@@ -7,36 +7,24 @@ using System.Web.Http;
 
 namespace PRJ666App.Controllers
 {
-    public class SectionsController : ApiController
+    public class MarksController : ApiController
     {
         private Manager m = new Manager();
 
-        // GET: api/Sections
+        // GET: api/Marks
         public IHttpActionResult Get()
         {
-            return Ok(m.SectionGetAll());
+            return Ok(m.MarkGetAll());
         }
 
-        // GET: api/Sections/5
-        public IHttpActionResult Get(int? id)
+        // GET: api/Marks/5
+        public string Get(int id)
         {
-            if (!id.HasValue) { return NotFound(); }
-            // Attempt to fetch the object
-            var o = m.SectionGetByIdWithQuestion(id.GetValueOrDefault());
-
-            // Continue?
-            if (o == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(o);
-            }
+            return "value";
         }
 
-        // POST: api/Sections
-        public IHttpActionResult Post([FromBody]SectionAdd newItem)
+        // POST: api/Marks
+        public IHttpActionResult Post([FromBody]MarkAdd newItem)
         {
             if (Request.GetRouteData().Values["id"] != null) { return BadRequest("Invalid request URI"); }
 
@@ -47,7 +35,7 @@ namespace PRJ666App.Controllers
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
 
             // Attempt to add the new object
-            var addedItem = m.SectionAdd(newItem);
+            var addedItem = m.MarkAdd(newItem);
 
             // Continue?
             if (addedItem == null) { return BadRequest("Cannot add the object"); }
@@ -59,12 +47,12 @@ namespace PRJ666App.Controllers
             return Created(uri, addedItem);
         }
 
-        // PUT: api/Sections/5
+        // PUT: api/Marks/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Sections/5
+        // DELETE: api/Marks/5
         public void Delete(int id)
         {
         }

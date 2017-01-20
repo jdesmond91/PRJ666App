@@ -21,6 +21,15 @@ namespace PRJ666App.Controllers
             return Mapper.Map<IEnumerable<ScenarioBase>>(c);
         }
 
+        public ScenarioBase ScenarioGetByIdWithSection(int id)
+        {
+            // Attempt to fetch the object
+            var o = ds.Scenarios.Include("Sections")                       
+                .SingleOrDefault(a => a.Id == id);
+
+            return (o == null) ? null : Mapper.Map<ScenarioBase>(o);
+        }
+
         public ScenarioBase ScenarioAdd(ScenarioAdd newItem)
         {
             if (newItem == null)
@@ -44,6 +53,15 @@ namespace PRJ666App.Controllers
 
             // Return the results as a collection based on a resource model class
             return Mapper.Map<IEnumerable<SectionBase>>(c);
+        }
+
+        public SectionBase SectionGetByIdWithQuestion(int id)
+        {
+            // Attempt to fetch the object
+            var o = ds.Sections.Include("Questions")
+                .SingleOrDefault(a => a.Id == id);
+
+            return (o == null) ? null : Mapper.Map<SectionBase>(o);
         }
 
         public SectionBase SectionAdd(SectionAdd newItem)
@@ -79,6 +97,15 @@ namespace PRJ666App.Controllers
             return Mapper.Map<IEnumerable<QuestionBase>>(c);
         }
 
+        public QuestionBase QuestionGetByIdWithKeyword(int id)
+        {
+            // Attempt to fetch the object
+            var o = ds.Questions.Include("Keywords")
+                .SingleOrDefault(a => a.Id == id);
+
+            return (o == null) ? null : Mapper.Map<QuestionBase>(o);
+        }
+
         public QuestionBase QuestionAdd(QuestionAdd newItem)
         {
             if (newItem == null)
@@ -95,12 +122,7 @@ namespace PRJ666App.Controllers
 
             Question addedItem = Mapper.Map<Question>(newItem);
             addedItem.ScenarioId = newItem.SectionId;
-            addedItem.SectionId = newItem.SectionId;
-
-            //foreach (var keyword in addedItem.Keywords)
-            //{
-
-            //}
+            addedItem.SectionId = newItem.SectionId;         
 
             ds.Questions.Add(addedItem);
             ds.SaveChanges();
@@ -108,6 +130,98 @@ namespace PRJ666App.Controllers
             // Return the result, or null if there was an error
             return Mapper.Map<QuestionBase>(addedItem);
         }
+
+        // ***************************************************KEYWORD SECTION ************************************************
+
+        public IEnumerable<KeywordBase> KeywordGetAll()
+        {
+            // Fetch the collection
+            var c = ds.Keywords.OrderBy(e => e.Description);
+
+            // Return the results as a collection based on a resource model class
+            return Mapper.Map<IEnumerable<KeywordBase>>(c);
+        }
+
+        public KeywordBase KeywordGetById(int id)
+        {
+            // Fetch the collection
+            var o = ds.Keywords.Find(id);
+
+            return (o == null) ? null : Mapper.Map<KeywordBase>(o);
+         
+        }
+
+        public IEnumerable<KeywordBase> KeywordGetByQuestionId(int questionId)
+        {
+            // Fetch the collection
+            var c = ds.Keywords.Where(d => d.QuestionId == questionId).ToList();
+
+            // Return the results as a collection based on a resource model class
+            return Mapper.Map<IEnumerable<KeywordBase>>(c);
+        }
+
+        public KeywordBase KeywordAdd(KeywordAdd newItem)
+        {
+            if (newItem == null)
+            {
+                return null;
+            }
+
+            var associatedItem = ds.Questions.Find(newItem.QuestionId);
+           
+            if (associatedItem == null)
+            {
+                return null;
+            }
+
+            Keyword addedItem = Mapper.Map<Keyword>(newItem);
+            addedItem.QuestionId = newItem.QuestionId;
+
+            ds.Keywords.Add(addedItem);
+            ds.SaveChanges();
+
+            // Return the result, or null if there was an error
+            return Mapper.Map<KeywordBase>(addedItem);
+        }
+
+        // ***************************************************KEYWORD SECTION ************************************************
+
+        public IEnumerable<MarkBase> MarkGetAll()
+        {
+            // Fetch the collection
+            var c = ds.Marks.Find();
+
+            // Return the results as a collection based on a resource model class
+            return Mapper.Map<IEnumerable<MarkBase>>(c);
+        }
+
+        public MarkBase MarkAdd (MarkAdd newItem)
+        {
+            if (newItem == null)
+            {
+                return null;
+            }
+
+            var associatedItem = ds.Scenarios.Find(newItem.ScenarioId);
+            var associatedItem2 = ds.Sections.Find(newItem.SectionId);
+
+            if (associatedItem == null || associatedItem2 == null)
+            {
+                return null;
+            }
+
+            Mark addedItem = Mapper.Map<Mark>(newItem);
+            addedItem.ScenarioId = newItem.ScenarioId;
+            addedItem.SectionId = newItem.SectionId;
+
+            ds.Marks.Add(addedItem);
+            ds.SaveChanges();
+
+            // Return the result, or null if there was an error
+            return Mapper.Map<MarkBase>(addedItem);
+        }
+
+
 
     }
 

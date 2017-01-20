@@ -5,27 +5,17 @@ using System.Web;
 
 namespace PRJ666App.Models
 {
-    public class Question
+    public class Mark
     {
-        public Question()
-        {
-            Keywords = new HashSet<Keyword>();
-        }
-
         public int Id { get; set; }
-
-        public string Description { get; set; }
-
-        public string Answer { get; set; }
-
+        public double Grade { get; set; }
+        public DateTime PracticeDate { get; set; }
+        public int UserId { get; set; }
         public int? ScenarioId { get; set; }
-
         public virtual Scenario Scenario { get; set; }
-
         public int? SectionId { get; set; }
-
         public virtual Section Section { get; set; }
-
-        public ICollection<Keyword> Keywords { get; set; }
+        public string ApplicationUserID { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

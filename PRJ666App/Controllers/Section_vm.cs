@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PRJ666App.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,5 +16,7 @@ namespace PRJ666App.Controllers
     public class SectionBase : SectionAdd
     {
         public int Id { get; set; }
+
+        public ICollection<QuestionBase> Questions { get; set; }
     }
 }

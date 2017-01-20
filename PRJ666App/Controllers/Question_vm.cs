@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PRJ666App.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,12 +15,12 @@ namespace PRJ666App.Controllers
         public int ScenarioId { get; set; }
 
         public int SectionId { get; set; }
-
-        public virtual ICollection<string> Keywords { get; set; }
+    
     }
 
     public class QuestionBase : QuestionAdd
     {
         public int Id { get; set; }
+        public ICollection<KeywordBase> Keywords { get; set; }
     }
 }

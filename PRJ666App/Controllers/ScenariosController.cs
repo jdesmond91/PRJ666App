@@ -18,9 +18,21 @@ namespace PRJ666App.Controllers
         }
 
         // GET: api/Scenarios/5
-        public string Get(int id)
+        public IHttpActionResult Get(int? id)
         {
-            return "value";
+            if (!id.HasValue) { return NotFound(); }
+            // Attempt to fetch the object
+            var o = m.ScenarioGetByIdWithSection(id.GetValueOrDefault());
+
+            // Continue?
+            if (o == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(o);
+            }
         }
 
         // POST: api/Scenarios

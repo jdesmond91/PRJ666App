@@ -7,22 +7,22 @@ using System.Web.Http;
 
 namespace PRJ666App.Controllers
 {
-    public class SectionsController : ApiController
+    public class KeywordsController : ApiController
     {
         private Manager m = new Manager();
 
-        // GET: api/Sections
+        // GET: api/Keywords
         public IHttpActionResult Get()
         {
-            return Ok(m.SectionGetAll());
+            return Ok(m.KeywordGetAll());
         }
 
-        // GET: api/Sections/5
+        // GET: api/Keywords/5
         public IHttpActionResult Get(int? id)
         {
             if (!id.HasValue) { return NotFound(); }
             // Attempt to fetch the object
-            var o = m.SectionGetByIdWithQuestion(id.GetValueOrDefault());
+            var o = m.KeywordGetById(id.GetValueOrDefault());
 
             // Continue?
             if (o == null)
@@ -35,8 +35,27 @@ namespace PRJ666App.Controllers
             }
         }
 
-        // POST: api/Sections
-        public IHttpActionResult Post([FromBody]SectionAdd newItem)
+        // GET: api/Keywords/5/byquestion
+        [Route("api/keywords/{questionid}/byquestion")]
+        public IHttpActionResult GetByQuestion(int? questionid)
+        {
+            if (!questionid.HasValue) { return NotFound(); }
+            // Attempt to fetch the object
+            var o = m.KeywordGetByQuestionId(questionid.GetValueOrDefault());
+
+            // Continue?
+            if (o == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(o);
+            }
+        }
+
+        // POST: api/Keywords
+        public IHttpActionResult Post([FromBody]KeywordAdd newItem)
         {
             if (Request.GetRouteData().Values["id"] != null) { return BadRequest("Invalid request URI"); }
 
@@ -47,7 +66,7 @@ namespace PRJ666App.Controllers
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
 
             // Attempt to add the new object
-            var addedItem = m.SectionAdd(newItem);
+            var addedItem = m.KeywordAdd(newItem);
 
             // Continue?
             if (addedItem == null) { return BadRequest("Cannot add the object"); }
@@ -59,12 +78,12 @@ namespace PRJ666App.Controllers
             return Created(uri, addedItem);
         }
 
-        // PUT: api/Sections/5
+        // PUT: api/Keywords/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Sections/5
+        // DELETE: api/Keywords/5
         public void Delete(int id)
         {
         }
