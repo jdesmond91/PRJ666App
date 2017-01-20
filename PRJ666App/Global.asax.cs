@@ -24,9 +24,9 @@ namespace PRJ666App
             AutoMapperConfig.RegisterMappings();
 
             //recreate the DB
-            //Database.SetInitializer<Models.ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<Models.ApplicationDbContext>());
+            Database.SetInitializer<Models.ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<Models.ApplicationDbContext>());
 
-            Database.SetInitializer<Models.ApplicationDbContext>(new DropCreateDatabaseAlways<Models.ApplicationDbContext>());      
+            //Database.SetInitializer<Models.ApplicationDbContext>(new DropCreateDatabaseAlways<Models.ApplicationDbContext>());      
 
             DataBaseInitializer.LoadScenarios();
 
