@@ -26,7 +26,7 @@ namespace PRJ666App.App_Start
             Mapper.CreateMap<Models.Question, Controllers.QuestionBase>();
 
             //KEYWORD
-            Mapper.CreateMap<Controllers.KeywordAdd, Models.Question>();
+            Mapper.CreateMap<Controllers.KeywordAdd, Models.Keyword>();
             Mapper.CreateMap<Models.Keyword, Controllers.KeywordBase>();
 
             //MARK

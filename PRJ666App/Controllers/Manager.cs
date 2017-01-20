@@ -121,7 +121,7 @@ namespace PRJ666App.Controllers
             }
 
             Question addedItem = Mapper.Map<Question>(newItem);
-            addedItem.ScenarioId = newItem.SectionId;
+            addedItem.ScenarioId = newItem.ScenarioId;
             addedItem.SectionId = newItem.SectionId;         
 
             ds.Questions.Add(addedItem);

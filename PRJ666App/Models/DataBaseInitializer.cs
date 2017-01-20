@@ -8,75 +8,390 @@ namespace PRJ666App.Models
 {
     public static class DataBaseInitializer
     {
-        public static void LoadCaims()
+        public static void LoadScenarios()
         {
 
             Manager m = new Controllers.Manager();
 
             
-           /* if (m.AppClaimGetAll().Count() == 0)
+            if (m.ScenarioGetAll().Count() == 0)
             {
-                var claimSales = new AppClaimAdd();
-                claimSales.Description = "Organizational Unit for Sales Employees";
-                claimSales.ClaimType = "OU";
-                claimSales.ClaimValue = "Sales";
-                m.AppClaimAdd(claimSales);
+                var scenario = new ScenarioAdd();
+                scenario.Name = "Pt in Isolation with MRSA";
+                scenario.Description = "Mrs. Blend is in an isolation room because she is positive for MRSA and has a UTI (urinary tract infection)";
+                scenario.Goals = "find out how pt is feeling, do proper PPE, take VS";
+                m.ScenarioAdd(scenario);
+            }
+        }
 
-                var claimProdMan = new AppClaimAdd();
-                claimProdMan.Description = "Organizational Unit for Product Managers";
-                claimProdMan.ClaimType = "OU";
-                claimProdMan.ClaimValue = "ProductManager";
-                m.AppClaimAdd(claimProdMan);
+        public static void LoadSections()
+        {
 
-                var claimAdvert = new AppClaimAdd();
-                claimAdvert.Description = "Organizational Unit for Product Advertisers";
-                claimAdvert.ClaimType = "OU";
-                claimAdvert.ClaimValue = "ProductAdvertiser";
-                m.AppClaimAdd(claimAdvert);
+            Manager m = new Controllers.Manager();
 
-                var claimCustService = new AppClaimAdd();
-                claimCustService.Description = "Organizational Unit for Customer Service Employees";
-                claimCustService.ClaimType = "OU";
-                claimCustService.ClaimValue = "CustomerService";
-                m.AppClaimAdd(claimCustService);
+            if (m.SectionGetAll().Count() == 0)
+            {
+                var section = new SectionAdd();
 
-                var webDev = new AppClaimAdd();
-                webDev.Description = "Organizational Unit for Web Site Developers";
-                webDev.ClaimType = "OU";
-                webDev.ClaimValue = "WebDeveloper";
-                m.AppClaimAdd(webDev);
+                section.Name = "Background";
+                section.ScenarioId = 1;        
+                m.SectionAdd(section);
 
-                var custEdit = new AppClaimAdd();
-                custEdit.Description = "Task for Customer Edition";
-                custEdit.ClaimType = "Task";
-                custEdit.ClaimValue = "CustomerEditor";
-                m.AppClaimAdd(custEdit);
+                section.Name = "Part1";
+                section.ScenarioId = 1;
+                m.SectionAdd(section);
 
-                var albumEdit = new AppClaimAdd();
-                albumEdit.Description = "Task for Album Edition";
-                albumEdit.ClaimType = "Task";
-                albumEdit.ClaimValue = "AlbumEditor";
-                m.AppClaimAdd(albumEdit);
+                section.Name = "VitalSigns1";
+                section.ScenarioId = 1;
+                m.SectionAdd(section);
 
-                var employeeEdit = new AppClaimAdd();
-                employeeEdit.Description = "Task for Employee Edition";
-                employeeEdit.ClaimType = "Task";
-                employeeEdit.ClaimValue = "EmployeeEditor";
-                m.AppClaimAdd(employeeEdit);
+                section.Name = "Doff PPE and Leave Room";
+                section.ScenarioId = 1;
+                m.SectionAdd(section);
+            }
+        }
 
-                var albumFetch = new AppClaimAdd();
-                albumFetch.Description = "Task for Fetching Album";
-                albumFetch.ClaimType = "Task";
-                albumFetch.ClaimValue = "AlbumFetch";
-                m.AppClaimAdd(albumFetch);
+        public static void LoadQuestions()
+        {
 
-                var invoiceFetch = new AppClaimAdd();
-                invoiceFetch.Description = "Task for Fetching Invoice";
-                invoiceFetch.ClaimType = "Task";
-                invoiceFetch.ClaimValue = "InvoiceFetch";
-                m.AppClaimAdd(invoiceFetch);
+            Manager m = new Controllers.Manager();
 
-            }*/
+            if (m.QuestionGetAll().Count() == 0)
+            {
+                var question = new QuestionAdd();
+
+                question.Description = "How are you?";
+                question.Answer = "I’m having pain in my back.  I couldn’t sleep all night. I don’t feel well today";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "When did this pain start?";
+                question.Answer = "After my first night in this hospital.  I think it’s this bed that’s making me so uncomfortable.  I haven’t moved from this bed for a few days and my back is getting stiffer every day";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "Did the pain start suddenly or gradually?";
+                question.Answer = "Not suddenly.  I’ve had this back pain on and off for years";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "What makes the pain worse";
+                question.Answer = "When I don’t move around or sleep on an uncomfortable bed";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "Can you describe the pain?";
+                question.Answer = "It feels like a dull ache in my back";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "Does the pain radiate anywhere?";
+                question.Answer = "No, it’s just in my back";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "Where in your back is your pain located?";
+                question.Answer = "Mostly in my middle and lower back";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "How would you rate the pain out of 10 if 0 means no pain and 10 is the worst pain you’ve ever had?";
+                question.Answer = "About 7/10";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "What do you take to help treat the back pain?";
+                question.Answer = "I usually take Advil";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "What is your understanding of this pain?";
+                question.Answer = "I’m not sure. Maybe it’s this uncomfortable bed or my arthritis acting up";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "How long have you had arthritis?";
+                question.Answer = "5 years";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "Where is the arthritis located?";
+                question.Answer = "In my back and hands";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "What do you take to treat arthritis?";
+                question.Answer = "I usually take Advil";
+                question.ScenarioId = 1;
+                question.SectionId = 2;
+                m.QuestionAdd(question);
+
+                question.Description = "Is it ok if I take your vital signs?";
+                question.Answer = "Yes, you may take my vital signs";
+                question.ScenarioId = 1;
+                question.SectionId = 3;
+                m.QuestionAdd(question);
+
+                question.Description = "Is there anything else that you’re concerned about?";
+                question.Answer = "Can you get me something for the pain";
+                question.ScenarioId = 1;
+                question.SectionId = 3;
+                m.QuestionAdd(question);           
+
+            }
+        }
+
+        public static void LoadKeywords()
+        {
+
+            Manager m = new Controllers.Manager();
+
+            if (m.KeywordGetAll().Count() == 0)
+            {
+                var keyword = new KeywordAdd();
+
+                // ************ QUESTION 1 ****************************************
+                //How are you?
+
+                keyword.Description = "how";
+                keyword.QuestionId = 1;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "you";
+                keyword.QuestionId = 1;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "feeling";
+                keyword.QuestionId = 1;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 2 ****************************************
+                //When did this pain start?
+
+                keyword.Description = "when";
+                keyword.QuestionId = 2;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 2;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "start";
+                keyword.QuestionId = 2;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 3 ****************************************
+                //Did the pain start suddenly or gradually?
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 3;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "start";
+                keyword.QuestionId = 3;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "suddenly";
+                keyword.QuestionId = 3;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "gradually";
+                keyword.QuestionId = 3;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 4 ****************************************
+                //What makes the pain worse?
+
+                keyword.Description = "what";
+                keyword.QuestionId = 4;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 4;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "worse";
+                keyword.QuestionId = 4;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 5 ****************************************
+                //Can you describe the pain?
+
+                keyword.Description = "describe";
+                keyword.QuestionId = 5;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 5;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 6 ****************************************
+                //Does the pain radiate anywhere?
+
+                keyword.Description = "radiate";
+                keyword.QuestionId = 6;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 6;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 7 ****************************************
+                //Where in your back is your pain located?
+
+                keyword.Description = "where";
+                keyword.QuestionId = 7;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "back";
+                keyword.QuestionId = 7;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 7;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 8 ****************************************
+                //How would you rate the pain out of 10 if 0 means no pain and 10 is the worst pain you’ve ever had?
+
+                keyword.Description = "how";
+                keyword.QuestionId = 8;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "rate";
+                keyword.QuestionId = 8;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 8;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 9 ****************************************
+                //What do you take to help treat the back pain?
+
+                keyword.Description = "what";
+                keyword.QuestionId = 9;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "take";
+                keyword.QuestionId = 9;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "treat";
+                keyword.QuestionId = 9;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 9;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 10 ****************************************
+                //What is your understanding of this pain?
+
+                keyword.Description = "what";
+                keyword.QuestionId = 10;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "understanding";
+                keyword.QuestionId = 10;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 10;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 11 ****************************************
+                //How long have you had arthritis?
+
+                keyword.Description = "how";
+                keyword.QuestionId = 11;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "long";
+                keyword.QuestionId = 11;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "arthritis";
+                keyword.QuestionId = 11;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 12 ****************************************
+                //Where is the arthritis located?
+
+                keyword.Description = "where";
+                keyword.QuestionId = 12;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "arthritis";
+                keyword.QuestionId = 12;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "located";
+                keyword.QuestionId = 12;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 13 ****************************************
+                //What do you take to treat arthritis?
+
+                keyword.Description = "take";
+                keyword.QuestionId = 13;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "treat";
+                keyword.QuestionId = 13;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "arthritis";
+                keyword.QuestionId = 13;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 14 ****************************************
+                // Is it ok if I take your vital signs?
+
+                keyword.Description = "ok";
+                keyword.QuestionId = 14;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "take";
+                keyword.QuestionId = 14;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "vital";
+                keyword.QuestionId = 14;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "signs";
+                keyword.QuestionId = 14;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 15 ****************************************
+                // Is there anything else that you’re concerned about?
+
+                keyword.Description = "anything";
+                keyword.QuestionId = 15;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "concerned";
+                keyword.QuestionId = 15;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "about";
+                keyword.QuestionId = 15;
+                m.KeywordAdd(keyword);
+
+            }
         }
     }
 }
