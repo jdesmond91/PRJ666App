@@ -331,7 +331,7 @@ namespace PRJ666App.Controllers
 
             bool canRegister = true;
 
-            if(model.Email.Contains("myseneca.ca") == false || model.Email.Contains("senecacollege.ca") == false)
+            if(model.Email.Contains("myseneca.ca") == false && model.Email.Contains("senecacollege.ca") == false)
             {
                 canRegister = false;
             }
