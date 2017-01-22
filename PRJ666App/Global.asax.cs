@@ -28,13 +28,13 @@ namespace PRJ666App
 
             //Database.SetInitializer<Models.ApplicationDbContext>(new DropCreateDatabaseAlways<Models.ApplicationDbContext>());      
 
-            DataBaseInitializer.LoadScenarios();
+            //DataBaseInitializer.LoadScenarios();
 
-            DataBaseInitializer.LoadSections();
+            //DataBaseInitializer.LoadSections();
 
-            DataBaseInitializer.LoadQuestions();
+            //DataBaseInitializer.LoadQuestions();
 
-            DataBaseInitializer.LoadKeywords();
+            //DataBaseInitializer.LoadKeywords();
 
         }
     }
