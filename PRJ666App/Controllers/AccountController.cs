@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using PRJ666App.Models;
 using PRJ666App.Providers;
 using PRJ666App.Results;
+using System.Net;
 
 namespace PRJ666App.Controllers
 {
@@ -328,16 +329,48 @@ namespace PRJ666App.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            bool canRegister = true;
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
+            if(model.Email.Contains("myseneca.ca") == false && model.Email.Contains("senecacollege.ca") == false)
             {
-                return GetErrorResult(result);
+                canRegister = false;
             }
+            if (canRegister)
+            {
+                var user = new ApplicationUser()
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    GivenName = model.GivenName,
+                    Surname = model.Surname
+                };
 
-            return Ok();
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+
+                //foreach (var role in model.Roles)
+                //{
+                //await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, role));
+                //}
+                if (model.Email.Contains("myseneca.ca"))
+                {
+                    await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, "Student"));
+                }
+                else if (model.Email.Contains("senecacollege.ca"))
+                {
+                    await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, "Professor"));
+                }
+
+                return Ok();
+            }
+            else
+            {
+                return StatusCode(HttpStatusCode.BadRequest);
+            }
         }
 
         // POST api/Account/RegisterExternal

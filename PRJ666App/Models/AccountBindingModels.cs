@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace PRJ666App.Models
 {
@@ -34,6 +35,11 @@ namespace PRJ666App.Models
 
     public class RegisterBindingModel
     {
+        public RegisterBindingModel()
+        {
+            Roles = new List<string>();
+        }
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -48,6 +54,16 @@ namespace PRJ666App.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "First name")]
+        [Required, StringLength(128, ErrorMessage = "The {0} must be {2} or fewer characters.")]
+        public string GivenName { get; set; }
+
+        [Display(Name = "Last name")]
+        [Required, StringLength(128, ErrorMessage = "The {0} must be {2} or fewer characters.")]
+        public string Surname { get; set; }
+
+        public ICollection<string> Roles { get; set; }
     }
 
     public class RegisterExternalBindingModel
