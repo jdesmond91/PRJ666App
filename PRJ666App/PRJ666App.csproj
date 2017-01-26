@@ -243,6 +243,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\Common\common.services.js" />
+    <Content Include="app\Scenario\scenarioController.js" />
+    <Content Include="app\Scenario\scenarioService.js" />
+    <Content Include="app\User\logincontroller.js" />
+    <Content Include="app\User\loginservice.js" />
+    <Content Include="app\User\userProfile.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -250,6 +256,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Index.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
