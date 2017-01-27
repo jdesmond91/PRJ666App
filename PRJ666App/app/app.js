@@ -28,8 +28,8 @@ var nursingApp = angular.module("nursingApp", ['ngRoute', 'common.services']);
 
 nursingApp.config(["$routeProvider", function ($routeProvider) {
     $routeProvider.
-    when("/", {
-        templateUrl: 'app/Question/Question.html',
+    when("/Question", {
+        templateUrl: 'Question.html',
         controller: "questionController"
-    }).otherwise({ redirectTo: "/"})
+    })
 }])
