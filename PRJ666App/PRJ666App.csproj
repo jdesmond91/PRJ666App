@@ -245,9 +245,6 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\Common\common.services.js" />
-    <Content Include="app\Question\Question.html" />
-    <Content Include="app\Question\questionController.js" />
-    <Content Include="app\Question\questionService.js" />
     <Content Include="app\Scenario\scenarioController.js" />
     <Content Include="app\Scenario\scenarioService.js" />
     <Content Include="app\User\logincontroller.js" />
