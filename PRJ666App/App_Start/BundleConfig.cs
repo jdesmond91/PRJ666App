@@ -23,6 +23,28 @@ namespace PRJ666App
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            /*bundles.Add(new StyleBundle("~/bundles/angular").Include(
+                      "~/Scripts/angular.js",
+                      "~/Scripts/angular-resource.js",
+                      "~/Scripts/angular-route.js"));*/
+
+            bundles.Add(new StyleBundle("~/bundles/nursingapp/style").Include(
+                     "~/Content/bootstrap.css"));
+
+           bundles.Add(new ScriptBundle("~/bundles/nursingapp/script").Include(
+                      "~/Scripts/angular.js",
+                      "~/Scripts/angular-route.js",
+                      "~/Scripts/angular-resource.js",
+                      "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
+                      "~/Scripts/jquery-1.10.2.js",
+                      "~/app/app.js",
+                      "~/app/Common/common.services.js",
+                      "~/app/User/loginservice.js",
+                      "~/app/User/logincontroller.js",
+                      "~/app/User/registercontroller.js",
+                      "~/app/User/userProfile.js"));
+
         }
     }
 }

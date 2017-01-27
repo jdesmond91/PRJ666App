@@ -1,6 +1,6 @@
-﻿angular.module("appmodule").controller("logincontroller", ["$scope", "loginservice", "userProfile", logincontroller]);
+﻿angular.module("appmodule").controller("logincontroller", ["$scope", '$location', "loginservice", "userProfile", logincontroller]);
 
-function logincontroller($scope, loginservice, userProfile) {
+function logincontroller($scope, $location, loginservice, userProfile) {
     $scope.responseData = "";
     $scope.userName = "";
     $scope.userEmail = "";
@@ -12,34 +12,11 @@ function logincontroller($scope, loginservice, userProfile) {
     $scope.isLoggedIn = false;
 
     $scope.registerUser = function () {
-        $scope.responseData = "";
-        var userInfo = {
-            Email: $scope.userEmail,
-            Password: $scope.userPassword,
-            ConfirmPassword: $scope.userPassword,
-            GivenName: $scope.userFirstName,
-            Surname: $scope.userLastName
-        };
-        console.log(userInfo.Email + " " + userInfo.Password + " " + userInfo.GivenName + " " + userInfo.Surname);
-        var registerResult = loginservice.register(userInfo);
-        registerResult.then(function (data) {
-            $scope.responseData = "User Registration Successfull";
-            $scope.userPassword = "";
-            console.log(data);
-        }, function (response) {
-            $scope.responseData = response.statusText + "\r\n";
-            if (response.data.exceptionMessage) {
-                $scope.responseData += response.data.exceptionMessage;
-            }
-            if (response.data.modelState) {
-                for (var key in response.data.modelState) {
-                    $scope.responseData += response.data.modelState[key] + "\r\n";
-                }
-            }
-        });
+        $location.path('/register');       
     };
 
     $scope.login = function () {
+        console.log($scope.userEmail + " " + $scope.userPassword);
         $scope.dataLoading = true;
         var userLogin = {
             grant_type: 'password',

@@ -1,4 +1,17 @@
-﻿/*angular.module("appmodule", ["common.services"]);*/
+﻿angular.module("appmodule", ['ngRoute', 'common.services'])
+        .config(['$routeProvider', '$locationProvider',
+            function ($routeProvider, $locationProvider) {
+                $routeProvider
+                .when('/home', {
+                    controller: 'logincontroller',
+                    templateUrl: 'app/Index.html'
+                })
+                    .when('/register', {
+                        controller: 'logincontroller',
+                        templateUrl: 'app/User/Register.html'
+                    })
+                .otherwise({ redirectTo: '/home' });
+            }]);
     
 
 /*.config(config);
@@ -22,8 +35,8 @@ function config($routeProvider, $locationProvider) {
 }*/
 
 
-(function () {
+/*(function () {
     "use strict";
     var app = angular.module("appmodule",
                                 ["common.services"]);
-}());
+}());*/

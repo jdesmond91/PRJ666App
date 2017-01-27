@@ -1,4 +1,4 @@
-﻿/*angular.module("common.services").factory("loginservice", ["$http", "appSettings", loginservice]);
+﻿angular.module("common.services").factory("loginservice", ["$http", "appSettings", loginservice]);
     function loginservice($http, appSettings) {
 
         this.register = function (userInfo) {
@@ -13,6 +13,7 @@
         };
 
         this.login = function (userLogin) {
+            console.log(userLogin);
             var resp = $http({
                 url: appSettings.serverPath + "/TOKEN",
                 method: "POST",
@@ -25,9 +26,9 @@
             register: this.register,
             login: this.login
         }
-    }*/
+    }
 
-(function () {
+/*(function () {
     'use strict';
     angular
         .module("common.services")
@@ -60,4 +61,4 @@
             login: this.login
         }
     }
-})();
+})();*/

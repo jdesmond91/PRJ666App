@@ -249,6 +249,8 @@
     <Content Include="app\Scenario\scenarioService.js" />
     <Content Include="app\User\logincontroller.js" />
     <Content Include="app\User\loginservice.js" />
+    <Content Include="app\User\Register.html" />
+    <Content Include="app\User\registercontroller.js" />
     <Content Include="app\User\userProfile.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -257,7 +259,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Index.html" />
+    <Content Include="app\Index.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
