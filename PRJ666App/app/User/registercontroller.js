@@ -1,4 +1,4 @@
-﻿angular.module("appmodule").controller("registercontroller", ["$scope", '$location', "loginservice", "userProfile", registercontroller]);
+﻿angular.module("nursingApp").controller("registercontroller", ["$scope", '$location', "loginservice", "userProfile", registercontroller]);
 
 function registercontroller($scope, $location, loginservice, userProfile) {
     $scope.responseData = "";

@@ -1,4 +1,4 @@
-﻿/*angular.module("common.services").factory("userProfile", userProfile);
+﻿angular.module("common.services").factory("userProfile", userProfile);
     function userProfile() {
         var setProfile = function (username, token, refreshToken) {
             sessionStorage.setItem('userName', username);
@@ -19,10 +19,10 @@
             setProfile: setProfile,
             getProfile: getProfile,
         }
-    }*/
+    }
 
 
-(function () {
+/*(function () {
     'use strict';
     angular
         .module("common.services")
@@ -49,4 +49,4 @@
             getProfile: getProfile,
         }
     }
-})();
+})();*/

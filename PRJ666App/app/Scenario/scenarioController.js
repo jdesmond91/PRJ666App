@@ -1,8 +1,9 @@
-﻿/*angular.module("appmodule").controller("scenarioController",["$scope", "scenarioService", scenarioController]);
+﻿angular.module("nursingApp").controller("scenarioController", ["$scope", "scenarioService", scenarioController]);
 function scenarioController($scope, scenarioService) {
     $scope.Scenarios = [];
     $scope.Message = "";
-    //getScenarios();
+    $scope.status;
+ 
 
     $scope.getScenarios = function() {
         console.log("get scnearios");
@@ -10,17 +11,20 @@ function scenarioController($scope, scenarioService) {
         scenarioResult.then(function (resp) {
             $scope.Scenarios = resp.data;
             $scope.Message = "Call Successfull";
-        }, function (err) {
-            $scope.Message = "Error!! " + err.status;
+        }, function (error) {
+            $scope.Message = "Error!! " + error.status;
+            $scope.status = 'Unable to load question data: ' + error.message;
         });
     };
-}*/
+
+    $scope.getScenarios();
+}
 
 
-(function () {
+/*(function () {
     'use strict';
     angular
-        .module("appmodule")
+        .module("nursingApp")
         .controller("scenarioController",
                     ["$scope", "scenarioService",
                              scenarioController]);
@@ -40,4 +44,4 @@ function scenarioController($scope, scenarioService) {
             });
         };
     }
-}());
+}());*/

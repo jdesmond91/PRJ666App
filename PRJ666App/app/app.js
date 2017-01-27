@@ -1,4 +1,4 @@
-﻿angular.module("appmodule", ['ngRoute', 'common.services'])
+﻿angular.module("nursingApp", ['ngRoute', 'common.services'])
         .config(['$routeProvider', '$locationProvider',
             function ($routeProvider, $locationProvider) {
                 $routeProvider
@@ -6,10 +6,18 @@
                     controller: 'logincontroller',
                     templateUrl: 'app/Index.html'
                 })
-                    .when('/register', {
-                        controller: 'logincontroller',
-                        templateUrl: 'app/User/Register.html'
-                    })
+                .when('/register', {
+                     controller: 'logincontroller',
+                    templateUrl: 'app/User/Register.html'
+                })
+                .when('/questions', {
+                     controller: 'questionController',
+                     templateUrl: 'app/Question/Question.html'
+                })
+                .when('/scenarios', {
+                     controller: 'scenarioController',
+                     templateUrl: 'app/Scenario/Scenario.html'
+                 })
                 .otherwise({ redirectTo: '/home' });
             }]);
     
@@ -37,6 +45,6 @@ function config($routeProvider, $locationProvider) {
 
 /*(function () {
     "use strict";
-    var app = angular.module("appmodule",
+    var app = angular.module("nursingApp",
                                 ["common.services"]);
 }());*/

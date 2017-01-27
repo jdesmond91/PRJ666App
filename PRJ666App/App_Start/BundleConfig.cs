@@ -43,7 +43,11 @@ namespace PRJ666App
                       "~/app/User/loginservice.js",
                       "~/app/User/logincontroller.js",
                       "~/app/User/registercontroller.js",
-                      "~/app/User/userProfile.js"));
+                      "~/app/User/userProfile.js",
+                      "~/app/Question/questionService.js",
+                      "~/app/Question/questionController.js",
+                      "~/app/Scenario/scenarioService.js",
+                      "~/app/Scenario/scenarioController.js"));
 
         }
     }

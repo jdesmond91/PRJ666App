@@ -1,4 +1,4 @@
-﻿angular.module("appmodule").controller("logincontroller", ["$scope", '$location', "loginservice", "userProfile", logincontroller]);
+﻿angular.module("nursingApp").controller("logincontroller", ["$scope", '$location', "loginservice", "userProfile", logincontroller]);
 
 function logincontroller($scope, $location, loginservice, userProfile) {
     $scope.responseData = "";
@@ -31,6 +31,7 @@ function logincontroller($scope, $location, loginservice, userProfile) {
             $scope.userName = resp.data.userName;
             userProfile.setProfile(resp.data.userName, resp.data.access_token, resp.data.refresh_token);
             $scope.isLoggedIn = true;
+            $location.path('/questions');
         }, function (response) {
             $scope.responseData = response.statusText + " : \r\n";
             if (response.data.error) {
@@ -44,13 +45,21 @@ function logincontroller($scope, $location, loginservice, userProfile) {
         $scope.userName = "";
         console.log("i am logout");
     };
+
+    $scope.getScenarios = function () {
+        $location.path('/scenarios');
+    }
+
+    $scope.getQuestions = function () {
+        $location.path('/questions');
+    }
 }
 
 
 /*(function () {
     'use strict';
     angular
-        .module("appmodule")
+        .module("nursingApp")
         .controller("logincontroller",
                      ["$scope", "loginservice", "userProfile",
                         logincontroller]);

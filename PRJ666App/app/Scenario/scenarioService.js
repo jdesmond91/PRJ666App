@@ -10,7 +10,7 @@ function scenarioService($http, appSettings) {
             //}
 
             var response = $http({
-                url: appSettings.serverPath + " /api/Scenarios",
+                url: appSettings.serverPath + "/api/Scenarios",
                 method: "GET",
                 //headers: authHeaders
             });
