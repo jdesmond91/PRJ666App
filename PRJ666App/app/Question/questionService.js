@@ -1,8 +1,9 @@
 ﻿angular.module("common.services").factory("questionService", ["$http", "appSettings", questionService]);
 function questionService($http, appSettings) {
 
-    this.get = function () {
-        console.log("here");
+    //this function makes a call to the questions api, to retrieve all questions and return the response
+    this.getQuestions = function () {
+        console.log("Questions Service: get questions");
         var accessToken = sessionStorage.getItem('accessToken');
 
         //var authHeaders = {};
@@ -19,6 +20,6 @@ function questionService($http, appSettings) {
     };
 
     return {
-        get: this.get
+        getQuestions: this.getQuestions
     }
 }

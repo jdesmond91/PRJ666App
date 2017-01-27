@@ -5,12 +5,13 @@ function questionController($scope, questionService) {
     $scope.Message = "";
     $scope.status;
 
+    //makes a call to the question service to retrieve all questions
     $scope.getQuestions = function () {
-        console.log("get questions");
+        console.log("Questions Controller: get questions");
 
-        var scenarioResult = questionService.get();
+        var questionResult = questionService.getQuestions();
 
-        scenarioResult.then(function (resp) {
+        questionResult.then(function (resp) {
             console.log(resp);
             $scope.Questions = resp.data;
             $scope.Message = "Call Successfull";
