@@ -1,4 +1,6 @@
-﻿/*angular.module("appmodule", ["common.services"]);*/
+﻿/// <reference path="Common/common.services.js" />
+/// <reference path="Question/Question.html" />
+/*angular.module("appmodule", ["common.services"]);*/
     
 
 /*.config(config);
@@ -22,8 +24,12 @@ function config($routeProvider, $locationProvider) {
 }*/
 
 
-(function () {
-    "use strict";
-    var app = angular.module("appmodule",
-                                ["common.services"]);
-}());
+var nursingApp = angular.module("nursingApp", ['ngRoute', 'common.services']);
+
+nursingApp.config(["$routeProvider", function ($routeProvider) {
+    $routeProvider.
+    when("/", {
+        templateUrl: 'app/Question/Question.html',
+        controller: "questionController"
+    }).otherwise({ redirectTo: "/"})
+}])

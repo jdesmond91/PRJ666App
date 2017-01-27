@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Questions</title>
+	<meta charset="utf-8" />
+    <script src="../../Scripts/angular.js"></script>
+    <script src="../../Scripts/angular-route.js"></script>
+    <script src="../../Scripts/angular-resource.js"></script>
+    <script src="../Common/common.services.js"></script>
+    <script src="../app.js"></script>
+    <script src="questionController.js"></script>
+    <script src="questionService.js"></script>
+</head>
+<body ng-app="nursingApp">
+    <div ng-controller="questionController">
+        <h1 ng-repeat="question in questions"> {{question.Description}} </h1>
+    </div>
+</body>
+</html>
