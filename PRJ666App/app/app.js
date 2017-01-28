@@ -8,15 +8,15 @@
                 })
                 .when('/register', {
                      controller: 'logincontroller',
-                    templateUrl: 'app/User/Register.html'
+                    templateUrl: 'app/Partials/Register.html'
                 })
                 .when('/questions', {
                      controller: 'questionController',
-                     templateUrl: 'app/Question/Question.html'
+                     templateUrl: 'app/Partials/Question.html'
                 })
                 .when('/scenarios', {
                      controller: 'scenarioController',
-                     templateUrl: 'app/Scenario/Scenario.html'
+                     templateUrl: 'app/Partials/Scenario.html'
                  })
                 .otherwise({ redirectTo: '/home' });
             }]);

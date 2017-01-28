@@ -39,15 +39,15 @@ namespace PRJ666App
                       "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                       "~/Scripts/jquery-1.10.2.js",
                       "~/app/app.js",
-                      "~/app/Common/common.services.js",
-                      "~/app/User/loginservice.js",
-                      "~/app/User/logincontroller.js",
-                      "~/app/User/registercontroller.js",
-                      "~/app/User/userProfile.js",
-                      "~/app/Question/questionService.js",
-                      "~/app/Question/questionController.js",
-                      "~/app/Scenario/scenarioService.js",
-                      "~/app/Scenario/scenarioController.js"));
+                      "~/app/Services/common.services.js",
+                      "~/app/Services/loginservice.js",
+                      "~/app/Controllers/logincontroller.js",
+                      "~/app/Controllers/registercontroller.js",
+                      "~/app/Services/userProfile.js",
+                      "~/app/Services/questionService.js",
+                      "~/app/Controllers/questionController.js",
+                      "~/app/Services/scenarioService.js",
+                      "~/app/Controllers/scenarioController.js"));
 
         }
     }

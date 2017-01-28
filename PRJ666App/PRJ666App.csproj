@@ -244,18 +244,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\Common\common.services.js" />
-    <Content Include="app\Question\Question.html" />
-    <Content Include="app\Question\questionController.js" />
-    <Content Include="app\Question\questionService.js" />
-    <Content Include="app\Scenario\Scenario.html" />
-    <Content Include="app\Scenario\scenarioController.js" />
-    <Content Include="app\Scenario\scenarioService.js" />
-    <Content Include="app\User\logincontroller.js" />
-    <Content Include="app\User\loginservice.js" />
-    <Content Include="app\User\Register.html" />
-    <Content Include="app\User\registercontroller.js" />
-    <Content Include="app\User\userProfile.js" />
+    <Content Include="app\Services\common.services.js" />
+    <Content Include="app\Partials\Question.html" />
+    <Content Include="app\Controllers\questionController.js" />
+    <Content Include="app\Services\questionService.js" />
+    <Content Include="app\Partials\Scenario.html" />
+    <Content Include="app\Controllers\scenarioController.js" />
+    <Content Include="app\Services\scenarioService.js" />
+    <Content Include="app\Controllers\logincontroller.js" />
+    <Content Include="app\Services\loginservice.js" />
+    <Content Include="app\Partials\Register.html" />
+    <Content Include="app\Controllers\registercontroller.js" />
+    <Content Include="app\Services\userProfile.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
