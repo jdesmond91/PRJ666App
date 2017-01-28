@@ -7,7 +7,7 @@ function scenarioController($scope, scenarioService) {
 
     $scope.getScenarios = function() {
         console.log("get scnearios");
-        var scenarioResult = scenarioService.get();
+        var scenarioResult = scenarioService.getScenario();
         scenarioResult.then(function (resp) {
             $scope.Scenarios = resp.data;
             $scope.Message = "Call Successfull";

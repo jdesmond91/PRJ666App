@@ -1,7 +1,7 @@
 ﻿angular.module("common.services").factory("scenarioService", ["$http", "appSettings", scenarioService]);
 function scenarioService($http, appSettings) {
 
-        this.get = function () {
+        this.getScenario = function () {
             var accessToken = sessionStorage.getItem('accessToken');
 
             //var authHeaders = {};
@@ -18,7 +18,7 @@ function scenarioService($http, appSettings) {
         };
 
         return {
-            get: this.get
+            getScenario: this.getScenario
         }
     }
 
