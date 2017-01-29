@@ -30,6 +30,15 @@ namespace PRJ666App.Controllers
             return (o == null) ? null : Mapper.Map<ScenarioBase>(o);
         }
 
+        public ScenarioBase ScenarioGetByIdWithAll(int id)
+        {
+            // Attempt to fetch the object
+            var o = ds.Scenarios.Include("Sections.Questions.Keywords")
+                .SingleOrDefault(a => a.Id == id);
+
+            return (o == null) ? null : Mapper.Map<ScenarioBase>(o);
+        }
+
         public ScenarioBase ScenarioAdd(ScenarioAdd newItem)
         {
             if (newItem == null)

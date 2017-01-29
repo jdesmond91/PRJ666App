@@ -35,6 +35,25 @@ namespace PRJ666App.Controllers
             }
         }
 
+        // GET: api/Scenarios/5/all
+        [Route("api/scenarios/{id}/all")]
+        public IHttpActionResult GetScenarioWithAll(int? id)
+        {
+            if (!id.HasValue) { return NotFound(); }
+            // Attempt to fetch the object
+            var o = m.ScenarioGetByIdWithAll(id.GetValueOrDefault());
+
+            // Continue?
+            if (o == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(o);
+            }
+        }
+
         // POST: api/Scenarios
         public IHttpActionResult Post([FromBody]ScenarioAdd newItem)
         {
