@@ -36,8 +36,9 @@ namespace PRJ666App
                       "~/Scripts/angular.js",
                       "~/Scripts/angular-route.js",
                       "~/Scripts/angular-resource.js",
-                      "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                       "~/Scripts/jquery-1.10.2.js",
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/angular-ui/ui-bootstrap-tpls.js",                     
                       "~/app/app.js",
                       "~/app/Services/common.services.js",
                       "~/app/Services/loginservice.js",
@@ -47,7 +48,8 @@ namespace PRJ666App
                       "~/app/Services/questionService.js",
                       "~/app/Controllers/questionController.js",
                       "~/app/Services/scenarioService.js",
-                      "~/app/Controllers/scenarioController.js"));
+                      "~/app/Controllers/scenarioController.js",
+                      "~/app/Controllers/headerController.js"));
 
         }
     }

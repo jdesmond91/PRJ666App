@@ -1,11 +1,16 @@
 ﻿angular.module("nursingApp", ['ngRoute', 'common.services'])
         .config(['$routeProvider', '$locationProvider',
             function ($routeProvider, $locationProvider) {
+                $locationProvider.hashPrefix('');
                 $routeProvider
                 .when('/home', {
                     controller: 'logincontroller',
                     templateUrl: 'app/Index.html'
                 })
+                .when('/login', {
+                     controller: 'logincontroller',
+                     templateUrl: 'app/Partials/Login.html'
+                 })
                 .when('/register', {
                      controller: 'logincontroller',
                     templateUrl: 'app/Partials/Register.html'
@@ -17,6 +22,10 @@
                 .when('/scenarios', {
                      controller: 'scenarioController',
                      templateUrl: 'app/Partials/Scenario.html'
+                })
+                .when('/practice/:scenario_id', {
+                     controller: 'scenarioController',
+                     templateUrl: 'app/Partials/Practice.html'
                  })
                 .otherwise({ redirectTo: '/home' });
             }]);

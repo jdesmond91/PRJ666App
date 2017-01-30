@@ -17,8 +17,19 @@ function scenarioService($http, appSettings) {
             return response;
         };
 
+        this.getScenarioByIdWithAll = function (scenario_id) {
+         
+            var response = $http({
+                url: appSettings.serverPath + "/api/scenarios/" + scenario_id + "/all",
+                method: "GET",
+                //headers: authHeaders
+            });
+            return response;
+        };
+
         return {
-            getScenario: this.getScenario
+            getScenario: this.getScenario,
+            getScenarioByIdWithAll: this.getScenarioByIdWithAll
         }
     }
 

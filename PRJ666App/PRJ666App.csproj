@@ -244,6 +244,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\Controllers\headerController.js" />
+    <Content Include="app\Partials\header.html" />
+    <Content Include="app\Partials\Login.html" />
+    <Content Include="app\Partials\Practice.html" />
     <Content Include="app\Services\common.services.js" />
     <Content Include="app\Partials\Question.html" />
     <Content Include="app\Controllers\questionController.js" />
