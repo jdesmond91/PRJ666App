@@ -35,6 +35,18 @@ nursingApp.config(["$routeProvider", function ($routeProvider) {
         templateUrl: 'Partials/question.html',
         controller: "questionController"
     })
+    .when("/scenario", {
+        templateUrl: 'Partials/scenario.html',
+        controller: "scenarioController"
+    })
+    .when('/login', {
+        templateUrl: 'Partials/login.html',
+        controller: 'loginController'
+    })
+    .when('/register', {
+        templateUrl: 'Partials/register.html',
+        controller: 'loginController'
+    })
     .when("/test", {
         templateUrl: "Partials/test.html",
     })
