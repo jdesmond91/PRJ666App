@@ -27,9 +27,18 @@ function config($routeProvider, $locationProvider) {
 var nursingApp = angular.module("nursingApp", ['ngRoute', 'common.services']);
 
 nursingApp.config(["$routeProvider", function ($routeProvider) {
-    $routeProvider.
-    when("/Question", {
-        templateUrl: 'Question.html',
+    $routeProvider
+    .when("/home", {
+        templateUrl: "Partials/home.html",
+    })
+    .when("/question", {
+        templateUrl: 'Partials/question.html',
         controller: "questionController"
     })
-}])
+    .when("/test", {
+        templateUrl: "Partials/test.html",
+    })
+    .otherwise({
+        templateUrl: "Partials/home.html"
+    });
+}]);
