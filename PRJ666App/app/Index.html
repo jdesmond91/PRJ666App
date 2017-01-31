@@ -17,14 +17,10 @@
     <meta name="description" content="ACME Inc.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>-->
+ 
     <script src="../Scripts/jquery-1.10.2.min.js"></script>
-    
-    <!-- Vendor: Bootstrap Stylesheets http://getbootstrap.com -->
-    <!-- Latest compiled and minified CSS -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <script src="../Scripts/bootstrap.min.js"></script>
+   
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
     
     <!-- Optional theme -->
@@ -32,7 +28,7 @@
     <link href="../Content/bootstrap-theme.min.css" rel="stylesheet" />
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="../Scripts/bootstrap.min.js"></script>
+    
     
     <!-- Our Website CSS Styles -->
     <link rel="stylesheet" href="css/main.css">
@@ -52,27 +48,29 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>-->
-    <script src="../Scripts/jquery-1.10.2.js"></script>
-    <script src="../Scripts/bootstrap.js"></script>
 
     <!-- Vendor: Angular, followed by our custom Javascripts -->
     <script src="../Scripts/angular.js"></script>
     <script src="../Scripts/angular-route.js"></script>
     <script src="../Scripts/angular-resource.js"></script>
-    <script src="Services/common.services.js"></script>
 
     <!-- Our Website Javascripts -->
     <script src="app.js"></script>
 
     <!-- Services -->
+    <script src="Services/common.services.js"></script>
+    <script src="Services/loginService.js"></script>
+    <script src="Services/userProfile.js"></script>
     <script src="Services/questionService.js"></script>
     <script src="Services/scenarioService.js"></script>
-    <script src="Services/loginService.js"></script>
-
+    
+    
     <!-- Controlllers -->
-    <script src="Controllers/questionController.js"></script>
-    <script src="Controllers/scenarioController.js"></script>
     <script src="Controllers/registerController.js"></script>
     <script src="Controllers/loginController.js"></script>
+    <script src="Controllers/headerController.js"></script>
+    <script src="Controllers/questionController.js"></script>
+    <script src="Controllers/scenarioController.js"></script>
+    
 </body>
 </html>

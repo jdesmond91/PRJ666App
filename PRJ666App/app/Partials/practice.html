@@ -1,0 +1,24 @@
+﻿<html>
+<head>
+    <title>Practice Scenario</title>
+    <meta charset="utf-8" />
+</head>
+<body ng-app="nursingApp">
+    <div ng-controller="scenarioController">
+        <h3> Scenario Name: {{allScenarios.Name}} </h3>
+        <h3> Scenario Description: {{allScenarios.Description}}</h3>
+        <h3> Scenario Goals: {{allScenarios.Goals}}  </h3>
+
+        <h3> Sections: </h3>
+
+        <ul>
+            <li ng-repeat="section in allSections"> {{section.Name}} </li>
+        </ul>
+        <h3> Questions from Section 2: </h3>
+        <ul>
+            <li ng-repeat="question in QuestionsSection2"> Question: {{question.Description}} Answer: {{question.Answer}}</li>
+        </ul>
+    </div>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-﻿angular.module("nursingApp").controller("logincontroller", ["$scope", '$location', "loginservice", "userProfile", logincontroller]);
+﻿angular.module("nursingApp").controller("loginController", ["$scope", '$location', "loginservice", "userProfile", logincontroller]);
 
 function logincontroller($scope, $location, loginservice, userProfile) {
     $scope.responseData = "";
@@ -47,11 +47,11 @@ function logincontroller($scope, $location, loginservice, userProfile) {
     };
 
     $scope.getScenarios = function () {
-        $location.path('/scenarios');
+        $location.path('/scenario');
     }
 
     $scope.getQuestions = function () {
-        $location.path('/questions');
+        $location.path('/question');
     }
 }
 
@@ -63,7 +63,6 @@ function logincontroller($scope, $location, loginservice, userProfile) {
         .controller("logincontroller",
                      ["$scope", "loginservice", "userProfile",
                         logincontroller]);
-
     function logincontroller($scope, loginservice, userProfile) {
         this.responseData = "";
         this.userName = "";
@@ -73,7 +72,6 @@ function logincontroller($scope, $location, loginservice, userProfile) {
         this.userLastName = "";
         this.accessToken = "";
         this.refreshToken = "";
-
         this.registerUser = function () {
             this.responseData = "";
             var userInfo = {
@@ -101,7 +99,6 @@ function logincontroller($scope, $location, loginservice, userProfile) {
                 }
             });
         };
-
         this.login = function () {
             var userLogin = {
                 grant_type: 'password',
@@ -110,7 +107,6 @@ function logincontroller($scope, $location, loginservice, userProfile) {
             };
             this.responseData = "";
             var loginResult = loginservice.login(userLogin);
-
             loginResult.then(function (resp) {
                 console.log(resp);
                 //this.userName = resp.data.userName;
@@ -122,7 +118,6 @@ function logincontroller($scope, $location, loginservice, userProfile) {
                 }
             });
         };
-
         this.logout = function () {
             sessionStorage.removeItem('accessToken');
         };

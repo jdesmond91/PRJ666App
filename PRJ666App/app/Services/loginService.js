@@ -35,7 +35,6 @@ function loginservice($http, appSettings) {
         .factory("loginservice", ["$http", "appSettings",
                                     loginservice]);
     function loginservice($http, appSettings) {
-
         this.register = function (userInfo) {
             console.log("login service");
             console.log(userInfo);
@@ -46,7 +45,6 @@ function loginservice($http, appSettings) {
             });
             return resp;
         };
-
         this.login = function (userLogin) {
             var resp = $http({
                 url: appSettings.serverPath + "/TOKEN",

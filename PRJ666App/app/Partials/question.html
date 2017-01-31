@@ -1,3 +1,5 @@
-﻿<body>
-    <h1 ng-repeat="question in Questions"> {{ question.Description }} </h1>
+﻿<body ng-app="nursingApp">
+    <div ng-controller="questionController">
+        <h1 ng-repeat="question in Questions"> {{question.Description}} </h1>
+    </div>
 </body>

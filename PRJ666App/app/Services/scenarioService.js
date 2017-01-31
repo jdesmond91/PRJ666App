@@ -44,12 +44,10 @@ function scenarioService($http, appSettings) {
     function scenarioService($http, appSettings) {
         this.get = function () {
             var accessToken = sessionStorage.getItem('accessToken');
-
             var authHeaders = {};
             if (accessToken) {
                 authHeaders.Authorization = 'Bearer ' + accessToken;
             }
-
             var response = $http({
                 url: appSettings.serverPath + " /api/Scenarios",
                 method: "GET",
@@ -57,10 +55,8 @@ function scenarioService($http, appSettings) {
             });
             return response;
         };
-
         return {
             get: this.get
         }
     }
-
 })();*/

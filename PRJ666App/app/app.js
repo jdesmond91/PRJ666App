@@ -1,35 +1,21 @@
-﻿/// <reference path="Common/common.services.js" />
-/// <reference path="Question/Question.html" />
-/*angular.module("appmodule", ["common.services"]);*/
-    
-
-/*.config(config);
-
-config.$inject = ['$routeProvider', '$locationProvider'];
-
-function config($routeProvider, $locationProvider) {
-    $routeProvider
-        .when('/home', {
-            controller: 'logincontroller',
-            templateUrl: 'index'          
-        })
-
-        .when('/register', {
-            controller: 'logincontroller',
-            templateUrl: 'User/register',
-        })
-
-        .otherwise({ redirectTo: '/home' });
-    $locationProvider.html5Mode(true);
-}*/
-
-
-var nursingApp = angular.module("nursingApp", ['ngRoute', 'common.services']);
-
-nursingApp.config(["$routeProvider", function ($routeProvider) {
-    $routeProvider
+﻿angular.module("nursingApp", ['ngRoute', 'common.services'])
+        .config(['$routeProvider', '$locationProvider',
+            function ($routeProvider, $locationProvider) {
+            $routeProvider
     .when("/home", {
         templateUrl: "Partials/home.html",
+    })    
+    .when('/login', {
+        templateUrl: 'Partials/login.html',
+        controller: 'loginController'
+    })
+    .when('/register', {
+        templateUrl: 'Partials/register.html',
+        controller: 'loginController'
+    })
+    .when('/practice/:scenario_id', {
+        controller: 'scenarioController',
+        templateUrl: 'Partials/practice.html'
     })
     .when("/question", {
         templateUrl: 'Partials/question.html',
@@ -39,18 +25,10 @@ nursingApp.config(["$routeProvider", function ($routeProvider) {
         templateUrl: 'Partials/scenario.html',
         controller: "scenarioController"
     })
-    .when('/login', {
-        templateUrl: 'Partials/login.html',
-        controller: 'loginController'
-    })
-    .when('/register', {
-        templateUrl: 'Partials/register.html',
-        controller: 'loginController'
-    })
     .when("/test", {
         templateUrl: "Partials/test.html",
     })
     .otherwise({
         templateUrl: "Partials/home.html"
     });
-}]);
+ }]);

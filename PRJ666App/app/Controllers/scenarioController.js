@@ -11,7 +11,7 @@ function scenarioController($scope, $routeParams, scenarioService) {
     console.log("Scenario Id: " + scenarioId);
 
     $scope.getScenarios = function () {
-        console.log("scenario controller: get scenarios");
+        console.log("get scnearios");
         var scenarioResult = scenarioService.getScenario();
         scenarioResult.then(function (resp) {
             $scope.Scenarios = resp.data;
@@ -22,7 +22,7 @@ function scenarioController($scope, $routeParams, scenarioService) {
         });
     };
 
-    //$scope.getScenarios();
+    $scope.getScenarios();
 
     $scope.getScenariosByIdWithAll = function () {
 
@@ -47,7 +47,7 @@ function scenarioController($scope, $routeParams, scenarioService) {
         console.log(item);
     })
 
-    $scope.getScenarios();
+    $scope.getScenariosByIdWithAll();
 }
 
 
@@ -58,12 +58,10 @@ function scenarioController($scope, $routeParams, scenarioService) {
         .controller("scenarioController",
                     ["$scope", "scenarioService",
                              scenarioController]);
-
     function scenarioController($scope, scenarioService) {
         this.Scenarios = [];
         this.Message = "";
         GetScenarios();
-
         function GetScenarios() {
             var scenarioResult = scenarioService.get();
             scenarioResult.then(function (resp) {
