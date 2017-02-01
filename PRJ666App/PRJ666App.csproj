@@ -246,6 +246,7 @@
     <Content Include="app\app.js" />
     <Content Include="app\Controllers\headerController.js" />
     <Content Include="app\Controllers\loginController.js" />
+    <Content Include="app\Controllers\practiceController.js" />
     <Content Include="app\Controllers\registerController.js" />
     <Content Include="app\css\main.css" />
     <Content Include="app\Partials\home.html" />

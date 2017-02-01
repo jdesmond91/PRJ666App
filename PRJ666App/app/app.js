@@ -14,7 +14,7 @@
         controller: 'loginController'
     })
     .when('/practice/:scenario_id', {
-        controller: 'scenarioController',
+        controller: 'practiceController',
         templateUrl: 'Partials/practice.html'
     })
     .when("/question", {
