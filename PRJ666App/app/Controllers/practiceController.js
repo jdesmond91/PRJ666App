@@ -9,6 +9,7 @@ function practiceController($scope, $routeParams, scenarioService) {
     $scope.QuestionsSection2 = [];
     $scope.studentQuestion = "";
     $scope.answer = "";
+    $scope.possibleQuestions = [];
 
     console.log("Scenario Id: " + scenarioId);
 
@@ -36,30 +37,35 @@ function practiceController($scope, $routeParams, scenarioService) {
         //angular.forEach($scope.QuestionsSection2, function (question) {
             //console.log(question.Answer);
         // });
-        var countMatches = 0;
-        for (var z = 0; z < $scope.QuestionsSection2[1].Keywords.length; z++) {           
-            var keyword = $scope.QuestionsSection2[1].Keywords[z].Description;
-            var r = new RegExp("\\b" + keyword + "\\b", "gi"); // global match
-            console.log(keyword);
-            var isMatch = $scope.studentQuestion.match(r);
-            console.log("match " + isMatch);
-            if (isMatch != "") {
-                countMatches++;
+        
+        for (var x = 0; x < $scope.QuestionsSection2.length; x++) {
+            var isMatch = "";
+            var countMatches = 0;
+
+            for (var y = 0; y < $scope.QuestionsSection2[x].Keywords.length; y++) {
+                var keyword = $scope.QuestionsSection2[x].Keywords[y].Description;
+
+                var regexKeyword = new RegExp("\\b" + keyword + "\\b", "gi"); // global match
+
+                isMatch = $scope.studentQuestion.match(regexKeyword);
+
+                if (isMatch != null) {
+                    countMatches++;
+                }
+            } // close Inner For
+
+            var percentMatch = $scope.QuestionsSection2[x].Keywords.length * 0.8;
+            if (Math.floor(countMatches * 0.8) >= Math.floor(percentMatch)) {
+                console.log("possible candidates: " + $scope.QuestionsSection2[x].Description);
+                $scope.answer = $scope.QuestionsSection2[x].Answer;
             }
         }
-        console.log("matches: " + countMatches + " keywords length: " + $scope.QuestionsSection2[1].Keywords.length);
-        if (countMatches == $scope.QuestionsSection2[1].Keywords.length) {
-            $scope.answer = $scope.QuestionsSection2[1].Answer;
-        }
+        //console.log("matches: " + countMatches + " keywords length: " + $scope.QuestionsSection2[1].Keywords.length);
+        //if (countMatches == $scope.QuestionsSection2[1].Keywords.length) {
+            //$scope.answer = $scope.QuestionsSection2[1].Answer;
+        //}
 
         
     };
-
-    /*for (var i = 0; i < $scope.QuestionsSection2; i++) {
-        for (var j = 0; j < $scope.QuestionsSection2[i].Keywords; j++) {
-            var r = new RegExp($scope.QuestionsSection2[i].Keywords[j], "gi"); // global match
-            var isMatch = $scope.studentQuestion.match(r);
-        }
-    }*/
 
 }
