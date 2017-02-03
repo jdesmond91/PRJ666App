@@ -34,18 +34,15 @@ function practiceController($scope, $routeParams, scenarioService) {
 
     $scope.getAnswer = function () {
         console.log("getAnswer");
-        //angular.forEach($scope.QuestionsSection2, function (question) {
-            //console.log(question.Answer);
-        // });
-        
-        for (var x = 0; x < $scope.QuestionsSection2.length; x++) {
+       
+        for (var x = 0; x < $scope.QuestionsSection2.length; x++) {           
             var isMatch = "";
             var countMatches = 0;
 
             for (var y = 0; y < $scope.QuestionsSection2[x].Keywords.length; y++) {
                 var keyword = $scope.QuestionsSection2[x].Keywords[y].Description;
 
-                var regexKeyword = new RegExp("\\b" + keyword + "\\b", "gi"); // global match
+                var regexKeyword = new RegExp("\\b" + keyword + "[a-zA-Z]*\\b", "gi"); // global match
 
                 isMatch = $scope.studentQuestion.match(regexKeyword);
 
@@ -58,14 +55,15 @@ function practiceController($scope, $routeParams, scenarioService) {
             if (Math.floor(countMatches * 0.8) >= Math.floor(percentMatch)) {
                 console.log("possible candidates: " + $scope.QuestionsSection2[x].Description);
                 $scope.answer = $scope.QuestionsSection2[x].Answer;
-            }
-        }
-        //console.log("matches: " + countMatches + " keywords length: " + $scope.QuestionsSection2[1].Keywords.length);
-        //if (countMatches == $scope.QuestionsSection2[1].Keywords.length) {
-            //$scope.answer = $scope.QuestionsSection2[1].Answer;
-        //}
-
+            }           
+        } // close Outer For
+        
         
     };
+
+    $("#question").click(function () {       
+        this.value = '';
+        $scope.answer = "";
+    });
 
 }
