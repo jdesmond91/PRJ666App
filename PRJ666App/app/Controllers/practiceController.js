@@ -1,5 +1,5 @@
-﻿angular.module("nursingApp").controller("practiceController", ["$scope", "$routeParams", "scenarioService", practiceController]);
-function practiceController($scope, $routeParams, scenarioService) {
+﻿angular.module("nursingApp").controller("practiceController", ["$scope", "$routeParams", "$http",  "scenarioService", practiceController]);
+function practiceController($scope, $routeParams, $http, scenarioService) {
     $scope.Scenarios = [];
     var scenarioId = $routeParams.scenario_id;
     $scope.Message = "";
@@ -11,10 +11,11 @@ function practiceController($scope, $routeParams, scenarioService) {
     $scope.answer = "";
     $scope.possibleQuestions = [];
 
+
+
     console.log("Scenario Id: " + scenarioId);
 
     $scope.getScenariosByIdWithAll = function () {
-
         var scenarioResult2 = scenarioService.getScenarioByIdWithAll(scenarioId);
         scenarioResult2.then(function (resp) {
             $scope.scenario = resp.data;
@@ -23,7 +24,6 @@ function practiceController($scope, $routeParams, scenarioService) {
             console.log($scope.allSections);
             $scope.QuestionsSection2 = $scope.allSections[1].Questions;
             console.log($scope.QuestionsSection2);
-            $scope.Message = "Call Successfull";
         }, function (error) {
             $scope.Message = "Error!! " + error.status;
             $scope.status = 'Unable to load question data: ' + error.message;
@@ -61,9 +61,11 @@ function practiceController($scope, $routeParams, scenarioService) {
         
     };
 
+    // DOM MANIPULATION SECTION ****************************************************************************************//
+
     $("#question").click(function () {       
         this.value = '';
         $scope.answer = "";
     });
 
-}
+} // close Module
