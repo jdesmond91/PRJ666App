@@ -1,5 +1,5 @@
-﻿angular.module("common.services").factory("loginservice", ["$http", "appSettings", loginservice]);
-    function loginservice($http, appSettings) {
+﻿angular.module("common.services").factory("loginService", ["$http", "appSettings", loginService]);
+    function loginService($http, appSettings) {
 
         this.register = function (userInfo) {
             console.log("login service");

@@ -1,6 +1,6 @@
-﻿angular.module("nursingApp").controller("logincontroller", ["$scope", '$location', "loginservice", "userProfile", logincontroller]);
+﻿angular.module("nursingApp").controller("loginController", ["$scope", '$location', "loginService", "userProfile", loginController]);
 
-function logincontroller($scope, $location, loginservice, userProfile) {
+function loginController($scope, $location, loginService, userProfile) {
     $scope.responseData = "";
     $scope.userName = "";
     $scope.userEmail = "";
@@ -24,14 +24,14 @@ function logincontroller($scope, $location, loginservice, userProfile) {
             password: $scope.userPassword
         };
         $scope.responseData = "";
-        var loginResult = loginservice.login(userLogin);
+        var loginResult = loginService.login(userLogin);
 
         loginResult.then(function (resp) {
             console.log(resp);
             $scope.userName = resp.data.userName;
             userProfile.setProfile(resp.data.userName, resp.data.access_token, resp.data.refresh_token);
             $scope.isLoggedIn = true;
-            $location.path('/questions');
+            $location.path('/question');
         }, function (response) {
             $scope.responseData = response.statusText + " : \r\n";
             if (response.data.error) {
@@ -47,11 +47,11 @@ function logincontroller($scope, $location, loginservice, userProfile) {
     };
 
     $scope.getScenarios = function () {
-        $location.path('/scenarios');
+        $location.path('/scenario');
     }
 
     $scope.getQuestions = function () {
-        $location.path('/questions');
+        $location.path('/question');
     }
 }
 

@@ -24,10 +24,6 @@ namespace PRJ666App
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            /*bundles.Add(new StyleBundle("~/bundles/angular").Include(
-                      "~/Scripts/angular.js",
-                      "~/Scripts/angular-resource.js",
-                      "~/Scripts/angular-route.js"));*/
 
             bundles.Add(new StyleBundle("~/bundles/nursingapp/style").Include(
                      "~/Content/bootstrap.css"));
@@ -42,14 +38,15 @@ namespace PRJ666App
                       "~/app/app.js",
                       "~/app/Services/common.services.js",
                       "~/app/Services/loginservice.js",
-                      "~/app/Controllers/logincontroller.js",
-                      "~/app/Controllers/registercontroller.js",
+                      "~/app/Controllers/loginController.js",
+                      "~/app/Controllers/registerController.js",
                       "~/app/Services/userProfile.js",
                       "~/app/Services/questionService.js",
                       "~/app/Controllers/questionController.js",
                       "~/app/Services/scenarioService.js",
                       "~/app/Controllers/scenarioController.js",
-                      "~/app/Controllers/headerController.js"));
+                      "~/app/Controllers/headerController.js",
+                      "~/app/Controllers/practiceController.js"));
 
         }
     }

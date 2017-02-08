@@ -245,6 +245,8 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\Controllers\headerController.js" />
+    <Content Include="app\Controllers\practiceController.js" />
+    <Content Include="app\css\main.css" />
     <Content Include="app\Partials\header.html" />
     <Content Include="app\Partials\login.html" />
     <Content Include="app\Partials\practice.html" />
@@ -255,10 +257,10 @@
     <Content Include="app\Partials\scenario.html" />
     <Content Include="app\Controllers\scenarioController.js" />
     <Content Include="app\Services\scenarioService.js" />
-    <Content Include="app\Controllers\logincontroller.js" />
-    <Content Include="app\Services\loginservice.js" />
+    <Content Include="app\Controllers\loginController.js" />
+    <Content Include="app\Services\loginService.js" />
     <Content Include="app\Partials\register.html" />
-    <Content Include="app\Controllers\registercontroller.js" />
+    <Content Include="app\Controllers\registerController.js" />
     <Content Include="app\Services\userProfile.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />

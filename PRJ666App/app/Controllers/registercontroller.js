@@ -1,6 +1,6 @@
-﻿angular.module("nursingApp").controller("registercontroller", ["$scope", '$location', "loginservice", "userProfile", registercontroller]);
+﻿angular.module("nursingApp").controller("registerController", ["$scope", '$location', "loginService", "userProfile", registerController]);
 
-function registercontroller($scope, $location, loginservice, userProfile) {
+function registerController($scope, $location, loginService, userProfile) {
     $scope.responseData = "";
     $scope.userName = "";
     $scope.userEmail = "";
@@ -21,7 +21,7 @@ function registercontroller($scope, $location, loginservice, userProfile) {
             Surname: $scope.userLastName
         };
         console.log(userInfo.Email + " " + userInfo.Password + " " + userInfo.GivenName + " " + userInfo.Surname);
-        var registerResult = loginservice.register(userInfo);
+        var registerResult = loginService.register(userInfo);
         registerResult.then(function (data) {
             $scope.responseData = "User Registration Successfull";
             $scope.userPassword = "";
