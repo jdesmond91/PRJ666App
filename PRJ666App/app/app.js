@@ -9,23 +9,23 @@
                 })
                 .when('/login', {
                      controller: 'logincontroller',
-                     templateUrl: 'app/Partials/Login.html'
+                     templateUrl: 'app/Partials/login.html'
                  })
                 .when('/register', {
                      controller: 'logincontroller',
-                    templateUrl: 'app/Partials/Register.html'
+                    templateUrl: 'app/Partials/register.html'
                 })
                 .when('/questions', {
                      controller: 'questionController',
-                     templateUrl: 'app/Partials/Question.html'
+                     templateUrl: 'app/Partials/question.html'
                 })
                 .when('/scenarios', {
                      controller: 'scenarioController',
-                     templateUrl: 'app/Partials/Scenario.html'
+                     templateUrl: 'app/Partials/scenario.html'
                 })
                 .when('/practice/:scenario_id', {
                      controller: 'scenarioController',
-                     templateUrl: 'app/Partials/Practice.html'
+                     templateUrl: 'app/Partials/practice.html'
                  })
                 .otherwise({ redirectTo: '/home' });
             }]);

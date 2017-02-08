@@ -1,25 +1,27 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html>
 <head>
     <title>Practice Scenario</title>
     <meta charset="utf-8" />
 </head>
 <body ng-app="nursingApp">
-    <div ng-controller="scenarioController">
-        <h3> Scenario Name: {{allScenarios.Name}} </h3>
-        <h3> Scenario Description: {{allScenarios.Description}}</h3>
-        <h3> Scenario Goals: {{allScenarios.Goals}}  </h3>
+    <div ng-controller="practiceController">
+        <div>
+            <h3> You are in section: {{allSections[1].Id}}: {{allSections[1].Name}}</h3>
+        </div>
+        <label class="control-label" for="question">Enter a question: </label>
+        <div class="form-group">
+            <input type="text" name="question" id="question" class="form-control" ng-model="studentQuestion">
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="getAnswer()">
+            Submit
+        </button>
+        <button type="submit" class="btn btn-default" ng-click="compareAPI()">
+            Compare
+        </button>
 
-        <h3> Sections: </h3>
+        <p>Answer: {{answer}}</p>
 
-        <ul>
-            <li ng-repeat="section in allSections"> {{section.Name}} </li>
-        </ul>
-        <h3> Questions from Section 2: </h3>
-        <ul>
-            <li ng-repeat="question in QuestionsSection2"> Question: {{question.Description}} Answer: {{question.Answer}}</li>
-        </ul>
+
     </div>
-
 </body>
 </html>
