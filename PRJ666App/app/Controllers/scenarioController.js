@@ -22,29 +22,3 @@ function scenarioController($scope, $routeParams, scenarioService) {
     $scope.getScenarios();
 
 }
-
-
-/*(function () {
-    'use strict';
-    angular
-        .module("nursingApp")
-        .controller("scenarioController",
-                    ["$scope", "scenarioService",
-                             scenarioController]);
-
-    function scenarioController($scope, scenarioService) {
-        this.Scenarios = [];
-        this.Message = "";
-        GetScenarios();
-
-        function GetScenarios() {
-            var scenarioResult = scenarioService.get();
-            scenarioResult.then(function (resp) {
-                this.Scenarios = resp.data;
-                this.Message = "Call Successfull";
-            }, function (err) {
-                this.Message = "Error!! " + err.status;
-            });
-        };
-    }
-}());*/

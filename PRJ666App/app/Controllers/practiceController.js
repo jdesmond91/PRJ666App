@@ -1,5 +1,5 @@
-﻿angular.module("nursingApp").controller("practiceController", ["$scope", "$routeParams", "$http", "scenarioService", practiceController]);
-function practiceController($scope, $routeParams, $http, scenarioService) {
+﻿angular.module("nursingApp").controller("practiceController", ["$scope", "$routeParams", "$http", "scenarioService", "semanticService", practiceController]);
+function practiceController($scope, $routeParams, $http, scenarioService, semanticService) {
     $scope.Scenarios = [];
     var scenarioId = $routeParams.scenario_id;
     $scope.Message = "";
@@ -57,9 +57,45 @@ function practiceController($scope, $routeParams, $http, scenarioService) {
                 $scope.answer = $scope.QuestionsSection2[x].Answer;
             }
         } // close Outer For
-
-
     };
+
+    $scope.compareAPI = function () {
+        console.log("compare API");
+        //DANDELION
+        var compare = semanticService.getSemantic("Cameron wins the Oscar", "All nominees for the Academy Awards");
+        compare.then(function (response) {          
+            console.log(response.data);
+            var similarity = response.data.similarity;
+            console.log("similar in: " + similarity);
+        }, function (error) {
+            $scope.Message = "Error!! " + error.status;
+            $scope.status = 'Unable to load question data: ' + error.message;
+        });
+
+        //create json for comparison
+        var textCompare =
+            [
+                {
+                    "term": "Pablo Picasso"
+                },
+                {
+                    "text": "Gustav Klimt was born in Baumgarten, near Vienna in Austria-Hungary, the second of seven children"
+                }
+            ];
+
+        //pass json to semanticService
+        /*var compare = semanticService.getSemantic(textCompare);
+        compare.then(function (response) {
+            console.log(response.data);
+            var similarity = response.data.weightedScoring;
+            console.log("similar in: " + similarity);
+        }, function (error) {
+            $scope.Message = "Error!! " + error.status;
+            $scope.status = 'Unable to load question data: ' + error.message;
+        });*/
+    };
+  
+
 
     // DOM MANIPULATION SECTION ****************************************************************************************//
 

@@ -46,7 +46,8 @@ namespace PRJ666App
                       "~/app/Services/scenarioService.js",
                       "~/app/Controllers/scenarioController.js",
                       "~/app/Controllers/headerController.js",
-                      "~/app/Controllers/practiceController.js"));
+                      "~/app/Controllers/practiceController.js",
+                      "~/app/Services/semanticService.js"));
 
         }
     }

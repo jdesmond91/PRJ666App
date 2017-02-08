@@ -261,6 +261,7 @@
     <Content Include="app\Services\loginService.js" />
     <Content Include="app\Partials\register.html" />
     <Content Include="app\Controllers\registerController.js" />
+    <Content Include="app\Services\semanticService.js" />
     <Content Include="app\Services\userProfile.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
