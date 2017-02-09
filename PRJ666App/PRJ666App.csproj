@@ -244,6 +244,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\bundle.js" />
     <Content Include="app\Controllers\headerController.js" />
     <Content Include="app\Controllers\practiceController.js" />
     <Content Include="app\css\main.css" />
