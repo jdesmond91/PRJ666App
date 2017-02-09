@@ -37,7 +37,7 @@ namespace PRJ666App
                       "~/Scripts/angular-ui/ui-bootstrap-tpls.js",                     
                       "~/app/app.js",
                       "~/app/Services/common.services.js",
-                      "~/app/Services/loginservice.js",
+                      "~/app/Services/loginService.js",
                       "~/app/Controllers/loginController.js",
                       "~/app/Controllers/registerController.js",
                       "~/app/Services/userProfile.js",

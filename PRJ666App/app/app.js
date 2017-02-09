@@ -12,7 +12,7 @@
                      templateUrl: 'app/Partials/login.html'
                  })
                 .when('/register', {
-                     controller: 'logincontroller',
+                     controller: 'loginController',
                     templateUrl: 'app/Partials/register.html'
                 })
                 .when('/question', {
