@@ -1,5 +1,5 @@
-﻿angular.module("common.services").factory("scenarioService", ["$http", "appSettings", scenarioService]);
-function scenarioService($http, appSettings) {
+﻿angular.module("common.services").factory("scenarioService", ["$http", '$q', "appSettings", scenarioService]);
+function scenarioService($http, $q, appSettings) {
 
         this.getScenario = function () {
             var accessToken = sessionStorage.getItem('accessToken');
@@ -18,13 +18,17 @@ function scenarioService($http, appSettings) {
         };
 
         this.getScenarioByIdWithAll = function (scenario_id) {
-         
-            var response = $http({
+            var def = $q.defer();
+            $http({
                 url: appSettings.serverPath + "/api/scenarios/" + scenario_id + "/all",
                 method: "GET",
                 //headers: authHeaders
+            }).then(function (response) {
+                def.resolve(response);
+            }, function (err) {
+                def.reject(err);
             });
-            return response;
+            return def.promise;           
         };
 
         return {

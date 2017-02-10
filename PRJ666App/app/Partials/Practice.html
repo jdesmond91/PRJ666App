@@ -4,20 +4,21 @@
     <meta charset="utf-8" />
 </head>
 <body ng-app="nursingApp">
-    <div ng-controller="practiceController">
+    <div>
         <div>
             <h3> You are in section: {{allSections[1].Id}}: {{allSections[1].Name}}</h3>
         </div>
         <label class="control-label" for="question">Enter a question: </label>
         <div class="form-group">
             <input type="text" name="question" id="question" class="form-control" ng-model="studentQuestion">
+            <button type="submit" class="btn btn-default" ng-click="parse()">
+                Go
+            </button>
         </div>
         <button type="submit" class="btn btn-default" ng-click="getAnswer()">
             Submit
         </button>
-        <button type="submit" class="btn btn-default" ng-click="getSim()">
-            Compare
-        </button>
+       
 
         <p>Answer: {{answer}}</p>
 

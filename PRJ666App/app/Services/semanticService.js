@@ -2,8 +2,7 @@
 function semanticService($http, appSettings, $q) {
 
     //DANDELION
-    this.getSemantic = function (phraseOne, phraseTwo) {
-        
+    /*this.getSemantic = function (phraseOne, phraseTwo) {       
         var def = $q.defer();
         $http({
             method: "GET",
@@ -15,9 +14,19 @@ function semanticService($http, appSettings, $q) {
             def.reject(err);
         });
         return def.promise;
+    };*/
 
         //CORTICAL
-        /*this.getSemantic = function (json) {
+    this.getSemantic = function (studentQuestion, possibleQuestion) {
+        var textCompare =
+            [
+                {
+                    "text": possibleQuestion
+                },
+                {
+                    "text": studentQuestion
+                }
+            ];
         var def = $q.defer();
         $http({
             method: "POST",
@@ -29,15 +38,7 @@ function semanticService($http, appSettings, $q) {
         }, function (err) {
             def.reject(err);
         });
-        return def.promise;*/
-
-        // UMBC
-        /*var resp = $http({
-            url: 'http://swoogle.umbc.edu/StsService/GetStsSim?operation=api&',
-            method: "GET",
-            params : { phrase1: phraseOne, phrase1: phraseTwo },
-        });*/
-
+        return def.promise;      
     };
     return {
         getSemantic: this.getSemantic

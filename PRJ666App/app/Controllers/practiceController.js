@@ -2,7 +2,6 @@
 function practiceController($scope, $routeParams, $http, scenarioService, semanticService) {
     $scope.Scenarios = [];
     var scenarioId = $routeParams.scenario_id;
-    $scope.Message = "";
     $scope.status;
     $scope.scenario = [];
     $scope.allSections = [];
@@ -12,28 +11,35 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
     $scope.possibleQuestions = [];
     $scope.QuestionsSection2Desc = [];
 
-
-
-    console.log("Scenario Id: " + scenarioId);
+    //console.log("Scenario Id: " + scenarioId);
 
     $scope.getScenariosByIdWithAll = function () {
         var scenarioResult2 = scenarioService.getScenarioByIdWithAll(scenarioId);
-        scenarioResult2.then(function (resp) {
-            $scope.scenario = resp.data;
-            console.log($scope.allScenarios);
+        scenarioResult2.then(function (response) {
+            $scope.scenario = response.data;
+            //console.log($scope.scenario);
             $scope.allSections = $scope.scenario.Sections;
-            console.log($scope.allSections);
+            //console.log($scope.allSections);
             $scope.QuestionsSection2 = $scope.allSections[1].Questions;
-            console.log($scope.QuestionsSection2);
+            getQuestionDescription();
         }, function (error) {
-            $scope.Message = "Error!! " + error.status;
             $scope.status = 'Unable to load question data: ' + error.message;
-        });
+        });        
     };
 
-    $scope.getScenariosByIdWithAll();
+    $scope.getScenariosByIdWithAll();    
 
-    $scope.getAnswer = function () {
+    function getQuestionDescription() {
+
+        for (var i = 0; i < $scope.QuestionsSection2.length; i++) {
+            $scope.QuestionsSection2Desc.push($scope.QuestionsSection2[i].Description);
+        }
+        console.log($scope.QuestionsSection2Desc);
+    }
+
+
+    //KEYWORD MATCHING ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /*$scope.getAnswer = function () {
         console.log("getAnswer");
 
         for (var x = 0; x < $scope.QuestionsSection2.length; x++) {
@@ -58,12 +64,22 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
                 $scope.answer = $scope.QuestionsSection2[x].Answer;
             }
         } // close Outer For
+    }; */
+
+    $scope.parse = function () {
+        console.log("Entering parse\n");
+
+        getSimilarity();
+
+        compareAPI();
+        
+
     };
 
-    $scope.compareAPI = function () {
+    function compareAPI() {
         console.log("compare API");
         //DANDELION
-        var compare = semanticService.getSemantic("Cameron wins the Oscar", "All nominees for the Academy Awards");
+        /*var compare = semanticService.getSemantic("Cameron wins the Oscar", "All nominees for the Academy Awards");
         compare.then(function (response) {          
             console.log(response.data);
             var similarity = response.data.similarity;
@@ -71,44 +87,48 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
         }, function (error) {
             $scope.Message = "Error!! " + error.status;
             $scope.status = 'Unable to load question data: ' + error.message;
-        });
+        });*/
 
-        //create json for comparison
-        var textCompare =
-            [
-                {
-                    "term": "Pablo Picasso"
-                },
-                {
-                    "text": "Gustav Klimt was born in Baumgarten, near Vienna in Austria-Hungary, the second of seven children"
-                }
-            ];
-
-        //pass json to semanticService
-        /*var compare = semanticService.getSemantic(textCompare);
+        var compare = semanticService.getSemantic($scope.studentQuestion);
         compare.then(function (response) {
             console.log(response.data);
             var similarity = response.data.weightedScoring;
-            console.log("similar in: " + similarity);
+            console.log(similarity);
         }, function (error) {
-            $scope.Message = "Error!! " + error.status;
             $scope.status = 'Unable to load question data: ' + error.message;
-        });*/
-    };
+        });
+    }
 
-    $scope.getSim = function () {
+    function getSimilarity () {
 
         var stringSimilarity = require('string-similarity');
+        var similarityArray = [];
+      
+        //make an array of object to associate each similarity result with its question
+        for (var i = 0; i < $scope.QuestionsSection2Desc.length; i++) {
+            var stringSim = stringSimilarity.compareTwoStrings($scope.studentQuestion, $scope.QuestionsSection2Desc[i]);
+            similarityArray.push({ similar: stringSim, question: $scope.QuestionsSection2Desc[i] });                
+        }
 
-        var sentence1 = 'When did this pain start?';
-        var sentence2 = 'What caused this pain';
+        //sort the array based on similarity result to get the 3 largest
+        similarityArray.sort(function (a, b) {
+            return b.similar - a.similar;
+        });
 
-        var stringSim = stringSimilarity.compareTwoStrings(sentence1, sentence2);
+        //push 3 possible questions
+        $scope.possibleQuestions.push(similarityArray[0].question);
+        $scope.possibleQuestions.push(similarityArray[1].question);
+        $scope.possibleQuestions.push(similarityArray[2].question);
 
-        console.log("string similarity: " + stringSim);
+        console.log($scope.possibleQuestions);
+
+        return;
+    }
+
+     
 
 
-        function Question(question, tests) {
+        /*function Question(question, tests) {
             this.question = question;
             this.tests = tests;
         }
@@ -361,7 +381,7 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
         var question39 = 'Have you ever had any injuries to your lungs or chest?';
 
 
-        /* questions.push(new Question(question1, test1));
+         questions.push(new Question(question1, test1));
          questions.push(new Question(question2, test2));
          questions.push(new Question(question3, test3));
          questions.push(new Question(question4, test4));
@@ -373,9 +393,9 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
          questions.push(new Question(question10, test10));
          questions.push(new Question(question11, test11));
          questions.push(new Question(question12, test12));
-         questions.push(new Question(question13, test13));*/
+         questions.push(new Question(question13, test13));
 
-        /* questions.push(new Question(question14, test14));
+         questions.push(new Question(question14, test14));
          questions.push(new Question(question15, test15));
          questions.push(new Question(question16, test16));
          questions.push(new Question(question17, test17));
@@ -412,7 +432,7 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
                  console.log(stringSim);
              }
              console.log("\n")
-         }*/
+         }
 
         for (var i = 0; i < $scope.QuestionsSection2.length; i++) {
             $scope.QuestionsSection2Desc.push($scope.QuestionsSection2[i].Description);
@@ -433,7 +453,7 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
         var bestMatch4 = stringSimilarity.findBestMatch('Did your pain begin immediately or gradually',
             $scope.QuestionsSection2Desc);
         console.log(bestMatch4);
-    };
+    };*/
   
 
 

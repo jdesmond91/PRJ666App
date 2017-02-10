@@ -23,7 +23,7 @@
                      controller: 'scenarioController',
                      templateUrl: 'app/Partials/scenario.html'
                 })
-                .when('/practice/:scenario_id', {
+                .when('/practice/:scenario_id/', {
                      controller: 'practiceController',
                      templateUrl: 'app/Partials/practice.html'
                  })
