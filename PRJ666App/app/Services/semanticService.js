@@ -1,5 +1,5 @@
-﻿angular.module("common.services").factory("semanticService", ["$http", "appSettings", '$q', semanticService]);
-function semanticService($http, appSettings, $q) {
+﻿angular.module("common.services").factory("semanticService", ["$http", "appSettings", '$q', "$timeout", semanticService]);
+function semanticService($http, appSettings, $q, $timeout) {
 
     //DANDELION
     /*this.getSemantic = function (phraseOne, phraseTwo) {       
@@ -32,7 +32,8 @@ function semanticService($http, appSettings, $q) {
             method: "POST",
             url: "http://api.cortical.io:80/rest/compare?retina_name=en_associative",
             headers: { 'api-key': '413b7040-ea4b-11e6-8782-2f4eaf4c41b5', 'content-type': 'application/json' },
-            data: JSON.stringify(json), //pass json to cortical
+            data: JSON.stringify(textCompare), //pass json to cortical
+            timeout: $timeout(function () {}, 3000)
         }).then(function (response) {
             def.resolve(response);
         }, function (err) {

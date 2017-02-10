@@ -20,22 +20,13 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
             //console.log($scope.scenario);
             $scope.allSections = $scope.scenario.Sections;
             //console.log($scope.allSections);
-            $scope.QuestionsSection2 = $scope.allSections[1].Questions;
-            getQuestionDescription();
+            $scope.QuestionsSection2 = $scope.allSections[1].Questions;          
         }, function (error) {
             $scope.status = 'Unable to load question data: ' + error.message;
         });        
     };
 
     $scope.getScenariosByIdWithAll();    
-
-    function getQuestionDescription() {
-
-        for (var i = 0; i < $scope.QuestionsSection2.length; i++) {
-            $scope.QuestionsSection2Desc.push($scope.QuestionsSection2[i].Description);
-        }
-        console.log($scope.QuestionsSection2Desc);
-    }
 
 
     //KEYWORD MATCHING ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,14 +60,30 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
     $scope.parse = function () {
         console.log("Entering parse\n");
 
-        getSimilarity();
+        var similarityArray = getSimilarity();
 
-        compareAPI();
-        
+        if (similarityArray[0].similar >= 0.8) {
+            $scope.answer = similarityArray[0].answer;
+        }
+       else {
+            var compares = [];
+            for (var i = 0; i < $scope.possibleQuestions.length; i++) {
+                var compare = compareAPI($scope.possibleQuestions[i].question);
+                compares.push({ similar: compare, question: $scope.possibleQuestions[i].question, 
+                    answer: $scope.possibleQuestions[i].answer});
+            }
+            console.log(compares);
 
+            //sort descending order
+            compares.sort(function (a, b) {
+                return b.similar - a.similar;
+            });
+
+            $scope.answer = compares[0].answer;
+        }
     };
 
-    function compareAPI() {
+    function compareAPI(possibleQuestions) {
         console.log("compare API");
         //DANDELION
         /*var compare = semanticService.getSemantic("Cameron wins the Oscar", "All nominees for the Academy Awards");
@@ -89,14 +96,18 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
             $scope.status = 'Unable to load question data: ' + error.message;
         });*/
 
-        var compare = semanticService.getSemantic($scope.studentQuestion);
-        compare.then(function (response) {
+        var compareMatch = "";
+        var apiMatches = [];
+         var compare = semanticService.getSemantic($scope.studentQuestion, possibleQuestions);
+         compare.then(function (response) {
             console.log(response.data);
-            var similarity = response.data.weightedScoring;
-            console.log(similarity);
-        }, function (error) {
-            $scope.status = 'Unable to load question data: ' + error.message;
-        });
+            compareMatch = response.data.weightedScoring;
+            apiMatches.push(compareMatch);        
+         }, function (error) {
+              $scope.status = 'Unable to load question data: ' + error.message;
+         });
+
+         return apiMatches;
     }
 
     function getSimilarity () {
@@ -105,9 +116,10 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
         var similarityArray = [];
       
         //make an array of object to associate each similarity result with its question
-        for (var i = 0; i < $scope.QuestionsSection2Desc.length; i++) {
-            var stringSim = stringSimilarity.compareTwoStrings($scope.studentQuestion, $scope.QuestionsSection2Desc[i]);
-            similarityArray.push({ similar: stringSim, question: $scope.QuestionsSection2Desc[i] });                
+        for (var i = 0; i < $scope.QuestionsSection2.length; i++) {
+            var stringSim = stringSimilarity.compareTwoStrings($scope.studentQuestion, $scope.QuestionsSection2[i].Description);
+            similarityArray.push({ similar: stringSim, question: $scope.QuestionsSection2[i].Description, 
+                answer: $scope.QuestionsSection2[i].Answer});                
         }
 
         //sort the array based on similarity result to get the 3 largest
@@ -115,14 +127,16 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
             return b.similar - a.similar;
         });
 
+        $scope.possibleQuestions = [];
+
         //push 3 possible questions
-        $scope.possibleQuestions.push(similarityArray[0].question);
-        $scope.possibleQuestions.push(similarityArray[1].question);
-        $scope.possibleQuestions.push(similarityArray[2].question);
+        $scope.possibleQuestions.push(similarityArray[0]);
+        $scope.possibleQuestions.push(similarityArray[1]);
+        $scope.possibleQuestions.push(similarityArray[2]);
 
-        console.log($scope.possibleQuestions);
+        //console.log(similarityArray);
 
-        return;
+        return similarityArray;
     }
 
      
