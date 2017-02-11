@@ -1,5 +1,5 @@
-﻿angular.module("nursingApp").controller("practiceController", ["$scope", "$routeParams", "$http", "scenarioService", "semanticService", practiceController]);
-function practiceController($scope, $routeParams, $http, scenarioService, semanticService) {
+﻿angular.module("nursingApp").controller("practiceController", ["$scope", "$routeParams", "$http", "$q", "scenarioService", "semanticService", practiceController]);
+function practiceController($scope, $routeParams, $http, $q, scenarioService, semanticService) {
     $scope.Scenarios = [];
     var scenarioId = $routeParams.scenario_id;
     $scope.status;
@@ -10,6 +10,7 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
     $scope.answer = "";
     $scope.possibleQuestions = [];
     $scope.QuestionsSection2Desc = [];
+    $scope.lastTry = [];
 
     //console.log("Scenario Id: " + scenarioId);
 
@@ -56,34 +57,42 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
             }
         } // close Outer For
     }; */
+    
 
     $scope.parse = function () {
         console.log("Entering parse\n");
 
         var similarityArray = getSimilarity();
 
+        $scope.compareAPI = [];
+
         if (similarityArray[0].similar >= 0.8) {
             $scope.answer = similarityArray[0].answer;
         }
        else {
-            var compares = [];
+            var max = 0;
+            var realAnswer = "";            
             for (var i = 0; i < $scope.possibleQuestions.length; i++) {
-                var compare = compareAPI($scope.possibleQuestions[i].question);
-                compares.push({ similar: compare, question: $scope.possibleQuestions[i].question, 
-                    answer: $scope.possibleQuestions[i].answer});
+                var api = compareAPI($scope.possibleQuestions[i].question, $scope.possibleQuestions[i].answer, function (score, question, answer) {                    
+                    $scope.compareAPI = score.weightedScoring;
+                    console.log($scope.compareAPI);
+                    console.log(question);
+                    console.log(answer);
+
+                    if ($scope.compareAPI >= max) {
+                        max = $scope.compareAPI;
+                        realAnswer = answer;
+                    }
+                    $scope.answer = realAnswer;
+                  
+                });
             }
-            console.log(compares);
-
-            //sort descending order
-            compares.sort(function (a, b) {
-                return b.similar - a.similar;
-            });
-
-            $scope.answer = compares[0].answer;
         }
     };
 
-    function compareAPI(possibleQuestions) {
+    
+
+    function compareAPI(possibleQuestion, possibleAnswer, fn) {
         console.log("compare API");
         //DANDELION
         /*var compare = semanticService.getSemantic("Cameron wins the Oscar", "All nominees for the Academy Awards");
@@ -96,19 +105,25 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
             $scope.status = 'Unable to load question data: ' + error.message;
         });*/
 
-        var compareMatch = "";
-        var apiMatches = [];
-         var compare = semanticService.getSemantic($scope.studentQuestion, possibleQuestions);
-         compare.then(function (response) {
-            console.log(response.data);
-            compareMatch = response.data.weightedScoring;
-            apiMatches.push(compareMatch);        
-         }, function (error) {
-              $scope.status = 'Unable to load question data: ' + error.message;
-         });
+        var promises = [];
+        //for(var i = 0; i<$scope.possibleQuestions.length; i++){              
+            //promises.push(semanticService.getSemantic($scope.studentQuestion, $scope.possibleQuestions[i].question).then(function(result) {
+        var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
+            apiMatch.then(function (result) {          
+                fn(result.data, possibleQuestion, possibleAnswer);           
+        }, function(error){
+            $scope.status = 'Unable to load question data: ' + error.message;
+        });
+        //}
 
-         return apiMatches;
-    }
+       
+     //$q.all(promises).then(function(){
+         //for (var j = 0; j < apiMatches.length; j++) {
+             //apiObject.push({ similar: apiMatches[j], question: $scope.possibleQuestions[j].question, answer: $scope.possibleQuestions[j].answer });
+             //console.log(apiObject[j]);
+         //}
+     //});
+    }   
 
     function getSimilarity () {
 
@@ -134,7 +149,8 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
         $scope.possibleQuestions.push(similarityArray[1]);
         $scope.possibleQuestions.push(similarityArray[2]);
 
-        //console.log(similarityArray);
+        console.log("similarity array\n");
+        console.log(similarityArray);
 
         return similarityArray;
     }
