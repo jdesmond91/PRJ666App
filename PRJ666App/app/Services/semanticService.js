@@ -60,7 +60,7 @@ function semanticService($http, appSettings, $q, $timeout) {
             url: "https://rxnlp-core.p.mashape.com/computeSimilarity",
             headers: { "X-Mashape-Key": 'gpxQfLFBuVmshbzxnXiQW313LURKp1ZQbnujsnOhvhgGusqcFv', 'Content-Type': 'application/json', 'Accept' : 'application/json' },
             data: textCompare, //pass json to cortical
-            timeout: $timeout(function () { }, 3000)
+            timeout: $timeout(function () { }, 7000)
         }).then(function (response) {
             def.resolve(response);
         }, function (err) {

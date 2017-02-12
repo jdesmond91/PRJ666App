@@ -59,7 +59,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     }; */
     
 
-   /* $scope.parse = function () {
+    $scope.parse = function () {
         console.log("Entering parse\n");
 
         var similarityArray = getSimilarity();
@@ -74,7 +74,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
             var realAnswer = "";            
             for (var i = 0; i < $scope.possibleQuestions.length; i++) {
                 var api = compareAPI($scope.possibleQuestions[i].question, $scope.possibleQuestions[i].answer, function (score, question, answer) {                    
-                    $scope.compareAPI = score.weightedScoring;
+                    $scope.compareAPI = score.average;
                     console.log($scope.compareAPI);
                     console.log(question);
                     console.log(answer);
@@ -86,12 +86,11 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
                     $scope.answer = realAnswer;
                   
                 });
-           // }
-        }
-    };*/
+            }
+        //}
+    };
 
     
-
     /*function compareAPI(possibleQuestion, possibleAnswer, fn) {
         console.log("compare API");
         //DANDELION
@@ -116,19 +115,18 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         //}
     } */
 
-    $scope.compareAPI = function(possibleQuestion, possibleAnswer, fn) {
+    function compareAPI (possibleQuestion, possibleAnswer, fn) {
         console.log("compare API");
     
-        //var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
-        var apiMatch = semanticService.getSemantic('question1', 'question2')
+        var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
         apiMatch.then(function (result) {          
-            //fn(result.data, possibleQuestion, possibleAnswer);
-            console.log(result);
+            fn(result.data, possibleQuestion, possibleAnswer);
+            console.log(result.data);
         }, function(error){
             $scope.status = 'Unable to load question data: ' + error.message;
         });
       
-    };
+    }
 
     function getSimilarity () {
 
