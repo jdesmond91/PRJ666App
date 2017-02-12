@@ -59,7 +59,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     }; */
     
 
-    $scope.parse = function () {
+   /* $scope.parse = function () {
         console.log("Entering parse\n");
 
         var similarityArray = getSimilarity();
@@ -69,7 +69,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         if (similarityArray[0].similar >= 0.8) {
             $scope.answer = similarityArray[0].answer;
         }
-       else {
+       //else {
             var max = 0;
             var realAnswer = "";            
             for (var i = 0; i < $scope.possibleQuestions.length; i++) {
@@ -86,13 +86,13 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
                     $scope.answer = realAnswer;
                   
                 });
-            }
+           // }
         }
-    };
+    };*/
 
     
 
-    function compareAPI(possibleQuestion, possibleAnswer, fn) {
+    /*function compareAPI(possibleQuestion, possibleAnswer, fn) {
         console.log("compare API");
         //DANDELION
         /*var compare = semanticService.getSemantic("Cameron wins the Oscar", "All nominees for the Academy Awards");
@@ -103,11 +103,10 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         }, function (error) {
             $scope.Message = "Error!! " + error.status;
             $scope.status = 'Unable to load question data: ' + error.message;
-        });*/
+        });
 
         var promises = [];
-        //for(var i = 0; i<$scope.possibleQuestions.length; i++){              
-            //promises.push(semanticService.getSemantic($scope.studentQuestion, $scope.possibleQuestions[i].question).then(function(result) {
+    
         var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
             apiMatch.then(function (result) {          
                 fn(result.data, possibleQuestion, possibleAnswer);           
@@ -115,15 +114,21 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
             $scope.status = 'Unable to load question data: ' + error.message;
         });
         //}
+    } */
 
-       
-     //$q.all(promises).then(function(){
-         //for (var j = 0; j < apiMatches.length; j++) {
-             //apiObject.push({ similar: apiMatches[j], question: $scope.possibleQuestions[j].question, answer: $scope.possibleQuestions[j].answer });
-             //console.log(apiObject[j]);
-         //}
-     //});
-    }   
+    $scope.compareAPI = function(possibleQuestion, possibleAnswer, fn) {
+        console.log("compare API");
+    
+        //var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
+        var apiMatch = semanticService.getSemantic('question1', 'question2')
+        apiMatch.then(function (result) {          
+            //fn(result.data, possibleQuestion, possibleAnswer);
+            console.log(result);
+        }, function(error){
+            $scope.status = 'Unable to load question data: ' + error.message;
+        });
+      
+    };
 
     function getSimilarity () {
 
