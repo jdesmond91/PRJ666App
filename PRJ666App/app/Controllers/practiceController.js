@@ -14,12 +14,10 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     $scope.sectionStartIndex = 1; //starting index, for now set to 1 until we remove the procedures
     $scope.answer = ""; //the answer we will return to the student
     $scope.possibleQuestions = []; //stores the top 3 results from the initial pass through string similarity
+    var questionsAskedCount = 0;
 
     //$scope.sectionQuestionDesc = [];
-    //$scope.continueLoop = true;
-
-    $scope.lastTry = [];
-    
+    //$scope.continueLoop = true;    
 
     //console.log("Scenario Id: " + scenarioId);
 
@@ -33,6 +31,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
             $scope.allSections = $scope.scenario.Sections;
             //console.log($scope.allSections);
             $scope.sectionQuestions = $scope.allSections[$scope.sectionStartIndex].Questions;
+            console.log($scope.sectionQuestions);
         }, function (error) {
             $scope.status = 'Unable to load question data: ' + error.message;
         });        
@@ -77,7 +76,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     */
     $scope.parse = function () {
         console.log("Entering parse\n");
-
+        
         var similarityArray = getSimilarity();
 
         $scope.compareAPI = [];
@@ -98,13 +97,25 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
 
                     if ($scope.compareAPI >= max) {
                         max = $scope.compareAPI;
-                        realAnswer = answer;
-                    }
-                    $scope.answer = realAnswer;
-                  
+                        if (max >= 0.6) {
+                            realAnswer = answer;
+                            questionsAskedCount++;
+                            $scope.answer = realAnswer;  
+                        }else {
+                        $scope.answer = "Please try asking another question!";
+                        }
+                    }                    
+                                    
                 });
             }
         }
+        //console.log("questions in section: " + $scope.sectionQuestions.length);
+                
+        //console.log("questions asked: " + questionsAskedCount);
+        //if (questionsAskedCount == $scope.sectionQuestions.length) {
+            //$scope.goToNextSection();
+        //}
+        
     };
 
 
@@ -115,7 +126,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
         apiMatch.then(function (result) {          
             fn(result.data, possibleQuestion, possibleAnswer);
-            console.log(result.data);
+            //console.log(result.data);
         }, function(error){
             $scope.status = 'Unable to load question data: ' + error.message;
         });
@@ -153,6 +164,13 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         return similarityArray;
     }
 
+    $scope.goToNextSection = function () {
+        if (($scope.sectionStartIndex + 1) <= $scope.allSections.length) {
+            $scope.sectionStartIndex++;
+            $scope.sectionQuestions = $scope.allSections[$scope.sectionStartIndex].Questions;
+        }
+    };
+
     // DOM MANIPULATION SECTION ****************************************************************************************//
 
     $("#question").click(function () {
@@ -165,13 +183,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         //loopStep();
         //setTimeout($scope.startLoop, 1000);
         --$scope.sectionStartIndex;
-        $scope.sectionQuestions = $scope.allSections[$scope.sectionStartIndex].Questions;
-        console.log($scope.sectionStartIndex);
-    }
-
-    //user presses the next section button which will update the section index and retrieve the next set of questions
-    $scope.stop = function () {
-        ++$scope.sectionStartIndex;
         $scope.sectionQuestions = $scope.allSections[$scope.sectionStartIndex].Questions;
         console.log($scope.sectionStartIndex);
     }
