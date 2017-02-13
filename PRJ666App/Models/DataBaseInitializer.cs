@@ -241,12 +241,6 @@ namespace PRJ666App.Models
                 question.SectionId = 6;
                 m.QuestionAdd(question);
 
-                question.Description = "Where in your back is your pain located?";
-                question.Answer = "Mostly in my middle and lower back";
-                question.ScenarioId = 2;
-                question.SectionId = 6;
-                m.QuestionAdd(question);
-
                 question.Description = "Do you have any chest pain when you cough?";
                 question.Answer = "Yes, a little.";
                 question.ScenarioId = 2;
