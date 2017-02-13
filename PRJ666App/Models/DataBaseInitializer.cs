@@ -43,12 +43,20 @@ namespace PRJ666App.Models
             
             if (m.ScenarioGetAll().Count() == 0)
             {
+                //SCENARIO 1
                 var scenario = new ScenarioAdd();
                 scenario.Name = "Pt in Isolation with MRSA";
                 scenario.Description = "Mrs. Blend is in an isolation room because she is positive for MRSA and has a UTI (urinary tract infection)";
                 scenario.Goals = "find out how pt is feeling, do proper PPE, take VS";
                 m.ScenarioAdd(scenario);
-            }
+
+                //SCENARIO 2
+                scenario.Name = "Mr. Smith is an 84 year old man with pneumonia";
+                scenario.Description = "Mr. Smith has a productive cough and is in isolation.  Today is the second day of his hospitalization. His respiratory function needs to be assessed";
+                scenario.Goals = "don proper PPE, find out how pt is feeling, find out about his pneumonia , do a respiratory assessment, find out if pt has any additional concerns, chart findings";
+                m.ScenarioAdd(scenario);
+            }         
+            
         }
 
         public static void LoadSections()
@@ -60,6 +68,7 @@ namespace PRJ666App.Models
             {
                 var section = new SectionAdd();
 
+                //SCENARIO 1
                 section.Name = "Background";
                 section.ScenarioId = 1;        
                 m.SectionAdd(section);
@@ -75,7 +84,25 @@ namespace PRJ666App.Models
                 section.Name = "Doff PPE and Leave Room";
                 section.ScenarioId = 1;
                 m.SectionAdd(section);
-            }
+
+                //SCENARIO 2
+                section.Name = "Background";
+                section.ScenarioId = 2;
+                m.SectionAdd(section);
+
+                section.Name = "Patient Assessment";
+                section.ScenarioId = 2;
+                m.SectionAdd(section);
+
+                section.Name = "Background History";
+                section.ScenarioId = 2;
+                m.SectionAdd(section);
+
+                section.Name = "Immunization";
+                section.ScenarioId = 2;
+                m.SectionAdd(section);
+            }          
+            
         }
 
         public static void LoadQuestions()
@@ -87,6 +114,7 @@ namespace PRJ666App.Models
             {
                 var question = new QuestionAdd();
 
+                //SCENARIO 1
                 question.Description = "How are you?";
                 question.Answer = "I’m having pain in my back.  I couldn’t sleep all night. I don’t feel well today";
                 question.ScenarioId = 1;
@@ -175,9 +203,215 @@ namespace PRJ666App.Models
                 question.Answer = "Can you get me something for the pain";
                 question.ScenarioId = 1;
                 question.SectionId = 3;
-                m.QuestionAdd(question);           
+                m.QuestionAdd(question);
+
+                //SCENARIO 2    
+                question.Description = "How are you?";
+                question.Answer = "A little better this morning.  I still have a cough that’s keeping me up at night.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Could I perform a respiratory assessment on you?";
+                question.Answer = "Yes, that’s fine.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "When you cough, do you cough up anything?";
+                question.Answer = "Yes.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "What colour is it?";
+                question.Answer = "Greenish-yellow.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "What causes the cough?";
+                question.Answer = "I’m not sure. I just seem to cough all the time.  Especially when I exert myself or talk a lot.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Do you ever get short of breath?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Where in your back is your pain located?";
+                question.Answer = "Mostly in my middle and lower back";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Do you have any chest pain when you cough?";
+                question.Answer = "Yes, a little.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Where is the pain?";
+                question.Answer = "In the middle of my chest.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Do you have difficulty breathing?";
+                question.Answer = "Yes, at night, with this pneumonia.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "How many pillow do you use to sleep?";
+                question.Answer = "Only 1 here in the hospital because they raise the head of my bed which helps my breathing.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Do you have any allergies?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Do you smoke?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you ever smoked?";
+                question.Answer = "No, never";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Does anyone in your home smoke?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "What is your job?";
+                question.Answer = "I’m retired but I used to be in sales.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Were you exposed to cigarette smoke at work?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Do you take any medications?";
+                question.Answer = "I take medicine for my arthritis pain, high blood pressure, and eyedrops for glaucoma.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you travelled anywhere recently?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Do you have asthma?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Did you ever have asthma as a child?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you been exposed to anyone with pneumonia?";
+                question.Answer = "Not that I know of.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Do you have any lung diseases such as cancer, emphysema, bronchitis, cystic fibrosis?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you ever had or been exposed to tuberculosis?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you had any recent changes in fatigue?";
+                question.Answer = "Yes, I’ve been more tired with this pneumonia.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you had any recent changes in weight?";
+                question.Answer = "No. But my appetite has decreased with this pneumonia.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Did you ever have asthma as a child?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you had any night sweats?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you had any swelling in your legs recently?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you had any recent changes in fatigue?";
+                question.Answer = "Yes, I’ve been more tired with this pneumonia.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you ever had any surgery on your lungs?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Have you ever had any injuries to your lungs or chest?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 7;
+                m.QuestionAdd(question);
+
+                question.Description = "Did you get an annual flu shot?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 8;
+                m.QuestionAdd(question);
+
+                question.Description = "Did you get an annual pneumonia vaccine?";
+                question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 8;
+                m.QuestionAdd(question);
 
             }
+            
         }
 
         public static void LoadKeywords()
