@@ -55,8 +55,7 @@ namespace PRJ666App.Models
                 scenario.Description = "Mr. Smith has a productive cough and is in isolation.  Today is the second day of his hospitalization. His respiratory function needs to be assessed";
                 scenario.Goals = "don proper PPE, find out how pt is feeling, find out about his pneumonia , do a respiratory assessment, find out if pt has any additional concerns, chart findings";
                 m.ScenarioAdd(scenario);
-            }         
-            
+            }                     
         }
 
         public static void LoadSections()
@@ -411,18 +410,19 @@ namespace PRJ666App.Models
             {
                 var keyword = new KeywordAdd();
 
+                //SCENARIO 1
+
                 // ************ QUESTION 1 ****************************************
                 //How are you?
-
                 keyword.Description = "how";
                 keyword.QuestionId = 1;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "you";
+                keyword.Description = "are";
                 keyword.QuestionId = 1;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "feeling";
+                keyword.Description = "you";
                 keyword.QuestionId = 1;
                 m.KeywordAdd(keyword);
 
@@ -452,11 +452,23 @@ namespace PRJ666App.Models
                 keyword.QuestionId = 3;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "suddenly";
+                keyword.Description = "sudden";
                 keyword.QuestionId = 3;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "gradually";
+                keyword.Description = "gradual";
+                keyword.QuestionId = 3;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "begin";
+                keyword.QuestionId = 3;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "quick";
+                keyword.QuestionId = 3;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "slow";
                 keyword.QuestionId = 3;
                 m.KeywordAdd(keyword);
 
@@ -486,10 +498,18 @@ namespace PRJ666App.Models
                 keyword.QuestionId = 5;
                 m.KeywordAdd(keyword);
 
+                keyword.Description = "like";
+                keyword.QuestionId = 5;
+                m.KeywordAdd(keyword);
+
                 // ************ QUESTION 6 ****************************************
                 //Does the pain radiate anywhere?
 
                 keyword.Description = "radiate";
+                keyword.QuestionId = 6;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "spread";
                 keyword.QuestionId = 6;
                 m.KeywordAdd(keyword);
 
@@ -512,12 +532,12 @@ namespace PRJ666App.Models
                 keyword.QuestionId = 7;
                 m.KeywordAdd(keyword);
 
+                keyword.Description = "feel";
+                keyword.QuestionId = 7;
+                m.KeywordAdd(keyword);
+
                 // ************ QUESTION 8 ****************************************
                 //How would you rate the pain out of 10 if 0 means no pain and 10 is the worst pain you’ve ever had?
-
-                keyword.Description = "how";
-                keyword.QuestionId = 8;
-                m.KeywordAdd(keyword);
 
                 keyword.Description = "rate";
                 keyword.QuestionId = 8;
@@ -534,7 +554,7 @@ namespace PRJ666App.Models
                 keyword.QuestionId = 9;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "take";
+                keyword.Description = "how";
                 keyword.QuestionId = 9;
                 m.KeywordAdd(keyword);
 
@@ -553,7 +573,7 @@ namespace PRJ666App.Models
                 keyword.QuestionId = 10;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "understanding";
+                keyword.Description = "understand";
                 keyword.QuestionId = 10;
                 m.KeywordAdd(keyword);
 
@@ -587,16 +607,8 @@ namespace PRJ666App.Models
                 keyword.QuestionId = 12;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "located";
-                keyword.QuestionId = 12;
-                m.KeywordAdd(keyword);
-
                 // ************ QUESTION 13 ****************************************
                 //What do you take to treat arthritis?
-
-                keyword.Description = "take";
-                keyword.QuestionId = 13;
-                m.KeywordAdd(keyword);
 
                 keyword.Description = "treat";
                 keyword.QuestionId = 13;
@@ -609,11 +621,11 @@ namespace PRJ666App.Models
                 // ************ QUESTION 14 ****************************************
                 // Is it ok if I take your vital signs?
 
-                keyword.Description = "ok";
+                keyword.Description = "take";
                 keyword.QuestionId = 14;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "take";
+                keyword.Description = "check";
                 keyword.QuestionId = 14;
                 m.KeywordAdd(keyword);
 
@@ -628,16 +640,406 @@ namespace PRJ666App.Models
                 // ************ QUESTION 15 ****************************************
                 // Is there anything else that you’re concerned about?
 
-                keyword.Description = "anything";
+                keyword.Description = "any";
                 keyword.QuestionId = 15;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "concerned";
+                keyword.Description = "concern";
                 keyword.QuestionId = 15;
                 m.KeywordAdd(keyword);
 
-                keyword.Description = "about";
-                keyword.QuestionId = 15;
+                //SCENARIO 2
+
+                // ************ QUESTION 1 ****************************************
+                //How are you?
+                keyword.Description = "how";
+                keyword.QuestionId = 50;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "are";
+                keyword.QuestionId = 50;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "you";
+                keyword.QuestionId = 50;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 2 ****************************************
+                //Could I perform a respiratory assessment on you?
+
+                keyword.Description = "respiratory";
+                keyword.QuestionId = 51;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "assessment";
+                keyword.QuestionId = 51;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 3 ****************************************
+                //When you cough, do you cough up anything?
+
+                keyword.Description = "cough";
+                keyword.QuestionId = 52;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "any";
+                keyword.QuestionId = 52;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 4 ****************************************
+                //What colour is it?
+
+                keyword.Description = "colour";
+                keyword.QuestionId = 53;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "what";
+                keyword.QuestionId = 53;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 5 ****************************************
+                //What causes the cough?
+
+                keyword.Description = "cause";
+                keyword.QuestionId = 54;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "make";
+                keyword.QuestionId = 54;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "cough";
+                keyword.QuestionId = 54;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 6 ****************************************
+                //Do you ever get short of breath?
+
+                keyword.Description = "short";
+                keyword.QuestionId = 55;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "breath";
+                keyword.QuestionId = 55;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 7 ****************************************
+                //Do you have any chest pain when you cough?
+
+                keyword.Description = "chest";
+                keyword.QuestionId = 57;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 57;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "cough";
+                keyword.QuestionId = 57;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 8 ****************************************
+                //Where is the pain?
+
+                keyword.Description = "where";
+                keyword.QuestionId = 58;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pain";
+                keyword.QuestionId = 58;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 9 ****************************************
+                //Do you have difficulty breathing?
+
+                keyword.Description = "breath";
+                keyword.QuestionId = 59;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "difficult";
+                keyword.QuestionId = 59;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "hard";
+                keyword.QuestionId = 59;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 10 ****************************************
+                //How many pillow do you use to sleep?
+
+                keyword.Description = "pillow";
+                keyword.QuestionId = 60;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "sleep";
+                keyword.QuestionId = 60;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 11 ****************************************
+                //Do you have any allergies?
+
+                keyword.Description = "allerg";
+                keyword.QuestionId = 61;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "any";
+                keyword.QuestionId = 61;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 12 ****************************************
+                //Do you smoke?
+
+                keyword.Description = "you";
+                keyword.QuestionId = 62;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "smoke";
+                keyword.QuestionId = 62;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 13 ****************************************
+                //Have you ever smoked?
+
+                keyword.Description = "you";
+                keyword.QuestionId = 63;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "smoke";
+                keyword.QuestionId = 63;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "before";
+                keyword.QuestionId = 63;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "past";
+                keyword.QuestionId = 63;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 14 ****************************************
+                //Does anyone in your home smoke?
+
+                keyword.Description = "smoke";
+                keyword.QuestionId = 64;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "house";
+                keyword.QuestionId = 64;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "home";
+                keyword.QuestionId = 64;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 15 ****************************************
+                //What is your job?
+
+                keyword.Description = "what";
+                keyword.QuestionId = 65;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "job";
+                keyword.QuestionId = 65;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "occupation";
+                keyword.QuestionId = 65;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "work";
+                keyword.QuestionId = 65;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 16 ****************************************
+                //Were you exposed to cigarette smoke at work?
+
+                keyword.Description = "smoke";
+                keyword.QuestionId = 66;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "work";
+                keyword.QuestionId = 66;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 17 ****************************************
+                //Do you take any medications?
+
+                keyword.Description = "take";
+                keyword.QuestionId = 67;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "medication";
+                keyword.QuestionId = 67;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "medicine";
+                keyword.QuestionId = 67;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 18 ****************************************
+                //Have you travelled anywhere recently?
+
+                keyword.Description = "travel";
+                keyword.QuestionId = 68;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 19 ****************************************
+                //Do you have asthma?
+
+                keyword.Description = "do";
+                keyword.QuestionId = 69;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "asthma";
+                keyword.QuestionId = 69;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 20 ****************************************
+                // Did you ever have asthma as a child?
+
+                keyword.Description = "have";
+                keyword.QuestionId = 70;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "asthma";
+                keyword.QuestionId = 70;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "past";
+                keyword.QuestionId = 70;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "before";
+                keyword.QuestionId = 70;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "child";
+                keyword.QuestionId = 70;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 21 ****************************************
+                //Have you been exposed to anyone with pneumonia?
+
+                keyword.Description = "any";
+                keyword.QuestionId = 71;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "pneumonia";
+                keyword.QuestionId = 71;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 22 ****************************************
+                //Do you have any lung diseases such as cancer, emphysema, bronchitis, cystic fibrosis?
+
+                keyword.Description = "lung";
+                keyword.QuestionId = 72;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "disease";
+                keyword.QuestionId = 72;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 23 ****************************************
+                //Have you ever had or been exposed to tuberculosis?
+
+                keyword.Description = "tuberculosis";
+                keyword.QuestionId = 73;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 24 ****************************************
+                //Have you had any recent changes in fatigue?
+
+                keyword.Description = "fatigue";
+                keyword.QuestionId = 74;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "have";
+                keyword.QuestionId = 74;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 25 ****************************************
+                //Have you had any recent changes in weight?
+
+                keyword.Description = "weight";
+                keyword.QuestionId = 75;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "have";
+                keyword.QuestionId = 75;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 26 ****************************************
+                //Have you had any night sweats?
+
+                keyword.Description = "sweat";
+                keyword.QuestionId = 77;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "night";
+                keyword.QuestionId = 77;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 27 ****************************************
+                //Have you had any swelling in your legs recently?
+
+                keyword.Description = "leg";
+                keyword.QuestionId = 78;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "swell";
+                keyword.QuestionId = 78;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 28 ****************************************
+                //Have you ever had any surgery on your lungs?
+
+                keyword.Description = "surgery";
+                keyword.QuestionId = 80;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "lung";
+                keyword.QuestionId = 80;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 29 ****************************************
+                //Have you ever had any injuries to your lungs or chest?
+
+                keyword.Description = "injur";
+                keyword.QuestionId = 81;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "lung";
+                keyword.QuestionId = 81;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "chest";
+                keyword.QuestionId = 81;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 30 ****************************************
+                //Did you get an annual flu shot?
+
+                keyword.Description = "flu";
+                keyword.QuestionId = 82;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "shot";
+                keyword.QuestionId = 82;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "vaccine";
+                keyword.QuestionId = 82;
+                m.KeywordAdd(keyword);
+
+                // ************ QUESTION 31 ****************************************
+                //Did you get an annual pneumonia vaccine?
+
+                keyword.Description = "pneumonia";
+                keyword.QuestionId = 83;
+                m.KeywordAdd(keyword);
+
+                keyword.Description = "vaccine";
+                keyword.QuestionId = 83;
                 m.KeywordAdd(keyword);
 
             }
