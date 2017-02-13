@@ -19,7 +19,6 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
         var scenarioResult2 = scenarioService.getScenarioByIdWithAll(scenarioId);
         scenarioResult2.then(function (resp) {
             $scope.scenario = resp.data;
-            console.log($scope.allScenarios);
             $scope.allSections = $scope.scenario.Sections;
             console.log($scope.allSections);
             $scope.QuestionsSection2 = $scope.allSections[1].Questions;
@@ -32,7 +31,7 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
 
     $scope.getScenariosByIdWithAll();
 
-    $scope.getAnswer = function () {
+    /*$scope.getAnswer = function () {
         console.log("getAnswer");
 
         for (var x = 0; x < $scope.QuestionsSection2.length; x++) {
@@ -57,7 +56,7 @@ function practiceController($scope, $routeParams, $http, scenarioService, semant
                 $scope.answer = $scope.QuestionsSection2[x].Answer;
             }
         } // close Outer For
-    };
+    };*/
 
     $scope.compareAPI = function () {
         console.log("compare API");
