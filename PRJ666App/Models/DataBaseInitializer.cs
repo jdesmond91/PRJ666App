@@ -55,8 +55,7 @@ namespace PRJ666App.Models
                 scenario.Description = "Mr. Smith has a productive cough and is in isolation.  Today is the second day of his hospitalization. His respiratory function needs to be assessed";
                 scenario.Goals = "don proper PPE, find out how pt is feeling, find out about his pneumonia , do a respiratory assessment, find out if pt has any additional concerns, chart findings";
                 m.ScenarioAdd(scenario);
-            }         
-            
+            }                     
         }
 
         public static void LoadSections()
@@ -238,6 +237,12 @@ namespace PRJ666App.Models
 
                 question.Description = "Do you ever get short of breath?";
                 question.Answer = "No.";
+                question.ScenarioId = 2;
+                question.SectionId = 6;
+                m.QuestionAdd(question);
+
+                question.Description = "Where in your back is your pain located?";
+                question.Answer = "Mostly in my middle and lower back";
                 question.ScenarioId = 2;
                 question.SectionId = 6;
                 m.QuestionAdd(question);
@@ -533,7 +538,7 @@ namespace PRJ666App.Models
 
                 // ************ QUESTION 8 ****************************************
                 //How would you rate the pain out of 10 if 0 means no pain and 10 is the worst pain you’ve ever had?
-            
+
                 keyword.Description = "rate";
                 keyword.QuestionId = 8;
                 m.KeywordAdd(keyword);
