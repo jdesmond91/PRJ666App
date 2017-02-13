@@ -10,7 +10,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     $scope.answer = "";
     $scope.possibleQuestions = [];
     $scope.QuestionsSection2Desc = [];
-    $scope.lastTry = [];
 
     //console.log("Scenario Id: " + scenarioId);
 
@@ -20,8 +19,9 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
             $scope.scenario = response.data;
             //console.log($scope.scenario);
             $scope.allSections = $scope.scenario.Sections;
-            //console.log($scope.allSections);
-            $scope.QuestionsSection2 = $scope.allSections[1].Questions;          
+           // console.log($scope.allSections);
+            $scope.QuestionsSection2 = $scope.allSections[1].Questions;
+            //console.log($scope.QuestionsSection2);
         }, function (error) {
             $scope.status = 'Unable to load question data: ' + error.message;
         });        

@@ -362,12 +362,6 @@ namespace PRJ666App.Models
                 question.SectionId = 7;
                 m.QuestionAdd(question);
 
-                question.Description = "Did you ever have asthma as a child?";
-                question.Answer = "No.";
-                question.ScenarioId = 2;
-                question.SectionId = 7;
-                m.QuestionAdd(question);
-
                 question.Description = "Have you had any night sweats?";
                 question.Answer = "No.";
                 question.ScenarioId = 2;
@@ -376,12 +370,6 @@ namespace PRJ666App.Models
 
                 question.Description = "Have you had any swelling in your legs recently?";
                 question.Answer = "No.";
-                question.ScenarioId = 2;
-                question.SectionId = 7;
-                m.QuestionAdd(question);
-
-                question.Description = "Have you had any recent changes in fatigue?";
-                question.Answer = "Yes, I’ve been more tired with this pneumonia.";
                 question.ScenarioId = 2;
                 question.SectionId = 7;
                 m.QuestionAdd(question);
