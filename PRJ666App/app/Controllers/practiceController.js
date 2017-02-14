@@ -89,7 +89,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
             $scope.answer = "Please try asking another question!";
         } else {
             var max = 0;
-            var realAnswer = "";            
+            var realAnswer = "";
             for (var i = 0; i < $scope.possibleQuestions.length; i++) {
                 var api = compareAPI($scope.possibleQuestions[i].question, $scope.possibleQuestions[i].answer, $scope.possibleQuestions[i].keywords,
                 function (score, question, answer, keywords) {
@@ -109,9 +109,8 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
                             if (isMatch == 0) {
                                 $scope.answer = "Please try asking another question!";
                             }
-                            else {
-                                //have to return a string just to know, bcause realAnswer is undefined in here, have to return callback function hahahahaha again, or set the answer in the match function
-                                $scope.answer = "real answer";
+                            else {                           
+                                $scope.answer = answer;
                             }
                             
                         } // closes outer else
@@ -241,10 +240,10 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
                 countMatches++;
             }
         }                
-        if (countMatches >= keywords.length - 1) {
+        if (countMatches >= (keywords.length - 1)) {
             return 1;         
         }
-        else if(countMatches < keywords.length - 2) {
+        else{
             return 0;
         }    
     }
