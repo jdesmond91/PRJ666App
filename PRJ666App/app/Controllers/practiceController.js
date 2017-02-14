@@ -70,7 +70,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         } // close Outer For
     }; */
 
-
     /* Once the user inputs their question and presses the Ask button, the following parse function is called.
        The function will first attempt to retrieve the 3 best matches from String Similarity by calling the getSimilarity function.
         If the highest match among those results has a score of 0.3 or less, the API will not be called as the scores are already too low.
@@ -91,52 +90,63 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
             var realAnswer = "";
             var results = [];
 
-            //for (var i = 0; i < $scope.possibleQuestions.length; i++) {
-            //    var compare = compareAPI(results, $scope.possibleQuestions[i].question,
-            //               $scope.possibleQuestions[i].answer,
-            //               $scope.possibleQuestions[i].keywords,
-            //               $scope.possibleQuestions[i].similar/*,
-            //    function (score, question, answer, keywords, similar) {
-            //        $scope.compareAPI = score.average;
-            //        console.log($scope.compareAPI);
-            //        console.log(question);
-            //        console.log(answer);
+            for (var i = 0; i < $scope.possibleQuestions.length; i++) {
+                var compare = compareAPI($scope.results, $scope.possibleQuestions[i].question,
+                           $scope.possibleQuestions[i].answer,
+                           $scope.possibleQuestions[i].keywords,
+                           $scope.possibleQuestions[i].similar/*,
+                function (score, question, answer, keywords, similar) {
+                    $scope.compareAPI = score.average;
+                    console.log($scope.compareAPI);
+                    console.log(question);
+                    console.log(answer);
 
-            //            if ($scope.compareAPI >= 0.6) {
-            //                realAnswer = answer;
-            //                questionsAskedCount++;
-            //                $scope.answer = realAnswer;  
-            //            } else {
-            //                var isMatch = matchKeywordAPI(question, keywords);
-            //                if (isMatch == 0) {
-            //                    $scope.answer = "Please try asking another question!";
-            //                }
-            //                else {
-            //                    //have to return a string just to know, bcause realAnswer is undefined in here, have to return callback function hahahahaha again, or set the answer in the match function
-            //                    $scope.answer = realAnswer;
-            //                }
+                        if ($scope.compareAPI >= 0.6) {
+                            realAnswer = answer;
+                            questionsAskedCount++;
+                            $scope.answer = realAnswer;  
+                        } else {
+                            var isMatch = matchKeywordAPI(question, keywords);
+                            if (isMatch == 0) {
+                                $scope.answer = "Please try asking another question!";
+                            }
+                            else {
+                                //have to return a string just to know, bcause realAnswer is undefined in here, have to return callback function hahahahaha again, or set the answer in the match function
+                                $scope.answer = realAnswer;
+                            }
 
-            //            } // closes outer else
-            //    }*/);
-            //}
+                        } // closes outer else
+                }*/);
+            }
 
-            var compare = compareAPI(results, $scope.possibleQuestions[0].question,
-                           $scope.possibleQuestions[0].answer,
-                           $scope.possibleQuestions[0].keywords,
-                           $scope.possibleQuestions[0].similar);
-
-            var compare = compareAPI(results, $scope.possibleQuestions[1].question,
-               $scope.possibleQuestions[1].answer,
-               $scope.possibleQuestions[1].keywords,
-               $scope.possibleQuestions[1].similar);
 
             console.log("display results array");
 
             results.sort(function (a, b) {
                 return b.apiResult - a.apiResult;
             });
+           
 
-            console.log(results);
+            //if (results[0].apiResult == results[1].apiResult) {
+            //    results.sort(function (a, b) {
+            //        return b.stringSimResult - a.stringSimResult;
+            //    });
+            //}
+
+            //if (results[0].apiResult >= 0.6) {
+            //    $scope.answer = results[0].answer;
+            //    questionsAskedCount++;
+            //}
+            //else {
+            //    var isMatch = matchKeywordAPI(results[0].question, results[0].keywords);
+            //    if (isMatch == 0) {
+            //        $scope.answer = "Please try asking another question!";
+            //    }
+            //    else {                   
+            //        $scope.answer = results[0].answer;
+            //        questionsAskedCount++;
+            //    }
+            //} //  closes Outer else
         }
         //console.log("questions in section: " + $scope.sectionQuestions.length);
 
@@ -145,7 +155,16 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         //$scope.goToNextSection();
         //}
 
+        //getResults(results);
     };
+
+    //function getResults() {
+    //    console.log("get results");
+    //    results.forEach(function (arrayElement) {
+    //        console.log(arrayElement);
+    //    });
+        
+    //}
 
     //calls the RxNLP API 
     function compareAPI(results, possibleQuestion, possibleAnswer, keywords, similar/*, fn*/) {
@@ -198,9 +217,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         $scope.possibleQuestions.push(similarityArray[0]);
         $scope.possibleQuestions.push(similarityArray[1]);
         $scope.possibleQuestions.push(similarityArray[2]);
-
-        //console.log("similarity array\n");
-        //console.log(similarityArray);
 
         //matchKeyword();
 
