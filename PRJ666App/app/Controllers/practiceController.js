@@ -117,6 +117,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
                     } // closes If                                                       
                 });
             }
+           
         }
         //console.log("questions in section: " + $scope.sectionQuestions.length);
                 
