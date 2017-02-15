@@ -81,50 +81,55 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         var similarityArray = getSimilarity();
 
         console.log("possible questions\n");
-        console.log($scope.possibleQuestions);
 
         //if the highest match from string similarity is 0.3 or less, don't bother going to API
         if (similarityArray[0].similar <= 0.3) {
             $scope.answer = "Please try asking another question!";
         } else {
             var realAnswer = "";
-            var results = [];
+            var results = "";
 
-            for (var i = 0; i < $scope.possibleQuestions.length; i++) {
-                var compare = compareAPI($scope.results, $scope.possibleQuestions[i].question,
-                           $scope.possibleQuestions[i].answer,
-                           $scope.possibleQuestions[i].keywords,
-                           $scope.possibleQuestions[i].similar/*,
-                function (score, question, answer, keywords, similar) {
-                    $scope.compareAPI = score.average;
-                    console.log($scope.compareAPI);
-                    console.log(question);
-                    console.log(answer);
+            //for (var i = 0; i < $scope.possibleQuestions.length; i++) {
+                //var compare = compareAPI(results, $scope.possibleQuestions[i].question,
+                //           $scope.possibleQuestions[i].answer,
+                //           $scope.possibleQuestions[i].keywords,
+                //           $scope.possibleQuestions[i].similar/*,
+                //function (score, question, answer, keywords, similar) {
+                //    $scope.compareAPI = score.average;
+                //    console.log($scope.compareAPI);
+                //    console.log(question);
+                //    console.log(answer);
 
-                        if ($scope.compareAPI >= 0.6) {
-                            realAnswer = answer;
-                            questionsAskedCount++;
-                            $scope.answer = realAnswer;  
-                        } else {
-                            var isMatch = matchKeywordAPI(question, keywords);
-                            if (isMatch == 0) {
-                                $scope.answer = "Please try asking another question!";
-                            }
-                            else {
-                                //have to return a string just to know, bcause realAnswer is undefined in here, have to return callback function hahahahaha again, or set the answer in the match function
-                                $scope.answer = realAnswer;
-                            }
+                //        if ($scope.compareAPI >= 0.6) {
+                //            realAnswer = answer;
+                //            questionsAskedCount++;
+                //            $scope.answer = realAnswer;  
+                //        } else {
+                //            var isMatch = matchKeywordAPI(question, keywords);
+                //            if (isMatch == 0) {
+                //                $scope.answer = "Please try asking another question!";
+                //            }
+                //            else {
+                //                //have to return a string just to know, bcause realAnswer is undefined in here, have to return callback function hahahahaha again, or set the answer in the match function
+                //                $scope.answer = realAnswer;
+                //            }
 
-                        } // closes outer else
-                }*/);
-            }
+                //        } // closes outer else
+                //}*/)
+
+                
+           // }
 
 
             console.log("display results array");
 
-            results.sort(function (a, b) {
-                return b.apiResult - a.apiResult;
-            });
+            //results.sort(function (a, b) {
+                //return b.apiResult - a.apiResult;
+           // });
+
+           
+
+      
            
 
             //if (results[0].apiResult == results[1].apiResult) {
@@ -172,8 +177,9 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
 
         var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
         apiMatch.then(function (result) {
+            
             //fn(result.data, possibleQuestion, possibleAnswer, keywords, similar);
-            //console.log(result.data);
+   
             results.push(
                 {
                     "apiResult": result.data.average,
