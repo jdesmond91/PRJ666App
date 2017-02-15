@@ -1,5 +1,5 @@
-﻿angular.module("nursingApp").controller("practiceController", ["$scope", "$routeParams", "$http", "$q", "scenarioService", "semanticService", practiceController]);
-function practiceController($scope, $routeParams, $http, $q, scenarioService, semanticService) {
+﻿angular.module("nursingApp").controller("practiceController", ["$scope", "$routeParams", "$http", "$q","$timeout",  "scenarioService", "semanticService", practiceController]);
+function practiceController($scope, $routeParams, $http, $q,$timeout, scenarioService, semanticService) {
 
     var scenarioId = $routeParams.scenario_id; //retrieve id from scenario selected from dropdown
     $scope.status;
@@ -15,9 +15,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     $scope.answer = ""; //the answer we will return to the student
     $scope.possibleQuestions = []; //stores the top 3 results from the initial pass through string similarity
     var questionsAskedCount = 0;
-
-    //$scope.sectionQuestionDesc = [];
-    //$scope.continueLoop = true;    
 
     //console.log("Scenario Id: " + scenarioId);
 
@@ -79,44 +76,51 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         $scope.answer = "";
         
         var similarityArray = getSimilarity();
-
-        console.log("possible questions\n");
-        console.log($scope.possibleQuestions);
-
         var compareAPI = 0;
 
         //if the highest match from string similarity is 0.3 or less, don't bother going to API
-        if (similarityArray[0].similar <= 0.3) {
-            //$scope.answer = "Please try asking another question!";
+        if (similarityArray[0].similar >= 0.7) {
+            $scope.answer = similarityArray[0].answer;
+            questionsAskedCount++;
+        }
+        else if (similarityArray[0].similar <= 0.3) {
+            $scope.answer = "Please try asking another question!";
         } else {
             var max = 0;
-            for (let i = 0; i < $scope.possibleQuestions.length; i++) {
-                var api = compareWebAPI($scope.possibleQuestions[i].question, $scope.possibleQuestions[i].answer, $scope.possibleQuestions[i].keywords,
-                function (score, question, answer, keywords) {
-                    compareAPI = score.average;
-                    console.log(compareAPI);
-                    console.log(question);
-                    console.log(answer);
-
-                    if (compareAPI >= max) {
-                        max = compareAPI;
-                        if (max >= 0.6) {                         
-                            questionsAskedCount++;
-                            $scope.answer = answer;
-                        } else {
-                            var isMatch = matchKeywordAPI(question, keywords);
-                            if (isMatch == 1) {
+            console.time("test");           
+                for (let i = 0; i < $scope.possibleQuestions.length; i++) {
+                    var api = compareWebAPI($scope.possibleQuestions[i].question, $scope.possibleQuestions[i].answer, $scope.possibleQuestions[i].keywords,
+                    function (score, question, answer, keywords) {
+                        compareAPI = score.average;
+                        console.log(compareAPI);
+                        if (compareAPI >= max) {
+                            max = compareAPI;
+                            if (max >= 0.6) {                         
+                                questionsAskedCount++;
                                 $scope.answer = answer;
-                            }                           
-                        } // closes outer else
-                    } // closes If                                                       
-                });
-            }                  
-        }
+                            } else {
+                                var isMatch = matchKeywordAPI(question, keywords);
+                                if (isMatch == 1) {
+                                    $scope.answer = answer;
+                                    questionsAskedCount++;
+                                }                           
+                            } // closes outer else
+                        } // closes If                                                       
+                    });
 
-        if ($scope.answer == "") {
-            $scope.answer = "Please try asking another question!";
-        }
+                } // closes For       
+                console.timeEnd("test");            
+        } // closes Else
+
+        $timeout(function () {           
+            if ($scope.answer == "") {
+                $scope.answer = "Please try asking another question!";
+                if (questionsAskedCount == $scope.sectionQuestions.length) {
+                    $scope.goToNextSection();
+                }
+            }
+        }, 1000);
+        
 
         //console.log("questions in section: " + $scope.sectionQuestions.length);
                 
@@ -135,7 +139,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
         apiMatch.then(function (result) {          
             fn(result.data, possibleQuestion, possibleAnswer, keywords);
-            //console.log(result.data);
         }, function(error){
             $scope.status = 'Unable to load question data: ' + error.message;
         });
@@ -187,9 +190,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
             for (var j = 0; j < $scope.possibleQuestions[i].keywords.length; j++) {
                 var keyword = $scope.possibleQuestions[i].keywords[j].Description;
 
-                console.log($scope.possibleQuestions[i].question);
-                console.log(keyword);
-
                 var regexKeyword = new RegExp("\\b" + keyword + "[a-zA-Z]*\\b", "gi"); // global match
 
                 isMatch = $scope.studentQuestion.match(regexKeyword);
@@ -226,12 +226,9 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     to see if any matches */
 
     function matchKeywordAPI(question, keywords) {
-        console.log("match keyword api");
         var isMatch = "";
         var countMatches = 0;
-        console.log(keywords);
-        
-
+ 
         for (var i = 0; i < keywords.length; i++) {
             var keyword = keywords[i].Description;
             var regexKeyword = new RegExp("\\b" + keyword + "[a-zA-Z]*\\b", "gi"); // global match
@@ -239,7 +236,8 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
             if (isMatch != null) {
                 countMatches++;
             }
-        }                
+        }
+       
         if (countMatches >= (keywords.length - 1)) {
             return 1;         
         }
@@ -260,20 +258,5 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     $("#question").click(function () {
         this.value = '';
     });
-
-    //TEMPORARY: user presses the previous section button which will update the section index and retrieve the previous set of questions
-    $scope.start = function () {
-        //if (!$scope.continueLoop) return;
-        //loopStep();
-        //setTimeout($scope.startLoop, 1000);
-        --$scope.sectionStartIndex;
-        $scope.sectionQuestions = $scope.allSections[$scope.sectionStartIndex].Questions;
-        console.log($scope.sectionStartIndex);
-    }
-
-
-    //function loopStep() {
-    //    console.log("test loop");
-    //}
 
 } // close Module
