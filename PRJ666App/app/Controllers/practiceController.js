@@ -76,20 +76,20 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     */
     $scope.parse = function () {
         console.log("Entering parse\n");
+        $scope.answer = "";
         
         var similarityArray = getSimilarity();
 
         console.log("possible questions\n");
         console.log($scope.possibleQuestions);
 
-        $scope.compareAPI = [];
+        $scope.compareAPI = 0;
 
         //if the highest match from string similarity is 0.3 or less, don't bother going to API
         if (similarityArray[0].similar <= 0.3) {
             $scope.answer = "Please try asking another question!";
         } else {
             var max = 0;
-            var realAnswer = "";
             for (var i = 0; i < $scope.possibleQuestions.length; i++) {
                 var api = compareAPI($scope.possibleQuestions[i].question, $scope.possibleQuestions[i].answer, $scope.possibleQuestions[i].keywords,
                 function (score, question, answer, keywords) {
@@ -100,25 +100,24 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
 
                     if ($scope.compareAPI >= max) {
                         max = $scope.compareAPI;
-                        if (max >= 0.6) {
-                            realAnswer = answer;
+                        if (max >= 0.6) {                         
                             questionsAskedCount++;
-                            $scope.answer = realAnswer;  
+                            $scope.answer = answer;
                         } else {
                             var isMatch = matchKeywordAPI(question, keywords);
-                            if (isMatch == 0) {
-                                $scope.answer = "Please try asking another question!";
-                            }
-                            else {                           
+                            if (isMatch == 1) {
                                 $scope.answer = answer;
-                            }
-                            
+                            }                           
                         } // closes outer else
                     } // closes If                                                       
                 });
-            }
-           
+            }                  
         }
+
+        if ($scope.answer == "") {
+            $scope.answer = "Please try asking another question!";
+        }
+
         //console.log("questions in section: " + $scope.sectionQuestions.length);
                 
         //console.log("questions asked: " + questionsAskedCount);
