@@ -83,23 +83,23 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
         console.log("possible questions\n");
         console.log($scope.possibleQuestions);
 
-        $scope.compareAPI = 0;
+        var compareAPI = 0;
 
         //if the highest match from string similarity is 0.3 or less, don't bother going to API
         if (similarityArray[0].similar <= 0.3) {
-            $scope.answer = "Please try asking another question!";
+            //$scope.answer = "Please try asking another question!";
         } else {
             var max = 0;
-            for (var i = 0; i < $scope.possibleQuestions.length; i++) {
-                var api = compareAPI($scope.possibleQuestions[i].question, $scope.possibleQuestions[i].answer, $scope.possibleQuestions[i].keywords,
+            for (let i = 0; i < $scope.possibleQuestions.length; i++) {
+                var api = compareWebAPI($scope.possibleQuestions[i].question, $scope.possibleQuestions[i].answer, $scope.possibleQuestions[i].keywords,
                 function (score, question, answer, keywords) {
-                    $scope.compareAPI = score.average;
-                    console.log($scope.compareAPI);
+                    compareAPI = score.average;
+                    console.log(compareAPI);
                     console.log(question);
                     console.log(answer);
 
-                    if ($scope.compareAPI >= max) {
-                        max = $scope.compareAPI;
+                    if (compareAPI >= max) {
+                        max = compareAPI;
                         if (max >= 0.6) {                         
                             questionsAskedCount++;
                             $scope.answer = answer;
@@ -129,7 +129,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
 
 
     //calls the RxNLP API 
-    function compareAPI (possibleQuestion, possibleAnswer, keywords, fn) {
+    function compareWebAPI (possibleQuestion, possibleAnswer, keywords, fn) {
         console.log("compare API");
     
         var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
