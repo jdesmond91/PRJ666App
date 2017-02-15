@@ -128,10 +128,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
            // });
 
            
-
-      
-           
-
             //if (results[0].apiResult == results[1].apiResult) {
             //    results.sort(function (a, b) {
             //        return b.stringSimResult - a.stringSimResult;
