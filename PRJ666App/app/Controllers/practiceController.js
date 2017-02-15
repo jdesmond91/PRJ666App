@@ -64,7 +64,21 @@ function practiceController($scope, $routeParams, $http, $q,$timeout, scenarioSe
             }
         } // close Outer For
     }; */
-    
+
+    $scope.trySync = function () {
+        $scope.resultssss = "";
+        var apiMatch = semanticService.getSemantic('how are you doing?', 'how are you')
+        apiMatch.then(function (result) {
+            //console.log(result);
+            $scope.resultssss = result.data.average;
+   
+        }, function (error) {
+            $scope.status = 'Unable to load question data: ' + error.message;
+        }, $timeout(function(){
+        }, 1000));
+       
+    };
+
 
     /* Once the user inputs their question and presses the Ask button, the following parse function is called.
        The function will first attempt to retrieve the 3 best matches from String Similarity by calling the getSimilarity function.
@@ -74,7 +88,7 @@ function practiceController($scope, $routeParams, $http, $q,$timeout, scenarioSe
     $scope.parse = function () {
         console.log("Entering parse\n");
         $scope.answer = "";
-        
+        console.log($scope.resultssss);
         var similarityArray = getSimilarity();
         var compareAPI = 0;
 
