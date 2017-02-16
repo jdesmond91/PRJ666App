@@ -17,6 +17,7 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     var questionsAskedCount = 0;
 
     $scope.compareAPI = 0;
+    $scope.compareAPIResults = [];
 
     //$scope.sectionQuestionDesc = [];
     //$scope.continueLoop = true;    
@@ -120,23 +121,37 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
             //    }*/);
             //}
 
-            var compare = compareAPI(results, $scope.possibleQuestions[0].question,
-                           $scope.possibleQuestions[0].answer,
-                           $scope.possibleQuestions[0].keywords,
-                           $scope.possibleQuestions[0].similar);
+            var promises = [];
+            for (var i = 0; i < $scope.possibleQuestions.length; i++) {
+                promises.push(compareAPI($scope.possibleQuestions[i].question,
+                                            $scope.possibleQuestions[i].answer,
+                                            $scope.possibleQuestions[i].keywords,
+                                            $scope.possibleQuestions[i].similar, results));
+            }
 
-            var compare = compareAPI(results, $scope.possibleQuestions[1].question,
-               $scope.possibleQuestions[1].answer,
-               $scope.possibleQuestions[1].keywords,
-               $scope.possibleQuestions[1].similar);
+            
+            $q.all(promises).then(function (ret) {
+                results.sort(function (a, b) {
+                    return b.apiResult - a.apiResult || b.stringSimResult - a.stringSimResult; 
+                });
 
-            console.log("display results array");
+                console.log(results);
 
-            results.sort(function (a, b) {
-                return b.apiResult - a.apiResult;
+                //if (results[0].apiResult >= 0.6) {
+                //    $scope.answer = results[0].answer;
+                //}
+  
             });
 
-            console.log(results);
+            //$scope.compareAPIResults.sort(function (a, b) {
+            //    return b.apiResult - a.apiResult;
+            //});
+
+           // console.log($scope.compareAPIResults);
+
+            //for (result in $scope.compareAPIResults) {
+            //    console.log("TESTING: " + result.stringSimResult);
+            //}
         }
         //console.log("questions in section: " + $scope.sectionQuestions.length);
 
@@ -148,25 +163,50 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     };
 
     //calls the RxNLP API 
-    function compareAPI(results, possibleQuestion, possibleAnswer, keywords, similar/*, fn*/) {
+    function compareAPI(possibleQuestion, possibleAnswer, keywords, similar, results/*, fn*/) {
         console.log("compare API");
 
         var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
         apiMatch.then(function (result) {
             //fn(result.data, possibleQuestion, possibleAnswer, keywords, similar);
             //console.log(result.data);
+            //var keywordMatch = matchKeywordAPI(possibleQuestion, keywords)
             results.push(
                 {
                     "apiResult": result.data.average,
                     "question": possibleQuestion,
                     "answer": possibleAnswer,
                     "keywords": keywords,
-                    "stringSimResult": similar
+                    "stringSimResult": similar,
+                    "keywordMatch": 0//keywordMatch
                 });
+            console.log("api success");
         }, function (error) {
             $scope.status = 'Unable to load question data: ' + error.message;
         });
+        return apiMatch;
+        //    .then(function (result) {
+        //    $scope.compareAPIResults.sort(function (a, b) {
+        //        return b.apiResult - a.apiResult | b.stringSimResult - a.stringSimResult;
+        //    });
+        //    console.log("Sorted");
+        //    console.log($scope.compareAPIResults);
+        //}).then(function (result) {
+        //    if ($scope.compareAPIResults[0] >= 0.6) {
+        //        $scope.answer = $scope.compareAPIResults[0].answer;
+        //    } else {
+        //        for (comparison in $scope.compareAPIResults) {
+        //            if (comparison.keywordMatch == 1) {
+        //                $scope.answer = comparison.answer;
+        //                break;
+        //            }
+        //        }
 
+        //        if (!$scope.answer) {
+        //            $scope.answer = "Please enter another question";
+        //        }
+        //    }
+        //});
     }
 
     //calls String Similarity node package to retrieve the top 3 matched questions
