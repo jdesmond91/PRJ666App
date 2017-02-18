@@ -5,30 +5,64 @@
 
 </head>
 <body ng-app="nursingApp">
-    <div class="row">
-        <div class="col-md-6" id="container">
+    <div class="wrap" style="width: 100%">
+        <div style="float: left; width: 50%">
             <form name="form">
-                <label class="control-label" for="scenarioName">Scenario Name: </label>             
-                    <input type="text" name="scenarioName" id="scenarioName" class="form-control" ng-model="scenarioName" required>                    
-               <br/> Section:               
+                <label class="control-label" for="scenarioName">Scenario Name: </label>
+                <input type="text" name="scenarioName" id="scenarioName" class="form-control" ng-model="scenarioName">
+                <br /> Section:
                 <div class="form-group">
                     <label class="control-label">Section</label>
                     <input type="text" class="form-control" placeholder="" ng-model="sectionName">
-
+              
+                    <div class="form-group">
+                        <label class="control-label">Question</label>
+                        <input type="text" class="form-control" placeholder="Question" ng-model="question">
+                        <input type="text" class="form-control" placeholder="Answer" ng-model="answer">
+                        <input type="text" class="form-control" placeholder="Hint" ng-model="hint">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default" ng-click="getKeywords()">
+                    Get Keywords
+                </button>
+                
+                <div class="input-group" ng-repeat="item in questionArray track by $index">
+                    <input type="text" class="form-control" ng-model="questionArray[$index]" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="removeKeywords($index)">Remove Keyword</button>
+                    </span>
+                </div>
+                <button type="button" class="btn btn-default" ng-click="addKeywords()">
+                    Add More Keywords
+                </button>
                     <button type="button" class="btn btn-default" ng-click="addQuestion()">
                         Add Question
                     </button>
-                    <fieldset ng-repeat="question in questions" class="form-group">
-                        <label class="control-label">Question</label>
-                        <input type="text" class="form-control" placeholder="Question" ng-model="question[$index].question">
-                        <input type="text" class="form-control" placeholder="Answer" ng-model="question[$index].answer">
-                        <input type="text" class="form-control" placeholder="Hint" ng-model="question[$index].hint">
-                    </fieldset>
-                </div>            
-                <button type="button" class="btn btn-default" ng-click="addSection()">
-                    Add Section
-                </button>
             </form>
         </div>
+        <div style="float: right; width: 50%;">
+            <fieldset ng-repeat="section in scenarios">
+                <p>Section: {{section.section}}</p><br/>                              
+                <p>
+                    Question:
+                    {{section.questions}}
+                </p>
+                <p>
+                    Answer:
+                    {{section.answers}}
+                </p> 
+                <p>
+                    Hint:
+                    {{section.hints}}
+                </p> 
+                <p>
+                    Keywords:
+                    <div ng-repeat="keyword in section.keywords">
+                        {{keyword}}
+                    </div>
+                </p>                               
+            </fieldset>
+        </div>
+        <div style="clear:both"></div>
         </div>
 </body>

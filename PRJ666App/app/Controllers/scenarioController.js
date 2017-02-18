@@ -5,8 +5,10 @@ function scenarioController($scope, $routeParams, scenarioService) {
     $scope.Message = "";
     $scope.status;
     $scope.sectionName = "";
-    $scope.questions = [];
-    var scenarios = [];
+    $scope.question = "";
+    $scope.answer = "";
+    $scope.hint = "";
+    $scope.scenarios = [];
 
     $scope.getScenarios = function() {
         console.log("get scnearios");
@@ -21,37 +23,54 @@ function scenarioController($scope, $routeParams, scenarioService) {
     };
 
     $scope.addQuestion = function () {
-        $scope.questions.push({});
+
+        $scope.scenarios.push({
+            section: $scope.sectionName,
+            questions: $scope.question,
+            answers: $scope.answer,
+            hints: $scope.hint,
+            keywords: $scope.questionArray
+        });
+               
+        //$scope.scenarios.section = $scope.sectionName;
+        //$scope.scenarios.questions.push({ question: $scope.question, keywords: $scope.questionArray});
+        //$scope.scenarios.answers.push($scope.answer);
+        //$scope.scenarios.hints.push($scope.hint);
+
+        console.log($scope.scenarios);
+        clearFields();
     }
 
     $scope.getQuestion = function () {
         console.log($scope.questions);
     }
 
-    $scope.addSection = function () {
-        var onlyQuestions = [];
-        var onlyAnswers = [];
-        var onlyHints = [];
-
-        for (var i = 0; i < $scope.questions.length; i++) {         
-            onlyQuestions.push($scope.questions[i][i].question);    
-            onlyAnswers.push($scope.questions[i][i].answer); 
-            onlyHints.push($scope.questions[i][i].hint); 
+    $scope.getKeywords = function () {
+        var question = $scope.question;
+        var containsQuestionMark = $scope.question.indexOf('?');
+        if(containsQuestionMark > -1){
+            question = question.slice(0, containsQuestionMark);          
         }
-        scenarios.push({
-            section: $scope.sectionName,
-            questions: onlyQuestions,
-            answers: onlyAnswers,
-            hints: onlyHints           
-        })
-        console.log(scenarios);
+        
+        $scope.questionArray = question.split(' ');
 
-        clearFields();
+        console.log($scope.questionArray);
+    };
+
+    $scope.addKeywords = function () {
+        $scope.questionArray.push(" ");
+    }
+
+    $scope.removeKeywords = function (index) {
+        $scope.questionArray.splice(index, 1);
+        console.log($scope.questionArray);
     }
 
     function clearFields() {
-        $scope.sectionName = "";
-        $scope.questions = [];
+        $scope.question = "";
+        $scope.answer = "";
+        $scope.hint = "";
+        $scope.questionArray = [];
     }
         
 }
