@@ -19,9 +19,9 @@
                      controller: 'questionController',
                      templateUrl: 'app/Partials/question.html'
                 })
-                .when('/scenario', {
+                .when('/addscenario/', {
                      controller: 'scenarioController',
-                     templateUrl: 'app/Partials/scenario.html'
+                     templateUrl: 'app/Partials/addscenario.html'
                 })
                 .when('/practice/:scenario_id/', {
                      controller: 'practiceController',

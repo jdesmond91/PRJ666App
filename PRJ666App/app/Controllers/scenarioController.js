@@ -4,8 +4,9 @@ function scenarioController($scope, $routeParams, scenarioService) {
     var scenarioId = $routeParams.scenario_id;
     $scope.Message = "";
     $scope.status;
-    
-    console.log("Scenario Id: " + scenarioId);
+    $scope.sectionName = "";
+    $scope.questions = [];
+    var scenarios = [];
 
     $scope.getScenarios = function() {
         console.log("get scnearios");
@@ -19,6 +20,38 @@ function scenarioController($scope, $routeParams, scenarioService) {
         });
     };
 
-    $scope.getScenarios();
+    $scope.addQuestion = function () {
+        $scope.questions.push({});
+    }
 
+    $scope.getQuestion = function () {
+        console.log($scope.questions);
+    }
+
+    $scope.addSection = function () {
+        var onlyQuestions = [];
+        var onlyAnswers = [];
+        var onlyHints = [];
+
+        for (var i = 0; i < $scope.questions.length; i++) {         
+            onlyQuestions.push($scope.questions[i][i].question);    
+            onlyAnswers.push($scope.questions[i][i].answer); 
+            onlyHints.push($scope.questions[i][i].hint); 
+        }
+        scenarios.push({
+            section: $scope.sectionName,
+            questions: onlyQuestions,
+            answers: onlyAnswers,
+            hints: onlyHints           
+        })
+        console.log(scenarios);
+
+        clearFields();
+    }
+
+    function clearFields() {
+        $scope.sectionName = "";
+        $scope.questions = [];
+    }
+        
 }

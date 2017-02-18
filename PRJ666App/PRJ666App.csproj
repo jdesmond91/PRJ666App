@@ -248,6 +248,7 @@
     <Content Include="app\Controllers\headerController.js" />
     <Content Include="app\Controllers\practiceController.js" />
     <Content Include="app\css\main.css" />
+    <Content Include="app\Partials\addscenario.html" />
     <Content Include="app\Partials\header.html" />
     <Content Include="app\Partials\login.html" />
     <Content Include="app\Partials\practice.html" />
