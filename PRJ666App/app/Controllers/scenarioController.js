@@ -4,6 +4,10 @@ function scenarioController($scope, $routeParams, scenarioService) {
     var scenarioId = $routeParams.scenario_id;
     $scope.Message = "";
     $scope.status;
+    $scope.scenarioName = "";
+    $scope.scenarioDescription = "";
+    $scope.scenarioGoals = "";
+
     $scope.sectionName = "";
     $scope.question = "";
     $scope.answer = "";
@@ -30,12 +34,7 @@ function scenarioController($scope, $routeParams, scenarioService) {
             answers: $scope.answer,
             hints: $scope.hint,
             keywords: $scope.questionArray
-        });
-               
-        //$scope.scenarios.section = $scope.sectionName;
-        //$scope.scenarios.questions.push({ question: $scope.question, keywords: $scope.questionArray});
-        //$scope.scenarios.answers.push($scope.answer);
-        //$scope.scenarios.hints.push($scope.hint);
+        });             
 
         console.log($scope.scenarios);
         clearFields();
@@ -72,5 +71,28 @@ function scenarioController($scope, $routeParams, scenarioService) {
         $scope.hint = "";
         $scope.questionArray = [];
     }
-        
+
+    $scope.saveSection = function () {
+        var scenarioId = [];
+        saveScenario(scenarioId);
+    }
+
+    function saveScenario(scenarioId) {
+
+        var scenario = {
+            Name: $scope.scenarioName,
+            Description: $scope.scenarioDescription,
+            Goals: $scope.scenarioGoals
+        };
+
+            var scenarioAddResult = scenarioService.addScenario(scenario);
+            scenarioAddResult.then(function (data) {
+                console.log(data);
+                scenarioId = data.Id;
+            }, function (error) {
+                $scope.status = 'Unable to load scenario data: ' + error.message;
+            });
+   
+        console.log(scenarioId);
+    }
 }

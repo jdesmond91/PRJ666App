@@ -10,6 +10,8 @@
             <form name="form">
                 <label class="control-label" for="scenarioName">Scenario Name: </label>
                 <input type="text" name="scenarioName" id="scenarioName" class="form-control" ng-model="scenarioName">
+                <input type="text" name="scenarioDescription" id="scenarioDescription" class="form-control" ng-model="scenarioDescription">
+                <input type="text" name="scenarioGoals" id="scenarioGoals" class="form-control" ng-model="scenarioGoals">
                 <br /> Section:
                 <div class="form-group">
                     <label class="control-label">Section</label>
@@ -41,27 +43,33 @@
             </form>
         </div>
         <div style="float: right; width: 50%;">
-            <fieldset ng-repeat="section in scenarios">
-                <p>Section: {{section.section}}</p><br/>                              
-                <p>
-                    Question:
-                    {{section.questions}}
-                </p>
-                <p>
-                    Answer:
-                    {{section.answers}}
-                </p> 
-                <p>
-                    Hint:
-                    {{section.hints}}
-                </p> 
-                <p>
-                    Keywords:
-                    <div ng-repeat="keyword in section.keywords">
-                        {{keyword}}
-                    </div>
-                </p>                               
-            </fieldset>
+            <div style="margin-left: 40px">
+                <p>Scenario: {{scenarioName}}</p>
+                <fieldset ng-repeat="section in scenarios">
+                    <p>Section: {{section.section}}</p><br />
+                    <p>
+                        Question:
+                        {{section.questions}}
+                    </p>
+                    <p>
+                        Answer:
+                        {{section.answers}}
+                    </p>
+                    <p>
+                        Hint:
+                        {{section.hints}}
+                    </p>
+                    <p>
+                        Keywords:
+                        <div ng-repeat="keyword in section.keywords">
+                            {{keyword}}
+                        </div>
+                    </p>
+                </fieldset>
+                <button type="button" class="btn btn-default" ng-click="saveSection()">
+                    Save Section
+                </button>
+            </div>
         </div>
         <div style="clear:both"></div>
         </div>

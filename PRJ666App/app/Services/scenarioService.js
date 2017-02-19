@@ -31,9 +31,24 @@ function scenarioService($http, $q, appSettings) {
             return def.promise;           
         };
 
+        this.addScenario = function (scenario) {
+            var def = $q.defer();
+            $http({
+                url: appSettings.serverPath + "/api/scenarios/",
+                method: "POST",
+                data: scenario,         
+            }).then(function (response) {
+                def.resolve(response);
+            }, function (err) {
+                def.reject(err);
+            });
+            return def.promise;              
+        };
+
         return {
             getScenario: this.getScenario,
-            getScenarioByIdWithAll: this.getScenarioByIdWithAll
+            getScenarioByIdWithAll: this.getScenarioByIdWithAll,
+            addScenario: this.addScenario
         }
     }
 
