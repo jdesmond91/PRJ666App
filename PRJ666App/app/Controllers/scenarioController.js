@@ -1,7 +1,6 @@
 ﻿angular.module("nursingApp").controller("scenarioController", ["$scope", "$routeParams", "scenarioService", scenarioController]);
 function scenarioController($scope, $routeParams, scenarioService) {
     $scope.Scenarios = [];
-    var scenarioId = $routeParams.scenario_id;
     $scope.Message = "";
     $scope.status;
     $scope.scenarioName = "";
@@ -13,6 +12,7 @@ function scenarioController($scope, $routeParams, scenarioService) {
     $scope.answer = "";
     $scope.hint = "";
     $scope.scenarios = [];
+    $scope.scenarioId = 0;
 
     $scope.getScenarios = function() {
         console.log("get scnearios");
@@ -73,11 +73,12 @@ function scenarioController($scope, $routeParams, scenarioService) {
     }
 
     $scope.saveSection = function () {
-        var scenarioId = [];
-        saveScenario(scenarioId);
+        saveScenario().then(function (result) {
+            console.log($scope.scenarioId)
+        });
     }
 
-    function saveScenario(scenarioId) {
+    function saveScenario() {
 
         var scenario = {
             Name: $scope.scenarioName,
@@ -85,14 +86,15 @@ function scenarioController($scope, $routeParams, scenarioService) {
             Goals: $scope.scenarioGoals
         };
 
-            var scenarioAddResult = scenarioService.addScenario(scenario);
-            scenarioAddResult.then(function (data) {
-                console.log(data);
-                scenarioId = data.Id;
-            }, function (error) {
-                $scope.status = 'Unable to load scenario data: ' + error.message;
-            });
+        var scenarioAddResult = scenarioService.addScenario(scenario);
+        scenarioAddResult.then(function (result) {
+            console.log("Saving the scenario");
+            console.log(result);
+            $scope.scenarioId = result.data.Id;
+        }, function (error) {
+            $scope.status = 'Unable to load scenario data: ' + error.message;
+        });
    
-        console.log(scenarioId);
+        return scenarioAddResult;
     }
 }
