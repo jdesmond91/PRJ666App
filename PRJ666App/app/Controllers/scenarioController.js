@@ -1,7 +1,7 @@
 ﻿angular.module("nursingApp").controller("scenarioController", ["$scope", "$routeParams", "scenarioService", scenarioController]);
 function scenarioController($scope, $routeParams, scenarioService) {
     $scope.Scenarios = [];
-    var scenarioId = $routeParams.scenario_id;
+    //var scenarioId = $routeParams.scenario_id;
     $scope.Message = "";
     $scope.status;
     $scope.scenarioName = "";
@@ -85,13 +85,13 @@ function scenarioController($scope, $routeParams, scenarioService) {
             Goals: $scope.scenarioGoals
         };
 
-            var scenarioAddResult = scenarioService.addScenario(scenario);
-            scenarioAddResult.then(function (data) {
-                console.log(data);
-                scenarioId = data.Id;
+        var scenarioAddResult = scenarioService.addScenario(scenario);
+            scenarioAddResult.then(function (result) {
+                console.log(result.data);
+                scenarioId.push(result.data.Id);
             }, function (error) {
                 $scope.status = 'Unable to load scenario data: ' + error.message;
-            });
+        });
    
         console.log(scenarioId);
     }
