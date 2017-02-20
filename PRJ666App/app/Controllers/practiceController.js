@@ -135,11 +135,12 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
                     return b.apiResult - a.apiResult || b.stringSimResult - a.stringSimResult; 
                 });
 
-                console.log(results);
+                //console.log(results);
+                console.log(results[0]);
 
-                //if (results[0].apiResult >= 0.6) {
-                //    $scope.answer = results[0].answer;
-                //}
+                if (results[0].apiResult >= 0.6) {
+                    $scope.answer = results[0].answer;
+                }
   
             });
 
