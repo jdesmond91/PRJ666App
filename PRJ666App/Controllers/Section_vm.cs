@@ -18,5 +18,7 @@ namespace PRJ666App.Controllers
         public int Id { get; set; }
 
         public ICollection<QuestionBase> Questions { get; set; }
+
+        public ICollection<ProcessBase> Processes { get; set; }
     }
 }

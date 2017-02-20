@@ -218,6 +218,8 @@
     <Compile Include="Controllers\Manager.cs" />
     <Compile Include="Controllers\MarksController.cs" />
     <Compile Include="Controllers\Mark_vm.cs" />
+    <Compile Include="Controllers\ProcessesController.cs" />
+    <Compile Include="Controllers\Process_vm.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\Question_vm.cs" />
     <Compile Include="Controllers\ScenariosController.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Keyword.cs" />
     <Compile Include="Models\Mark.cs" />
+    <Compile Include="Models\Process.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Scenario.cs" />
     <Compile Include="Models\Section.cs" />

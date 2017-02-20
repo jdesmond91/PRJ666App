@@ -35,6 +35,8 @@ namespace PRJ666App
 
             DataBaseInitializer.LoadQuestions();
 
+            DataBaseInitializer.LoadProcesses();
+
             DataBaseInitializer.LoadKeywords();
 
             // Enable the application to use a cookie to store information for the signed in user
