@@ -72,7 +72,7 @@ function scenarioController($scope, $routeParams, scenarioService) {
         $scope.questionArray = [];
     }
 
-    $scope.saveSection = function () {
+    $scope.saveSection = function (){
         saveScenario().then(function (result) {
             console.log($scope.scenarioId)
         });
@@ -96,5 +96,9 @@ function scenarioController($scope, $routeParams, scenarioService) {
         });
    
         return scenarioAddResult;
+    }
+
+    $scope.trySection = function() {
+        console.log($scope.scenarioId);
     }
 }
