@@ -33,7 +33,7 @@ namespace PRJ666App.Controllers
         public ScenarioBase ScenarioGetByIdWithAll(int id)
         {
             // Attempt to fetch the object
-            var o = ds.Scenarios.Include("Sections.Questions.Keywords")
+            var o = ds.Scenarios.Include("Sections.Questions.Keywords").Include("Sections.Processes.Keywords")
                 .SingleOrDefault(a => a.Id == id);
 
             return (o == null) ? null : Mapper.Map<ScenarioBase>(o);
@@ -67,7 +67,7 @@ namespace PRJ666App.Controllers
         public SectionBase SectionGetByIdWithQuestion(int id)
         {
             // Attempt to fetch the object
-            var o = ds.Sections.Include("Questions")
+            var o = ds.Sections.Include("Questions").Include("Processes")
                 .SingleOrDefault(a => a.Id == id);
 
             return (o == null) ? null : Mapper.Map<SectionBase>(o);
@@ -140,6 +140,52 @@ namespace PRJ666App.Controllers
             return Mapper.Map<QuestionBase>(addedItem);
         }
 
+        // ************************************************** PROCESS SECTION *************************************************
+
+        public IEnumerable<ProcessBase> ProcessGetAll()
+        {
+            // Fetch the collection
+            var c = ds.Processes.OrderBy(e => e.Description);
+
+            // Return the results as a collection based on a resource model class
+            return Mapper.Map<IEnumerable<ProcessBase>>(c);
+        }
+
+        public ProcessBase ProcessGetByIdWithKeyword(int id)
+        {
+            // Attempt to fetch the object
+            var o = ds.Processes.Include("Keywords")
+                .SingleOrDefault(a => a.Id == id);
+
+            return (o == null) ? null : Mapper.Map<ProcessBase>(o);
+        }
+
+        public ProcessBase ProcessAdd(ProcessAdd newItem)
+        {
+            if (newItem == null)
+            {
+                return null;
+            }
+
+            var associatedItem = ds.Scenarios.Find(newItem.ScenarioId);
+            var associatedItem2 = ds.Sections.Find(newItem.SectionId);
+            if (associatedItem == null || associatedItem2 == null)
+            {
+                return null;
+            }
+
+            Process addedItem = Mapper.Map<Process>(newItem);
+            addedItem.ScenarioId = newItem.ScenarioId;
+            addedItem.SectionId = newItem.SectionId;
+
+            ds.Processes.Add(addedItem);
+            ds.SaveChanges();
+
+            // Return the result, or null if there was an error
+            return Mapper.Map<ProcessBase>(addedItem);
+        }
+
+
         // ***************************************************KEYWORD SECTION ************************************************
 
         public IEnumerable<KeywordBase> KeywordGetAll()
@@ -176,15 +222,25 @@ namespace PRJ666App.Controllers
                 return null;
             }
 
-            var associatedItem = ds.Questions.Find(newItem.QuestionId);
-           
-            if (associatedItem == null)
+            var associatedQuestion = ds.Questions.Find(newItem.QuestionId);
+
+            var associatedProcess = ds.Processes.Find(newItem.ProcessId);
+
+            if (associatedQuestion == null && associatedProcess == null)
             {
                 return null;
             }
-
+          
             Keyword addedItem = Mapper.Map<Keyword>(newItem);
-            addedItem.QuestionId = newItem.QuestionId;
+
+            if (associatedQuestion != null)
+            {
+                addedItem.QuestionId = newItem.QuestionId;
+            }
+            if(associatedProcess != null)
+            {
+                addedItem.ProcessId = newItem.ProcessId;
+            }
 
             ds.Keywords.Add(addedItem);
             ds.SaveChanges();

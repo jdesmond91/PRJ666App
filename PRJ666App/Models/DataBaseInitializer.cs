@@ -31,7 +31,7 @@ namespace PRJ666App.Models
                 if (result.Succeeded)
                 {
                     // Add claims                   
-                    await userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, "Administrator"));                   
+                    await userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, "Administrator"));
                 }
             }
         }
@@ -40,7 +40,7 @@ namespace PRJ666App.Models
 
             Manager m = new Controllers.Manager();
 
-            
+
             if (m.ScenarioGetAll().Count() == 0)
             {
                 //SCENARIO 1
@@ -53,9 +53,9 @@ namespace PRJ666App.Models
                 //SCENARIO 2
                 scenario.Name = "Mr. Smith is an 84 year old man with pneumonia";
                 scenario.Description = "Mr. Smith has a productive cough and is in isolation.  Today is the second day of his hospitalization. His respiratory function needs to be assessed";
-                scenario.Goals = "don proper PPE, find out how pt is feeling, find out about his pneumonia , do a respiratory assessment, find out if pt has any additional concerns, chart findings";
+                scenario.Goals = "Don proper PPE, find out how patient is feeling, find out about his pneumonia , do a respiratory assessment, find out if pt has any additional concerns, chart findings";
                 m.ScenarioAdd(scenario);
-            }                     
+            }
         }
 
         public static void LoadSections()
@@ -69,7 +69,7 @@ namespace PRJ666App.Models
 
                 //SCENARIO 1
                 section.Name = "Background";
-                section.ScenarioId = 1;        
+                section.ScenarioId = 1;
                 m.SectionAdd(section);
 
                 section.Name = "Part1";
@@ -100,8 +100,8 @@ namespace PRJ666App.Models
                 section.Name = "Immunization";
                 section.ScenarioId = 2;
                 m.SectionAdd(section);
-            }          
-            
+            }
+
         }
 
         public static void LoadQuestions()
@@ -392,7 +392,7 @@ namespace PRJ666App.Models
                 m.QuestionAdd(question);
 
             }
-            
+
         }
 
         public static void LoadKeywords()
@@ -647,396 +647,749 @@ namespace PRJ666App.Models
                 // ************ QUESTION 1 ****************************************
                 //How are you?
                 keyword.Description = "how";
-                keyword.QuestionId = 50;
+                keyword.QuestionId = 16;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "are";
-                keyword.QuestionId = 50;
+                keyword.QuestionId = 16;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "you";
-                keyword.QuestionId = 50;
+                keyword.QuestionId = 16;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 2 ****************************************
                 //Could I perform a respiratory assessment on you?
 
                 keyword.Description = "respiratory";
-                keyword.QuestionId = 51;
+                keyword.QuestionId = 17;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "assessment";
-                keyword.QuestionId = 51;
+                keyword.QuestionId = 17;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 3 ****************************************
                 //When you cough, do you cough up anything?
 
                 keyword.Description = "cough";
-                keyword.QuestionId = 52;
+                keyword.QuestionId = 18;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "any";
-                keyword.QuestionId = 52;
+                keyword.QuestionId = 18;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 4 ****************************************
                 //What colour is it?
 
                 keyword.Description = "colour";
-                keyword.QuestionId = 53;
+                keyword.QuestionId = 19;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "what";
-                keyword.QuestionId = 53;
+                keyword.QuestionId = 19;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 5 ****************************************
                 //What causes the cough?
 
                 keyword.Description = "cause";
-                keyword.QuestionId = 54;
+                keyword.QuestionId = 20;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "make";
-                keyword.QuestionId = 54;
+                keyword.QuestionId = 20;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "cough";
-                keyword.QuestionId = 54;
+                keyword.QuestionId = 20;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 6 ****************************************
                 //Do you ever get short of breath?
 
                 keyword.Description = "short";
-                keyword.QuestionId = 55;
+                keyword.QuestionId = 21;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "breath";
-                keyword.QuestionId = 55;
+                keyword.QuestionId = 21;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 7 ****************************************
                 //Do you have any chest pain when you cough?
 
                 keyword.Description = "chest";
-                keyword.QuestionId = 57;
+                keyword.QuestionId = 22;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "pain";
-                keyword.QuestionId = 57;
+                keyword.QuestionId = 22;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "cough";
-                keyword.QuestionId = 57;
+                keyword.QuestionId = 22;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 8 ****************************************
                 //Where is the pain?
 
                 keyword.Description = "where";
-                keyword.QuestionId = 58;
+                keyword.QuestionId = 23;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "pain";
-                keyword.QuestionId = 58;
+                keyword.QuestionId = 23;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 9 ****************************************
                 //Do you have difficulty breathing?
 
                 keyword.Description = "breath";
-                keyword.QuestionId = 59;
+                keyword.QuestionId = 24;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "difficult";
-                keyword.QuestionId = 59;
+                keyword.QuestionId = 24;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "hard";
-                keyword.QuestionId = 59;
+                keyword.QuestionId = 24;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 10 ****************************************
                 //How many pillow do you use to sleep?
 
                 keyword.Description = "pillow";
-                keyword.QuestionId = 60;
+                keyword.QuestionId = 25;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "sleep";
-                keyword.QuestionId = 60;
+                keyword.QuestionId = 25;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 11 ****************************************
                 //Do you have any allergies?
 
                 keyword.Description = "allerg";
-                keyword.QuestionId = 61;
+                keyword.QuestionId = 26;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "any";
-                keyword.QuestionId = 61;
+                keyword.QuestionId = 26;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 12 ****************************************
                 //Do you smoke?
 
                 keyword.Description = "you";
-                keyword.QuestionId = 62;
+                keyword.QuestionId = 27;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "smoke";
-                keyword.QuestionId = 62;
+                keyword.QuestionId = 27;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 13 ****************************************
                 //Have you ever smoked?
 
                 keyword.Description = "you";
-                keyword.QuestionId = 63;
+                keyword.QuestionId = 28;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "smoke";
-                keyword.QuestionId = 63;
+                keyword.QuestionId = 28;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "before";
-                keyword.QuestionId = 63;
+                keyword.QuestionId = 28;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "past";
-                keyword.QuestionId = 63;
+                keyword.QuestionId = 28;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 14 ****************************************
                 //Does anyone in your home smoke?
 
                 keyword.Description = "smoke";
-                keyword.QuestionId = 64;
+                keyword.QuestionId = 29;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "house";
-                keyword.QuestionId = 64;
+                keyword.QuestionId = 29;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "home";
-                keyword.QuestionId = 64;
+                keyword.QuestionId = 29;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 15 ****************************************
                 //What is your job?
 
                 keyword.Description = "what";
-                keyword.QuestionId = 65;
+                keyword.QuestionId = 30;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "job";
-                keyword.QuestionId = 65;
+                keyword.QuestionId = 30;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "occupation";
-                keyword.QuestionId = 65;
+                keyword.QuestionId = 30;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "work";
-                keyword.QuestionId = 65;
+                keyword.QuestionId = 30;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 16 ****************************************
                 //Were you exposed to cigarette smoke at work?
 
                 keyword.Description = "smoke";
-                keyword.QuestionId = 66;
+                keyword.QuestionId = 31;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "work";
-                keyword.QuestionId = 66;
+                keyword.QuestionId = 31;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 17 ****************************************
                 //Do you take any medications?
 
                 keyword.Description = "take";
-                keyword.QuestionId = 67;
+                keyword.QuestionId = 32;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "medication";
-                keyword.QuestionId = 67;
+                keyword.QuestionId = 32;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "medicine";
-                keyword.QuestionId = 67;
+                keyword.QuestionId = 32;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 18 ****************************************
                 //Have you travelled anywhere recently?
 
                 keyword.Description = "travel";
-                keyword.QuestionId = 68;
+                keyword.QuestionId = 33;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 19 ****************************************
                 //Do you have asthma?
 
                 keyword.Description = "do";
-                keyword.QuestionId = 69;
+                keyword.QuestionId = 34;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "asthma";
-                keyword.QuestionId = 69;
+                keyword.QuestionId = 34;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 20 ****************************************
                 // Did you ever have asthma as a child?
-
-                keyword.Description = "have";
-                keyword.QuestionId = 70;
-                m.KeywordAdd(keyword);
-
+         
                 keyword.Description = "asthma";
-                keyword.QuestionId = 70;
+                keyword.QuestionId = 35;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "past";
-                keyword.QuestionId = 70;
+                keyword.QuestionId = 35;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "before";
-                keyword.QuestionId = 70;
+                keyword.QuestionId = 35;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "child";
-                keyword.QuestionId = 70;
+                keyword.QuestionId = 35;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 21 ****************************************
                 //Have you been exposed to anyone with pneumonia?
 
                 keyword.Description = "any";
-                keyword.QuestionId = 71;
+                keyword.QuestionId = 36;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "pneumonia";
-                keyword.QuestionId = 71;
+                keyword.QuestionId = 36;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 22 ****************************************
                 //Do you have any lung diseases such as cancer, emphysema, bronchitis, cystic fibrosis?
 
                 keyword.Description = "lung";
-                keyword.QuestionId = 72;
+                keyword.QuestionId = 37;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "disease";
-                keyword.QuestionId = 72;
+                keyword.QuestionId = 37;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 23 ****************************************
                 //Have you ever had or been exposed to tuberculosis?
 
                 keyword.Description = "tuberculosis";
-                keyword.QuestionId = 73;
+                keyword.QuestionId = 38;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 24 ****************************************
                 //Have you had any recent changes in fatigue?
 
                 keyword.Description = "fatigue";
-                keyword.QuestionId = 74;
+                keyword.QuestionId = 39;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "have";
-                keyword.QuestionId = 74;
+                keyword.QuestionId = 39;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 25 ****************************************
                 //Have you had any recent changes in weight?
 
                 keyword.Description = "weight";
-                keyword.QuestionId = 75;
+                keyword.QuestionId = 40;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "have";
-                keyword.QuestionId = 75;
+                keyword.QuestionId = 40;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 26 ****************************************
                 //Have you had any night sweats?
 
                 keyword.Description = "sweat";
-                keyword.QuestionId = 77;
+                keyword.QuestionId = 41;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "night";
-                keyword.QuestionId = 77;
+                keyword.QuestionId = 41;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 27 ****************************************
                 //Have you had any swelling in your legs recently?
 
                 keyword.Description = "leg";
-                keyword.QuestionId = 78;
+                keyword.QuestionId = 42;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "swell";
-                keyword.QuestionId = 78;
+                keyword.QuestionId = 42;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 28 ****************************************
                 //Have you ever had any surgery on your lungs?
 
                 keyword.Description = "surgery";
-                keyword.QuestionId = 80;
+                keyword.QuestionId = 43;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "lung";
-                keyword.QuestionId = 80;
+                keyword.QuestionId = 43;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 29 ****************************************
                 //Have you ever had any injuries to your lungs or chest?
 
                 keyword.Description = "injur";
-                keyword.QuestionId = 81;
+                keyword.QuestionId = 44;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "lung";
-                keyword.QuestionId = 81;
+                keyword.QuestionId = 44;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "chest";
-                keyword.QuestionId = 81;
+                keyword.QuestionId = 44;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 30 ****************************************
                 //Did you get an annual flu shot?
 
                 keyword.Description = "flu";
-                keyword.QuestionId = 82;
+                keyword.QuestionId = 45;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "shot";
-                keyword.QuestionId = 82;
+                keyword.QuestionId = 45;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "vaccine";
-                keyword.QuestionId = 82;
+                keyword.QuestionId = 45;
                 m.KeywordAdd(keyword);
 
                 // ************ QUESTION 31 ****************************************
                 //Did you get an annual pneumonia vaccine?
 
                 keyword.Description = "pneumonia";
-                keyword.QuestionId = 83;
+                keyword.QuestionId = 46;
                 m.KeywordAdd(keyword);
 
                 keyword.Description = "vaccine";
-                keyword.QuestionId = 83;
+                keyword.QuestionId = 46;
                 m.KeywordAdd(keyword);
+
+                // ************ PROCESS SCENARIO 1 ****************************************
+
+                var keywordProcess = new KeywordAdd();
+
+                //Don PPE
+                keywordProcess.Description = "PPE";
+                keywordProcess.ProcessId = 1;
+                m.KeywordAdd(keywordProcess);
+
+                //Put on gloves
+                keywordProcess.Description = "glove";
+                keywordProcess.ProcessId = 2;
+                m.KeywordAdd(keywordProcess);
+
+                //Put on gown
+                keywordProcess.Description = "gown";
+                keywordProcess.ProcessId = 3;
+                m.KeywordAdd(keywordProcess);
+
+                //Put on mask
+                keywordProcess.Description = "mask";
+                keywordProcess.ProcessId = 4;
+                m.KeywordAdd(keywordProcess);
+
+                //Put on protective eyewear
+                keywordProcess.Description = "eyewear";
+                keywordProcess.ProcessId = 5;
+                m.KeywordAdd(keywordProcess);
+
+                //Wash hands
+                keywordProcess.Description = "wash";
+                keywordProcess.ProcessId = 6;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "hand";
+                keywordProcess.ProcessId = 6;
+                m.KeywordAdd(keywordProcess);
+
+                //Greet Patient
+                keywordProcess.Description = "greet";
+                keywordProcess.ProcessId = 7;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "patient";
+                keywordProcess.ProcessId = 7;
+                m.KeywordAdd(keywordProcess);
+
+                //Provide for privacy
+                keywordProcess.Description = "privacy";
+                keywordProcess.ProcessId = 8;
+                m.KeywordAdd(keywordProcess);
+
+                //Confirm patient name
+                keywordProcess.Description = "patient";
+                keywordProcess.ProcessId = 9;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "name";
+                keywordProcess.ProcessId = 9;
+                m.KeywordAdd(keywordProcess);
+
+                //Confirm patient DOB
+                keywordProcess.Description = "patient";
+                keywordProcess.ProcessId = 10;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "birth";
+                keywordProcess.ProcessId = 10;
+                m.KeywordAdd(keywordProcess);
+
+                //Match band id
+                keywordProcess.Description = "match";
+                keywordProcess.ProcessId = 11;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "id";
+                keywordProcess.ProcessId = 11;
+                m.KeywordAdd(keywordProcess);
+
+                //Remove gloves
+                keywordProcess.Description = "glove";
+                keywordProcess.ProcessId = 12;
+                m.KeywordAdd(keywordProcess);
+
+                //Remove gown
+                keywordProcess.Description = "gown";
+                keywordProcess.ProcessId = 13;
+                m.KeywordAdd(keywordProcess);
+
+                //Wash hands
+                keywordProcess.Description = "wash";
+                keywordProcess.ProcessId = 14;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "hand";
+                keywordProcess.ProcessId = 14;
+                m.KeywordAdd(keywordProcess);
+
+                //Remove eyewear
+                keywordProcess.Description = "eyewear";
+                keywordProcess.ProcessId = 15;
+                m.KeywordAdd(keywordProcess);
+
+                //Remove mask
+                keywordProcess.Description = "mask";
+                keywordProcess.ProcessId = 16;
+                m.KeywordAdd(keywordProcess);
+
+                //Don PPE
+                keywordProcess.Description = "PPE";
+                keywordProcess.ProcessId = 17;
+                m.KeywordAdd(keywordProcess);
+
+                //Put on gloves
+                keywordProcess.Description = "glove";
+                keywordProcess.ProcessId = 18;
+                m.KeywordAdd(keywordProcess);
+
+                //Put on gown
+                keywordProcess.Description = "gown";
+                keywordProcess.ProcessId = 19;
+                m.KeywordAdd(keywordProcess);
+
+                //Put on mask
+                keywordProcess.Description = "mask";
+                keywordProcess.ProcessId = 20;
+                m.KeywordAdd(keywordProcess);
+
+                //Put on protective eyewear
+                keywordProcess.Description = "eyewear";
+                keywordProcess.ProcessId = 21;
+                m.KeywordAdd(keywordProcess);
+
+                //Wash hands
+                keywordProcess.Description = "wash";
+                keywordProcess.ProcessId =22;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "hand";
+                keywordProcess.ProcessId = 22;
+                m.KeywordAdd(keywordProcess);
+
+                //Greet Patient
+                keywordProcess.Description = "greet";
+                keywordProcess.ProcessId = 23;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "patient";
+                keywordProcess.ProcessId = 23;
+                m.KeywordAdd(keywordProcess);
+
+                //Provide for privacy
+                keywordProcess.Description = "privacy";
+                keywordProcess.ProcessId = 24;
+                m.KeywordAdd(keywordProcess);
+
+                //Confirm patient name
+                keywordProcess.Description = "patient";
+                keywordProcess.ProcessId = 25;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "name";
+                keywordProcess.ProcessId = 25;
+                m.KeywordAdd(keywordProcess);
+
+                //Confirm patient DOB
+                keywordProcess.Description = "patient";
+                keywordProcess.ProcessId = 26;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "birth";
+                keywordProcess.ProcessId = 26;
+                m.KeywordAdd(keywordProcess);
+
+                //Match band id
+                keywordProcess.Description = "match";
+                keywordProcess.ProcessId = 27;
+                m.KeywordAdd(keywordProcess);
+
+                keywordProcess.Description = "id";
+                keywordProcess.ProcessId = 27;
+                m.KeywordAdd(keywordProcess);
 
             }
         }
+
+        public static void LoadProcesses()
+        {
+
+            Manager m = new Controllers.Manager();
+
+            if (m.ProcessGetAll().Count() == 0)
+            {
+                var process = new ProcessAdd();
+
+                //SCENARIO 1
+                process.Description = "Don PPE";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Put on gloves";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Put on gown";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Put on mask";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Put on protective eyewear";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Wash Hands";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Greet patient";
+                process.Hint = "Say hello to patient";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Provide for privacy";
+                process.Hint = "Give patient some space";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Confirm patient name";
+                process.Hint = "Confirm information";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Confirm patient day of birth";
+                process.Hint = "Confirm information";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Match Id band";
+                process.Hint = "Confirm information";
+                process.ScenarioId = 1;
+                process.SectionId = 1;
+                m.ProcessAdd(process);
+
+                process.Description = "Remove gloves";
+                process.Hint = "Doff PPE";
+                process.ScenarioId = 1;
+                process.SectionId = 4;
+                m.ProcessAdd(process);
+
+                process.Description = "Remove gown";
+                process.Hint = "Doff PPE";
+                process.ScenarioId = 1;
+                process.SectionId = 4;
+                m.ProcessAdd(process);
+
+                process.Description = "Wash hands";
+                process.Hint = "Doff PPE";
+                process.ScenarioId = 1;
+                process.SectionId = 4;
+                m.ProcessAdd(process);
+
+                process.Description = "Remove eyewear";
+                process.Hint = "Doff PPE";
+                process.ScenarioId = 1;
+                process.SectionId = 4;
+                m.ProcessAdd(process);
+
+                process.Description = "Remove mask";
+                process.Hint = "Doff PPE";
+                process.ScenarioId = 1;
+                process.SectionId = 4;
+                m.ProcessAdd(process);
+
+                //SCENARIO 2
+                process.Description = "Don PPE";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+
+                process.Description = "Put on gloves";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+
+                process.Description = "Put on gown";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+
+                process.Description = "Put on mask";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+
+                process.Description = "Put on protective eyewear";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+
+                process.Description = "Wash Hands";
+                process.Hint = "Acessories to protect yourself";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+
+                process.Description = "Greet patient";
+                process.Hint = "Say hello to patient";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+
+                process.Description = "Provide for privacy";
+                process.Hint = "Give patient some space";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+                process.Description = "Confirm patient name";
+                process.Hint = "Confirm information";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+
+                process.Description = "Confirm patient day of birth";
+                process.Hint = "Confirm information";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+
+                process.Description = "Match Id band";
+                process.Hint = "Confirm information";
+                process.ScenarioId = 2;
+                process.SectionId = 5;
+                m.ProcessAdd(process);
+            }
+        }        
     }
 }

@@ -36,6 +36,7 @@ namespace PRJ666App.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<Keyword> Keywords { get; set; }
         public DbSet<Mark> Marks { get; set; }
+        public DbSet<Process> Processes { get; set; }
 
         public static ApplicationDbContext Create()
         {

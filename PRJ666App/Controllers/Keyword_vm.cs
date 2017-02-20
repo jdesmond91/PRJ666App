@@ -8,7 +8,8 @@ namespace PRJ666App.Controllers
     public class KeywordAdd
     {
         public string Description { get; set; }
-        public int QuestionId { get; set; }
+        public int? QuestionId { get; set; }
+        public int? ProcessId { get; set; }
     }
 
     public class KeywordBase : KeywordAdd

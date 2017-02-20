@@ -11,5 +11,7 @@ namespace PRJ666App.Models
         public string Description { get; set; }
         public int? QuestionId { get; set; }
         public virtual Question Question { get; set; }
+        public int? ProcessId { get; set; }
+        public virtual Process Process { get; set; }
     }
 }

@@ -27,14 +27,7 @@ namespace PRJ666App
             Database.SetInitializer<Models.ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<Models.ApplicationDbContext>());
 
             //Database.SetInitializer<Models.ApplicationDbContext>(new DropCreateDatabaseAlways<Models.ApplicationDbContext>());      
-
-            //DataBaseInitializer.LoadScenarios();
-
-            //DataBaseInitializer.LoadSections();
-
-            //DataBaseInitializer.LoadQuestions();
-
-            //DataBaseInitializer.LoadKeywords();
+         
 
         }
     }
