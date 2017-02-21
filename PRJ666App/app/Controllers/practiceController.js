@@ -80,6 +80,11 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
     $scope.parse = function () {
         console.log("Entering parse\n");
 
+        if ($scope.studentQuestion.split(" ").length <= 2) {
+            $scope.answer = "Please try asking another question!";
+            return;
+        }
+
         var similarityArray = getSimilarity();
 
         console.log("possible questions\n");
@@ -140,26 +145,27 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
 
                 if (results[0].apiResult >= 0.6) {
                     $scope.answer = results[0].answer;
+                    questionsAskedCount++;
+                } else {
+                    console.log("checking keyword match");
+                    for (var i = 0; i < results.length; i++) {
+                        var isMatch = matchKeywordAPI(results[i].question, results[i].keywords);
+                        if (isMatch == 1) {
+                            $scope.answer = results[i].answer;
+                            questionsAskedCount++;
+                            break;
+                        }
+                    }
                 }
   
             });
-
-            //$scope.compareAPIResults.sort(function (a, b) {
-            //    return b.apiResult - a.apiResult;
-            //});
-
-           // console.log($scope.compareAPIResults);
-
-            //for (result in $scope.compareAPIResults) {
-            //    console.log("TESTING: " + result.stringSimResult);
-            //}
         }
         //console.log("questions in section: " + $scope.sectionQuestions.length);
 
         //console.log("questions asked: " + questionsAskedCount);
-        //if (questionsAskedCount == $scope.sectionQuestions.length) {
-        //$scope.goToNextSection();
-        //}
+        if (questionsAskedCount == $scope.sectionQuestions.length) {
+            $scope.goToNextSection();
+        }
 
     };
 
@@ -169,9 +175,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
 
         var apiMatch = semanticService.getSemantic($scope.studentQuestion, possibleQuestion)
         apiMatch.then(function (result) {
-            //fn(result.data, possibleQuestion, possibleAnswer, keywords, similar);
-            //console.log(result.data);
-            //var keywordMatch = matchKeywordAPI(possibleQuestion, keywords)
             results.push(
                 {
                     "apiResult": result.data.average,
@@ -179,35 +182,12 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
                     "answer": possibleAnswer,
                     "keywords": keywords,
                     "stringSimResult": similar,
-                    "keywordMatch": 0//keywordMatch
                 });
             console.log("api success");
         }, function (error) {
             $scope.status = 'Unable to load question data: ' + error.message;
         });
         return apiMatch;
-        //    .then(function (result) {
-        //    $scope.compareAPIResults.sort(function (a, b) {
-        //        return b.apiResult - a.apiResult | b.stringSimResult - a.stringSimResult;
-        //    });
-        //    console.log("Sorted");
-        //    console.log($scope.compareAPIResults);
-        //}).then(function (result) {
-        //    if ($scope.compareAPIResults[0] >= 0.6) {
-        //        $scope.answer = $scope.compareAPIResults[0].answer;
-        //    } else {
-        //        for (comparison in $scope.compareAPIResults) {
-        //            if (comparison.keywordMatch == 1) {
-        //                $scope.answer = comparison.answer;
-        //                break;
-        //            }
-        //        }
-
-        //        if (!$scope.answer) {
-        //            $scope.answer = "Please enter another question";
-        //        }
-        //    }
-        //});
     }
 
     //calls String Similarity node package to retrieve the top 3 matched questions
