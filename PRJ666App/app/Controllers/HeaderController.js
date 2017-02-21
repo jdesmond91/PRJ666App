@@ -5,8 +5,8 @@ function headerController($scope, scenarioService) {
     $scope.status;
 
     var scenarioResult = scenarioService.getScenario();
-    scenarioResult.then(function (resp) {
-        $scope.Scenarios = resp.data;
+    scenarioResult.then(function (response) {
+        $scope.Scenarios = response.data;
         $scope.Message = "Call Successfull";
     }, function (error) {
         $scope.Message = "Error!! " + error.status;

@@ -45,10 +45,70 @@ function scenarioService($http, $q, appSettings) {
             return def.promise;              
         };
 
+        this.addSection = function (section) {
+            var def = $q.defer();
+            $http({
+                url: appSettings.serverPath + "/api/sections/",
+                method: "POST",
+                data: section,
+            }).then(function (response) {
+                def.resolve(response);
+            }, function (err) {
+                def.reject(err);
+            });
+            return def.promise;
+        };
+
+        this.addQuestion = function (question) {
+            var def = $q.defer();
+            $http({
+                url: appSettings.serverPath + "/api/questions/",
+                method: "POST",
+                data: question,
+            }).then(function (response) {
+                def.resolve(response);
+            }, function (err) {
+                def.reject(err);
+            });
+            return def.promise;
+        };
+
+        this.addProcess = function (process) {
+            var def = $q.defer();
+            $http({
+                url: appSettings.serverPath + "/api/processes/",
+                method: "POST",
+                data: process,
+            }).then(function (response) {
+                def.resolve(response);
+            }, function (err) {
+                def.reject(err);
+            });
+            return def.promise;
+        };
+
+        this.addKeyword = function (keyword) {
+            var def = $q.defer();
+            $http({
+                url: appSettings.serverPath + "/api/keywords/",
+                method: "POST",
+                data: keyword,
+            }).then(function (response) {
+                def.resolve(response);
+            }, function (err) {
+                def.reject(err);
+            });
+            return def.promise;
+        };
+
         return {
             getScenario: this.getScenario,
             getScenarioByIdWithAll: this.getScenarioByIdWithAll,
-            addScenario: this.addScenario
+            addScenario: this.addScenario,
+            addSection: this.addSection,
+            addQuestion: this.addQuestion,
+            addProcess: this.addProcess,
+            addKeyword: this.addKeyword
         }
     }
 

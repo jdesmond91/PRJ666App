@@ -8,70 +8,116 @@
     <div class="wrap" style="width: 100%">
         <div style="float: left; width: 50%">
             <form name="form">
-                <label class="control-label" for="scenarioName">Scenario Name: </label>
-                <input type="text" name="scenarioName" id="scenarioName" class="form-control" ng-model="scenarioName">
-                <input type="text" name="scenarioDescription" id="scenarioDescription" class="form-control" ng-model="scenarioDescription">
-                <input type="text" name="scenarioGoals" id="scenarioGoals" class="form-control" ng-model="scenarioGoals">
-                <br /> Section:
-                <div class="form-group">
-                    <label class="control-label">Section</label>
-                    <input type="text" class="form-control" placeholder="" ng-model="sectionName">
-              
-                    <div class="form-group">
-                        <label class="control-label">Question</label>
-                        <input type="text" class="form-control" placeholder="Question" ng-model="question">
-                        <input type="text" class="form-control" placeholder="Answer" ng-model="answer">
-                        <input type="text" class="form-control" placeholder="Hint" ng-model="hint">
-                    </div>
+                <div ng-if="showScenario" class="form-group">
+                    <label class="control-label" for="scenarioName">Scenario</label>
+                    <input type="text" name="scenarioName" id="scenarioName" class="form-control" placeholder="Scenario Name" ng-model="$parent.scenarioName">
+                    <input type="text" name="scenarioDescription" id="scenarioDescription" class="form-control" placeholder="Scenario Description" ng-model="$parent.scenarioDescription">
+                    <input type="text" name="scenarioGoals" id="scenarioGoals" class="form-control" placeholder="Scenario Goals" ng-model="$parent.scenarioGoals">
+                    <button type="button" class="btn btn-default" ng-click="addScenario()">
+                        Add Scenario
+                    </button>
                 </div>
-                <button type="button" class="btn btn-default" ng-click="getKeywords()">
+                <div ng-if="showSection" class="form-group">
+                    <label class="control-label" for="sectionName">Section</label>           
+                    <input type="text" class="form-control" placeholder="Section Name" ng-model="$parent.sectionName">
+                    <button type="button" class="btn btn-default" ng-click="addSection()">
+                        Add Section
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Procedures</label>
+                    <input type="text" class="form-control" placeholder="Procedure" ng-model="process">
+                    <input type="text" class="form-control" placeholder="Hint" ng-model="processHint">
+                    <input type="text" class="form-control" placeholder="Output" ng-model="processOutput">
+                </div>
+                <button type="button" class="btn btn-default" ng-click="getProcessKeywords()">
                     Get Keywords
                 </button>
-                
-                <div class="input-group" ng-repeat="item in questionArray track by $index">
-                    <input type="text" class="form-control" ng-model="questionArray[$index]" />
+                <div class="input-group" ng-repeat="item in processKeywords track by $index">
+                    <input type="text" class="form-control" ng-model="processKeywords[$index]" />
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="removeKeywords($index)">Remove Keyword</button>
+                        <button class="btn btn-default" type="button" ng-click="removeProcessKeywords($index)">Remove Keyword</button>
                     </span>
                 </div>
-                <button type="button" class="btn btn-default" ng-click="addKeywords()">
+                <button type="button" class="btn btn-default" ng-click="addProcessKeywords()">
                     Add More Keywords
                 </button>
-                    <button type="button" class="btn btn-default" ng-click="addQuestion()">
-                        Add Question
-                    </button>
-            </form>
+                <button type="button" class="btn btn-default" ng-click="addProcess()">
+                    Add Procedure
+                </button>
+            <div class="form-group">
+                <label class="control-label">Question</label>
+                <input type="text" class="form-control" placeholder="Question" ng-model="question">
+                <input type="text" class="form-control" placeholder="Answer" ng-model="answer">
+                <input type="text" class="form-control" placeholder="Hint" ng-model="hint">
+            </div>
+        <button type="button" class="btn btn-default" ng-click="getKeywords()">
+            Get Keywords
+        </button>
+
+        <div class="input-group" ng-repeat="item in questionKeywords track by $index">
+            <input type="text" class="form-control" ng-model="questionKeywords[$index]" />
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="removeKeywords($index)">Remove Keyword</button>
+            </span>
         </div>
+        <button type="button" class="btn btn-default" ng-click="addKeywords()">
+            Add More Keywords
+        </button>
+        <button type="button" class="btn btn-default" ng-click="addQuestion()">
+            Add Question
+        </button>
+        </form>
+    </div>
         <div style="float: right; width: 50%;">
             <div style="margin-left: 40px">
-                <p>Scenario: {{scenarioName}}</p>
-                <fieldset ng-repeat="section in scenarios">
-                    <p>Section: {{section.section}}</p><br />
+                <div ng-show="!showScenario">
+                    <p>Scenario: {{scenarioName}}</p>
+                </div>
+                <p ng-hide="showSection">Section: {{sectionName}}</p>
+                <fieldset ng-repeat="question in questions">
                     <p>
                         Question:
-                        {{section.questions}}
+                        {{question.Description}}
                     </p>
                     <p>
                         Answer:
-                        {{section.answers}}
+                        {{question.Answer}}
                     </p>
                     <p>
                         Hint:
-                        {{section.hints}}
+                        {{question.Hint}}
                     </p>
                     <p>
                         Keywords:
-                        <div ng-repeat="keyword in section.keywords">
+                        <div ng-repeat="keyword in question.keywords">
+                            {{keyword}}
+                        </div>
+                    </p>
+                </fieldset>
+                <fieldset ng-repeat="process in processes">
+                    <p>
+                        Procedure:
+                        {{process.Description}}
+                    </p>
+                    <p>
+                        Hint:
+                        {{process.Hint}}
+                    </p>
+                    <p>
+                        Output:
+                        {{process.Output}}
+                    </p>
+                    <p>
+                        Keywords:
+                        <div ng-repeat="keyword in process.keywords">
                             {{keyword}}
                         </div>
                     </p>
                 </fieldset>
                 <button type="button" class="btn btn-default" ng-click="saveSection()">
                     Save Section
-                </button>
-                <button type="button" class="btn btn-default" ng-click="trySection()">
-                    Try Section
-                </button>
+                </button>                
             </div>
         </div>
         <div style="clear:both"></div>

@@ -15,11 +15,11 @@ namespace PRJ666App.Controllers
         public IEnumerable<ScenarioBase> ScenarioGetAll()
         {
             // Fetch the collection
-            var c = ds.Scenarios.OrderBy(e => e.Name);
+            var c = ds.Scenarios.Include("Sections.Processes").OrderBy(e => e.Name);
 
             // Return the results as a collection based on a resource model class
             return Mapper.Map<IEnumerable<ScenarioBase>>(c);
-        }
+        }       
 
         public ScenarioBase ScenarioGetByIdWithSection(int id)
         {
