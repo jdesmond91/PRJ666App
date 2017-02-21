@@ -92,41 +92,17 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
 
         //if the highest match from string similarity is 0.3 or less, don't bother going to API
         if (similarityArray[0].similar <= 0.3) {
+            console.log("too low for string sim, skipping question");
             $scope.answer = "Please try asking another question!";
+        } else if (similarityArray[0].similar >= 0.7) {
+            console.log("question found with string sim result greater than 0.7");
+            $scope.answer = similarityArray[0].answer;
+            questionsAskedCount++;
         } else {
             var realAnswer = "";
             var results = [];
-
-            //for (var i = 0; i < $scope.possibleQuestions.length; i++) {
-            //    var compare = compareAPI(results, $scope.possibleQuestions[i].question,
-            //               $scope.possibleQuestions[i].answer,
-            //               $scope.possibleQuestions[i].keywords,
-            //               $scope.possibleQuestions[i].similar/*,
-            //    function (score, question, answer, keywords, similar) {
-            //        $scope.compareAPI = score.average;
-            //        console.log($scope.compareAPI);
-            //        console.log(question);
-            //        console.log(answer);
-
-            //            if ($scope.compareAPI >= 0.6) {
-            //                realAnswer = answer;
-            //                questionsAskedCount++;
-            //                $scope.answer = realAnswer;  
-            //            } else {
-            //                var isMatch = matchKeywordAPI(question, keywords);
-            //                if (isMatch == 0) {
-            //                    $scope.answer = "Please try asking another question!";
-            //                }
-            //                else {
-            //                    //have to return a string just to know, bcause realAnswer is undefined in here, have to return callback function hahahahaha again, or set the answer in the match function
-            //                    $scope.answer = realAnswer;
-            //                }
-
-            //            } // closes outer else
-            //    }*/);
-            //}
-
             var promises = [];
+
             for (var i = 0; i < $scope.possibleQuestions.length; i++) {
                 promises.push(compareAPI($scope.possibleQuestions[i].question,
                                             $scope.possibleQuestions[i].answer,
@@ -134,7 +110,6 @@ function practiceController($scope, $routeParams, $http, $q, scenarioService, se
                                             $scope.possibleQuestions[i].similar, results));
             }
 
-            
             $q.all(promises).then(function (ret) {
                 results.sort(function (a, b) {
                     return b.apiResult - a.apiResult || b.stringSimResult - a.stringSimResult; 
