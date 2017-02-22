@@ -23,10 +23,12 @@ function scenarioController($scope, $routeParams, scenarioService) {
     $scope.questionKeywords = [];
 
     $scope.disableInput = {
-        disableScenario: true,
-        disableSection: true,
+        showScenario: true,
+        showSection: true,
         showSaveButton: false,
-        showNextButton: false
+        showNextButton: false,
+        editProcedure: false,
+        editQuestion: false
     };
 
     $scope.getScenarios = function() {
@@ -42,12 +44,22 @@ function scenarioController($scope, $routeParams, scenarioService) {
     };
 
     $scope.addScenario = function () {
-        $scope.disableInput.disableScenario = false;
+        $scope.disableInput.showScenario = false;
+    }
+
+    $scope.editScenario = function () {
+
     }
 
     $scope.addSection = function () {
-        $scope.disableInput.disableSection = false;
+        $scope.disableInput.showSection = false;
     }
+
+    $scope.editSection = function () {
+        $scope.disableInput.showSection = true;
+    }
+
+    
 
     $scope.addQuestion = function () {
 
@@ -84,6 +96,33 @@ function scenarioController($scope, $routeParams, scenarioService) {
     $scope.removeKeywords = function (index) {
         $scope.questionKeywords.splice(index, 1);
         console.log($scope.questionKeywords);
+    }
+
+    $scope.editQuestion = function (index) {
+        $scope.question = $scope.questions[index].Description;
+        $scope.answer = $scope.questions[index].Answer;
+        $scope.hint = $scope.questions[index].Hint;
+        $scope.questions[index].keywords.length = 0;
+        $scope.indexQuestion = index;
+        $scope.disableInput.editQuestion = true;
+    }
+
+    $scope.saveEditQuestion = function () {
+        $scope.questions[$scope.indexQuestion].Description = $scope.question;
+        $scope.questions[$scope.indexQuestion].Answer = $scope.answer;
+        $scope.questions[$scope.indexQuestion].Hint = $scope.hint;
+        $scope.questions[$scope.indexQuestion].keywords = $scope.questionKeywords;
+
+        $scope.disableInput.editQuestion = false;
+
+        clearFields();
+    }
+
+    $scope.removeQuestion = function(index){
+        $scope.questions.splice(index, 1);
+        if ($scope.questions.length == 0 && $scope.processes.length == 0) {
+            $scope.disableInput.showSaveButton;
+        }
     }
 
     function clearFields() {
@@ -132,6 +171,33 @@ function scenarioController($scope, $routeParams, scenarioService) {
     $scope.removeProcessKeywords = function (index) {
         $scope.processKeywords.splice(index, 1);
         console.log($scope.processKeywords);
+    }
+
+    $scope.editProcess = function (index) {
+        $scope.process = $scope.processes[index].Description;
+        $scope.processHint = $scope.processes[index].Hint;
+        $scope.processOutput = $scope.processes[index].Output;
+        $scope.processes[index].keywords.length = 0;
+        $scope.processIndex = index;
+        $scope.disableInput.editProcedure = true;
+    }
+
+    $scope.saveEditProcess = function () {
+        $scope.processes[$scope.processIndex].Description = $scope.process;
+        $scope.processes[$scope.processIndex].Hint = $scope.processHint;
+        $scope.processes[$scope.processIndex].Output = $scope.processOutput;
+        $scope.processes[$scope.processIndex].keywords = $scope.processKeywords;
+
+        $scope.disableInput.editProcedure = false;
+
+        clearProcessFields();
+    }
+
+    $scope.removeProcess = function (index) {
+        $scope.processes.splice(index, 1);
+        if ($scope.processes.length == 0 && $scope.questions.length == 0) {
+            $scope.disableInput.showSaveButton;
+        }
     }
 
     function clearProcessFields() {

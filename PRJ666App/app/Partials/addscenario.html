@@ -8,7 +8,7 @@
     <div class="wrap" style="width: 100%">
         <div style="float: left; width: 50%">
             <form name="form">
-                <div ng-if="disableInput.disableScenario" class="form-group">
+                <div ng-if="disableInput.showScenario" class="form-group">
                     <label class="control-label" for="scenarioName">Scenario</label>
                     <input type="text" name="scenarioName" id="scenarioName" class="form-control" placeholder="Scenario Name" ng-model="$parent.scenarioName">
                     <input type="text" name="scenarioDescription" id="scenarioDescription" class="form-control" placeholder="Scenario Description" ng-model="$parent.scenarioDescription">
@@ -17,18 +17,18 @@
                         Add Scenario
                     </button>
                 </div>
-                <div ng-if="disableInput.disableSection" class="form-group">
+                <div ng-if="disableInput.showSection" class="form-group">
                     <label class="control-label" for="sectionName">Section</label>           
-                    <input type="text" class="form-control" placeholder="Section Name" ng-model="$parent.sectionName" ng-disabled="disableInput.disableScenario">
-                    <button type="button" class="btn btn-default" ng-click="addSection()" ng-disabled="disableInput.disableScenario">
+                    <input type="text" class="form-control" placeholder="Section Name" ng-model="$parent.sectionName" ng-disabled="disableInput.showScenario">
+                    <button type="button" class="btn btn-default" ng-click="addSection()" ng-disabled="disableInput.showScenario">
                         Add Section
                     </button>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Procedures</label>
-                    <input type="text" class="form-control" placeholder="Procedure" ng-model="process" ng-disabled="disableInput.disableSection">
-                    <input type="text" class="form-control" placeholder="Hint" ng-model="processHint" ng-disabled="disableInput.disableSection">
-                    <input type="text" class="form-control" placeholder="Output" ng-model="processOutput" ng-disabled="disableInput.disableSection">
+                    <input type="text" class="form-control" placeholder="Procedure" ng-model="process" ng-disabled="disableInput.showSection">
+                    <input type="text" class="form-control" placeholder="Hint" ng-model="processHint" ng-disabled="disableInput.showSection">
+                    <input type="text" class="form-control" placeholder="Output" ng-model="processOutput" ng-disabled="disableInput.showSection">
                 </div>
                 <button type="button" class="btn btn-default" ng-click="getProcessKeywords()">
                     Get Keywords
@@ -42,14 +42,17 @@
                 <button type="button" class="btn btn-default" ng-click="addProcessKeywords()">
                     Add More Keywords
                 </button>
-                <button type="button" class="btn btn-default" ng-click="addProcess()">
+                <button type="button" class="btn btn-default" ng-click="addProcess()" ng-hide="disableInput.editProcedure">
                     Add Procedure
+                </button>
+                <button type="button" class="btn btn-default" ng-click="saveEditProcess()" ng-show="disableInput.editProcedure">
+                    Update Procedure
                 </button>
             <div class="form-group">
                 <label class="control-label">Question</label>
-                <input type="text" class="form-control" placeholder="Question" ng-model="question" ng-disabled="disableInput.disableSection">
-                <input type="text" class="form-control" placeholder="Answer" ng-model="answer" ng-disabled="disableInput.disableSection">
-                <input type="text" class="form-control" placeholder="Hint" ng-model="hint" ng-disabled="disableInput.disableSection">
+                <input type="text" class="form-control" placeholder="Question" ng-model="question" ng-disabled="disableInput.showSection">
+                <input type="text" class="form-control" placeholder="Answer" ng-model="answer" ng-disabled="disableInput.showSection">
+                <input type="text" class="form-control" placeholder="Hint" ng-model="hint" ng-disabled="disableInput.showSection">
             </div>
         <button type="button" class="btn btn-default" ng-click="getKeywords()">
             Get Keywords
@@ -64,39 +67,32 @@
         <button type="button" class="btn btn-default" ng-click="addKeywords()">
             Add More Keywords
         </button>
-        <button type="button" class="btn btn-default" ng-click="addQuestion()">
+        <button type="button" class="btn btn-default" ng-click="addQuestion()" ng-hide="disableInput.editQuestion">
             Add Question
         </button>
+         <button type="button" class="btn btn-default" ng-click="saveEditQuestion()" ng-show="disableInput.editQuestion">
+          Update Question
+         </button>
         </form>
     </div>
         <div style="float: right; width: 50%;">
             <div style="margin-left: 40px">
-                <div ng-hide="disableInput.disableScenario">
-                    <p>Scenario: {{scenarioName}}</p>
+                <div ng-hide="disableInput.showScenario">
+                    <p><button type="button" class="btn btn-default" ng-click="editScenario()"> Edit Scenario </button> 
+                    Scenario: {{scenarioName}} 
+                    </p>
                 </div>
-                <p ng-hide="disableInput.disableSection">Section: {{sectionName}}</p>
-                <fieldset ng-repeat="question in questions">
+                <p ng-hide="disableInput.showSection"><button type="button" class="btn btn-default" ng-click="editSection()">  Edit Section </button>
+                    Section: {{sectionName}} 
+                </p>
+                <fieldset ng-repeat="process in processes track by $index">
                     <p>
-                        Question:
-                        {{question.Description}}
-                    </p>
-                    <p>
-                        Answer:
-                        {{question.Answer}}
-                    </p>
-                    <p>
-                        Hint:
-                        {{question.Hint}}
-                    </p>
-                    <p>
-                        Keywords:
-                        <div ng-repeat="keyword in question.keywords">
-                            {{keyword}}
-                        </div>
-                    </p>
-                </fieldset>
-                <fieldset ng-repeat="process in processes">
-                    <p>
+                        <button type="button" class="btn btn-default" ng-click="editProcess($index)">
+                            Edit Procedure
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="removeProcess($index)">
+                            Remove Procedure
+                        </button>
                         Procedure:
                         {{process.Description}}
                     </p>
@@ -115,6 +111,32 @@
                         </div>
                     </p>
                 </fieldset>
+                <fieldset ng-repeat="question in questions track by $index">
+                    <p>
+                        <button type="button" class="btn btn-default" ng-click="editQuestion($index)">
+                            Edit Question
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="removeQuestion($index)">
+                            Remove Question
+                        </button>
+                        Question:
+                        {{question.Description}}                        
+                    </p>
+                    <p>
+                        Answer:
+                        {{question.Answer}}
+                    </p>
+                    <p>
+                        Hint:
+                        {{question.Hint}}
+                    </p>
+                    <p>
+                        Keywords:
+                        <div ng-repeat="keyword in question.keywords">
+                            {{keyword}}
+                        </div>
+                    </p>
+                </fieldset>               
                 <button type="button" class="btn btn-default" ng-click="saveSection()" ng-show="disableInput.showSaveButton">
                     Save Section
                 </button>    
