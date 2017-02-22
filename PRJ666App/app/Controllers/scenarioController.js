@@ -6,10 +6,8 @@ function scenarioController($scope, $routeParams, scenarioService) {
     $scope.scenarioName = '';
     $scope.scenarioDescription = "";
     $scope.scenarioGoals = "";
-    $scope.showScenario = true;
 
     $scope.sectionName = "";
-    $scope.showSection = true;
     $scope.process = "";
     $scope.processHint = "";
     $scope.processOutput = "";
@@ -21,6 +19,15 @@ function scenarioController($scope, $routeParams, scenarioService) {
     $scope.scenarioId = 0;
     $scope.sectionId = 0;
     $scope.questionId = 0;
+    $scope.processKeywords = [];
+    $scope.questionKeywords = [];
+
+    $scope.disableInput = {
+        disableScenario: true,
+        disableSection: true,
+        showSaveButton: false,
+        showNextButton: false
+    };
 
     $scope.getScenarios = function() {
         console.log("get scnearios");
@@ -35,11 +42,11 @@ function scenarioController($scope, $routeParams, scenarioService) {
     };
 
     $scope.addScenario = function () {
-        $scope.showScenario = false;
+        $scope.disableInput.disableScenario = false;
     }
 
     $scope.addSection = function () {
-        $scope.showSection = false;
+        $scope.disableInput.disableSection = false;
     }
 
     $scope.addQuestion = function () {
@@ -54,35 +61,17 @@ function scenarioController($scope, $routeParams, scenarioService) {
         });             
 
         console.log($scope.questions);
+        $scope.disableInput.showSaveButton = true;
         clearFields();
-    }
-
-    $scope.addProcess = function () {
-
-        $scope.processes.push({
-            SectionId: $scope.sectionName,
-            ScenarioId: $scope.scenarioName,
-            Description: $scope.process,
-            Hint: $scope.processHint,
-            Output: $scope.processOutput,
-            keywords: $scope.processKeywords
-        });
-
-        console.log($scope.processes);
-        clearProcessFields();
-    }
-
-    $scope.getQuestion = function () {
-        console.log($scope.questions);
     }
 
     $scope.getKeywords = function () {
         var question = $scope.question;
         var containsQuestionMark = $scope.question.indexOf('?');
-        if(containsQuestionMark > -1){
-            question = question.slice(0, containsQuestionMark);          
+        if (containsQuestionMark > -1) {
+            question = question.slice(0, containsQuestionMark);
         }
-        
+
         $scope.questionKeywords = question.split(' ');
 
         console.log($scope.questionKeywords);
@@ -103,6 +92,26 @@ function scenarioController($scope, $routeParams, scenarioService) {
         $scope.hint = "";
         $scope.questionKeywords = [];
     }
+
+    $scope.addProcess = function () {
+
+        $scope.processes.push({
+            SectionId: $scope.sectionName,
+            ScenarioId: $scope.scenarioName,
+            Description: $scope.process,
+            Hint: $scope.processHint,
+            Output: $scope.processOutput,
+            keywords: $scope.processKeywords
+        });
+
+        $scope.disableInput.showSaveButton = true;
+        console.log($scope.processes);
+        clearProcessFields();
+    }
+
+    $scope.getQuestion = function () {
+        console.log($scope.questions);
+    }  
 
     $scope.getProcessKeywords = function () {
         var process = $scope.process;
@@ -164,17 +173,19 @@ function scenarioController($scope, $routeParams, scenarioService) {
                         var questionAddResult = scenarioService.addQuestion(question);
                         questionAddResult.then(function (result) {
                             $scope.questionId = result.data.Id;
-                            for (var j = 0; j < $scope.questions[i].keywords.length; j++) {
-                                var keyword = {
-                                    Description: $scope.questions[i].keywords[j],
-                                    QuestionId: $scope.questionId
-                                };
-                                var questionKeywordAddResult = scenarioService.addKeyword(keyword);
-                                questionKeywordAddResult.then(function (result) {
-                                    console.log("save keyword");
-                                }, function (error) {
-                                    $scope.status = 'Unable to save keyword: ' + error.message;
-                                });
+                            if ($scope.questions[i].keywords.length != 0) {
+                                for (var j = 0; j < $scope.questions[i].keywords.length; j++) {
+                                    var keyword = {
+                                        Description: $scope.questions[i].keywords[j],
+                                        QuestionId: $scope.questionId
+                                    };
+                                    var questionKeywordAddResult = scenarioService.addKeyword(keyword);
+                                    questionKeywordAddResult.then(function (result) {
+                                        console.log("save keyword");
+                                    }, function (error) {
+                                        $scope.status = 'Unable to save keyword: ' + error.message;
+                                    });
+                                }
                             }
                         }, function (error) {
                             $scope.status = 'Unable to save question: ' + error.message;
@@ -193,17 +204,19 @@ function scenarioController($scope, $routeParams, scenarioService) {
                         var processAddResult = scenarioService.addProcess(process);
                         processAddResult.then(function (result) {
                             $scope.processId = result.data.Id;
-                            for (var j = 0; j < $scope.processes[i].keywords.length; j++) {
-                                var keyword = {
-                                    Description: $scope.processes[i].keywords[j],
-                                    ProcessId: $scope.processId
-                                };
-                                var processKeywordAddResult = scenarioService.addKeyword(keyword);
-                                processKeywordAddResult.then(function (result) {
-                                    console.log("save keyword");
-                                }, function (error) {
-                                    $scope.status = 'Unable to save keyword: ' + error.message;
-                                });
+                            if ($scope.processes[i].keywords.length != 0) {
+                                for (var j = 0; j < $scope.processes[i].keywords.length; j++) {
+                                    var keyword = {
+                                        Description: $scope.processes[i].keywords[j],
+                                        ProcessId: $scope.processId
+                                    };
+                                    var processKeywordAddResult = scenarioService.addKeyword(keyword);
+                                    processKeywordAddResult.then(function (result) {
+                                        console.log("save keyword");
+                                    }, function (error) {
+                                        $scope.status = 'Unable to save keyword: ' + error.message;
+                                    });
+                                }
                             }
                         }, function (error) {
                             $scope.status = 'Unable to save question: ' + error.message;
@@ -215,7 +228,8 @@ function scenarioController($scope, $routeParams, scenarioService) {
                 $scope.status = 'Unable to save section: ' + error.message;
             });
             return sectionAddResult;
-        }
+        } // close Else
+        $scope.disableInput.showSaveButton = true;
     }
 
     function saveScenario() {
@@ -257,22 +271,24 @@ function scenarioController($scope, $routeParams, scenarioService) {
                         var questionAddResult = scenarioService.addQuestion(question);
                         questionAddResult.then(function (result) {
                             $scope.questionId = result.data.Id;
-                            for (var j = 0; j < $scope.questions[i].keywords.length; j++) {
-                                var keyword = {
-                                    Description: $scope.questions[i].keywords[j],
-                                    QuestionId: $scope.questionId
-                                };
-                                var questionKeywordAddResult = scenarioService.addKeyword(keyword);
-                                questionKeywordAddResult.then(function (result) {
-                                    console.log("save keyword");
-                                }, function (error) {
-                                    $scope.status = 'Unable to save keyword: ' + error.message;
-                                });
+                            if ($scope.questions[i].keywords.length != 0) {
+                                for (var j = 0; j < $scope.questions[i].keywords.length; j++) {
+                                    var keyword = {
+                                        Description: $scope.questions[i].keywords[j],
+                                        QuestionId: $scope.questionId
+                                    };
+                                    var questionKeywordAddResult = scenarioService.addKeyword(keyword);
+                                    questionKeywordAddResult.then(function (result) {
+                                        console.log("save keyword");
+                                    }, function (error) {
+                                        $scope.status = 'Unable to save keyword: ' + error.message;
+                                    });
+                                }
                             }
-                        }, function (error) {
-                            $scope.status = 'Unable to save question: ' + error.message;
-                        });
-                    }
+                            }, function (error) {
+                                $scope.status = 'Unable to save question: ' + error.message;
+                            });
+                        }                      
                 } // close IF question length != 0
                 if ($scope.processes.length != 0) {
                     for (let i = 0; i < $scope.processes.length; i++) {
@@ -286,17 +302,19 @@ function scenarioController($scope, $routeParams, scenarioService) {
                         var processAddResult = scenarioService.addProcess(process);
                         processAddResult.then(function (result) {
                             $scope.processId = result.data.Id;
-                            for (var j = 0; j < $scope.processes[i].keywords.length; j++) {
-                                var keyword = {
-                                    Description: $scope.processes[i].keywords[j],
-                                    ProcessId: $scope.processId
-                                };
-                                var processKeywordAddResult = scenarioService.addKeyword(keyword);
-                                processKeywordAddResult.then(function (result) {
-                                    console.log("save keyword");
-                                }, function (error) {
-                                    $scope.status = 'Unable to save keyword: ' + error.message;
-                                });
+                            if ($scope.processes[i].keywords.length != 0) {
+                                for (var j = 0; j < $scope.processes[i].keywords.length; j++) {
+                                    var keyword = {
+                                        Description: $scope.processes[i].keywords[j],
+                                        ProcessId: $scope.processId
+                                    };
+                                    var processKeywordAddResult = scenarioService.addKeyword(keyword);
+                                    processKeywordAddResult.then(function (result) {
+                                        console.log("save keyword");
+                                    }, function (error) {
+                                        $scope.status = 'Unable to save keyword: ' + error.message;
+                                    });
+                                }
                             }
                         }, function (error) {
                             $scope.status = 'Unable to save question: ' + error.message;
@@ -308,7 +326,9 @@ function scenarioController($scope, $routeParams, scenarioService) {
         }, function (error) {
             $scope.status = 'Unable to save scenario: ' + error.message;
         });
-                                  
+
+        $scope.disableInput.showSaveButton = true;
         return scenarioAddResult;
-    }
+    } // close saveScenario
+    
 }
