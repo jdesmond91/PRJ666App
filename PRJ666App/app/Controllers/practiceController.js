@@ -11,7 +11,7 @@ function practiceController($scope, $routeParams, $http, $q,$timeout, scenarioSe
     $scope.sectionQuestions = [];
     $scope.studentQuestion = "";
 
-    $scope.sectionStartIndex = 1; //starting index, for now set to 1 until we remove the procedures
+    $scope.sectionStartIndex = 0; //starting index, for now set to 1 until we remove the procedures
     $scope.answer = ""; //the answer we will return to the student
     $scope.possibleQuestions = []; //stores the top 3 results from the initial pass through string similarity
     var questionsAskedCount = 0;
