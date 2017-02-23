@@ -30,8 +30,8 @@
                     <input type="text" class="form-control" placeholder="Hint" ng-model="processHint" ng-disabled="disableInput.showSection">
                     <input type="text" class="form-control" placeholder="Output" ng-model="processOutput" ng-disabled="disableInput.showSection">
                 </div>
-                <button type="button" class="btn btn-default" ng-click="getProcessKeywords()">
-                    Get Keywords
+                <button type="button" class="btn btn-default" ng-click="addProcessKeywords()">
+                    Add Keywords
                 </button>
                 <div class="input-group" ng-repeat="item in processKeywords track by $index">
                     <input type="text" class="form-control" ng-model="processKeywords[$index]" />
@@ -39,9 +39,6 @@
                         <button class="btn btn-default" type="button" ng-click="removeProcessKeywords($index)">Remove Keyword</button>
                     </span>
                 </div>
-                <button type="button" class="btn btn-default" ng-click="addProcessKeywords()">
-                    Add More Keywords
-                </button>
                 <button type="button" class="btn btn-default" ng-click="addProcess()" ng-hide="disableInput.editProcedure">
                     Add Procedure
                 </button>
@@ -54,19 +51,15 @@
                 <input type="text" class="form-control" placeholder="Answer" ng-model="answer" ng-disabled="disableInput.showSection">
                 <input type="text" class="form-control" placeholder="Hint" ng-model="hint" ng-disabled="disableInput.showSection">
             </div>
-        <button type="button" class="btn btn-default" ng-click="getKeywords()">
-            Get Keywords
-        </button>
-
+         <button type="button" class="btn btn-default" ng-click="addKeywords()">
+              Add Keywords
+         </button>
         <div class="input-group" ng-repeat="item in questionKeywords track by $index">
             <input type="text" class="form-control" ng-model="questionKeywords[$index]" />
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="removeKeywords($index)">Remove Keyword</button>
             </span>
         </div>
-        <button type="button" class="btn btn-default" ng-click="addKeywords()">
-            Add More Keywords
-        </button>
         <button type="button" class="btn btn-default" ng-click="addQuestion()" ng-hide="disableInput.editQuestion">
             Add Question
         </button>

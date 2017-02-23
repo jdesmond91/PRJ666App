@@ -91,6 +91,7 @@ function scenarioController($scope, $routeParams, scenarioService) {
 
     $scope.addKeywords = function () {
         $scope.questionKeywords.push(" ");
+        console.log($scope.questionKeywords);
     }
 
     $scope.removeKeywords = function (index) {
@@ -166,6 +167,7 @@ function scenarioController($scope, $routeParams, scenarioService) {
 
     $scope.addProcessKeywords = function () {
         $scope.processKeywords.push(" ");
+        console.log($scope.processKeywords);
     }
 
     $scope.removeProcessKeywords = function (index) {
