@@ -53,33 +53,20 @@ function semanticService($http, appSettings, $q, $timeout) {
                     "text2": studentQuestion,
                     "clean": "true"
                 }               
-            
         var def = $q.defer();
         $http({
             method: "POST",
             url: "https://rxnlp-core.p.mashape.com/computeSimilarity",
             headers: { "X-Mashape-Key": 'gpxQfLFBuVmshbzxnXiQW313LURKp1ZQbnujsnOhvhgGusqcFv', 'Content-Type': 'application/json', 'Accept' : 'application/json' },
             data: textCompare, //pass json to cortical
-            async: false
-        }).then(function (response) {
+            timeout: $timeout(function () { }, 7000)
+        }).then(function (response) {        
             def.resolve(response);
         }, function (err) {
             def.reject(err);
         });
         return def.promise;
     };
-        /*$.ajax({
-            type: "POST",
-            url: "https://rxnlp-core.p.mashape.com/computeSimilarity",
-            headers: { "X-Mashape-Key": 'gpxQfLFBuVmshbzxnXiQW313LURKp1ZQbnujsnOhvhgGusqcFv', 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            data: textCompare, //pass json to cortical
-        }).then(function (response) {
-            def.resolve(response);
-        }, function (err) {
-            def.reject(err);
-        });
-        return def.promise;
-    };*/
     return {
         getSemantic: this.getSemantic
     }
